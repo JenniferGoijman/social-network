@@ -1,0 +1,25 @@
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 55px;
+    padding: 0 20px;
+    background-color: white;
+
+    .logo {
+        margin: 13px 0;
+    }
+
+    input {
+        text-align: center;
+    }
+
+    .icons {
+        display: flex;
+        
+        .icon {
+            margin: 0 10px;
+            font-size: 22px;
+        }
+    }
+}
