@@ -22,4 +22,14 @@ class UserController extends Controller
             return response(['message' => 'Hubo un problema para registrar el usuario', 'error' => $e->getMessage()], 500);
         }
     }
+    public function login(Request $request)
+    {
+        $credentials = $request->only('username', 'password');
+        if (!Auth::attempt($credentials)) {
+            return response(['message' => 'Wrong Credentials'], 400);
+        }
+        $user = Auth::user();
+        $token = $user->createToken('authToken')->accessToken;
+        return response(['user' => $user, 'token' => $token]);
+    }
 }

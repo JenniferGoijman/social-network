@@ -16,9 +16,7 @@ const Login = props => {
         login(user)
         .then(res => {
             notification.success({message:'Login', description:res.data.message})
-            // setTimeout(() => {
-            //     props.history.push('/login')
-            // }, 1500);
+            setTimeout(() => { props.history.push('/profile') }, 1500);
         })
         .catch((res) =>{
             notification.error({message:'Login', description:'Hubo un problema al tratar de iniciar sesión'})
@@ -60,11 +58,11 @@ const Login = props => {
                     </Form>
                 </div>
                 <Divider plain><div className="divider">O</div></Divider>
-                <FacebookFilled /><h4> Iniciar sesión con Facebook</h4>
+                <h4><FacebookFilled /> Iniciar sesión con Facebook</h4>
                 <h5>¿Has olvidado la contraseña?</h5>                 
             </div>
             <div className="card-in">
-                ¿No tienes una cuenta?  <a href="/register">Regístrate</a> {/* chequear href para redirigir a register*/}
+                ¿No tienes una cuenta?  <a href="/register">Regístrate</a>
             </div>
         </div>
     );

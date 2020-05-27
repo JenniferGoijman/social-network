@@ -23,7 +23,7 @@
         }
 
         h4 {
-            color: #8e8e8e;
+            color: #385185;
         }
 
         .divider {
@@ -32,8 +32,12 @@
         }
 
         h5 {
-            color: #8e8e8e;
+            color: rgba(var(--fe0,0,55,107),1);
             font-weight: 400;
+        }
+
+        a {
+            font-weight: 600;
         }
     }
 }

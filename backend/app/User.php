@@ -38,22 +38,22 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    // public function followers()
-    // {
-    //     return $this->belongsToMany(
-    //         self::class,
-    //         'followers',
-    //         'follower_id',
-    //         'followed_id',
-    //     );
-    // }
-    // public function following()
-    // {
-    //     return $this->belongsToMany(
-    //         self::class,
-    //         'followers',
-    //         'followed_id',
-    //         'follower_id',
-    //     );
-    // }
+    public function followers()
+    {
+        return $this->belongsToMany(
+            self::class,
+            'followers',
+            'follower_id',
+            'followed_id',
+        );
+    }
+    public function following()
+    {
+        return $this->belongsToMany(
+            self::class,
+            'followers',
+            'followed_id',
+            'follower_id',
+        );
+    }
 }
