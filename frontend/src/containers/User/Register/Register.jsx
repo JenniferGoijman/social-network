@@ -1,36 +1,29 @@
 import React from 'react'
-import { Card, Form, Input, Row, Col, Button, Typography, notification, Divider } from 'antd';
+import { Form, Input, Row, Col, Button, notification, Divider } from 'antd';
 import { FacebookFilled } from '@ant-design/icons';
 
 import './Register.scss'
 import Logo from '../../../img/logoGrande.png';
 
-// import { register } from '../../../redux/actions/users'
+import { register } from '../../../redux/actions/users'
 
 
 const Register = props => {
-
-    const { Title } = Typography;
     const [form] = Form.useForm();
 
     const onFinish = values => {
-        const user ={
-            username: values.username,
-            password: values.password,
-            role: 'standar'
-        }
-        // register(user)
-        // .then(res => {
-        //     notification.success({message:'Register', description:res.data.message})
-        //     setTimeout(() => {
-        //         props.history.push('/login')
-        //     }, 1500);
-        // })
-        // .catch((res) =>{
-        //     notification.error({message:'Register', description:'Hubo un problema al registrar el usuario'})
-        //     console.log(res)
-        // })
-        
+        const user = values;
+        register(user)
+        .then(res => {
+            notification.success({message:'Register', description:res.data.message})
+            setTimeout(() => {
+                props.history.push('/login')
+            }, 1500);
+        })
+        .catch((res) =>{
+            notification.error({message:'Register', description:'Hubo un problema al registrar el usuario'})
+            console.log(res)
+        })
     };
   
     return (
@@ -81,7 +74,7 @@ const Register = props => {
                     las cookies y tecnologías similares en nuestra Política de cookies.</h5>
             </div>
             <div className="card-in">
-                ¿Tienes una cuenta?  <a href="">Entrar</a>
+                ¿Tienes una cuenta?  <a href="/login">Entrar</a> {/* chequear href para redirigir a login*/}
             </div>
         </div>
     );
