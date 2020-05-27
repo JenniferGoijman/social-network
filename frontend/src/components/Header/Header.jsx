@@ -9,7 +9,7 @@ const Header = props => {
         <header>
             <div className="logo">
                 <img src={Logo} alt="Logo Instagram"/>
-                </div>
+            </div>
             <div>
                 <input type="text" name="" id="" placeholder="Busca" className="search" />
             </div>

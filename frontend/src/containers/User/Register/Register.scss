@@ -1,0 +1,34 @@
+.card-out {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+    margin: 12px 0;
+
+    .card-in {
+        width: 350px;
+        background-color: white;
+        border: 1px rgb(200, 200, 200) solid;
+        padding: 22px 40px;
+        margin: 5px 0;
+
+        .header {
+
+            h3 {
+                color: #8e8e8e;
+            }
+    
+            .divider {
+                color: #8e8e8e;
+            }
+ 
+            img {
+                width: 175px;
+            }
+        }
+
+        h5 {
+            color: #8e8e8e;
+        }
+    }
+}
