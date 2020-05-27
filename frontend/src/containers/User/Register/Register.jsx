@@ -1,5 +1,6 @@
 import React from 'react'
 import { Card, Form, Input, Row, Col, Button, Typography, notification, Divider } from 'antd';
+import { FacebookFilled } from '@ant-design/icons';
 
 import './Register.scss'
 import Logo from '../../../img/logoGrande.png';
@@ -40,7 +41,7 @@ const Register = props => {
                         <img src={Logo} alt="Logo Instagram"/>
                     </div>
                     <h3>Regístrate para ver fotos y vídeos de tus amigos.</h3>
-                    <Button type="primary" htmlType="submit">
+                    <Button type="primary" htmlType="submit" icon={<FacebookFilled />} style={{width: 270, borderRadius:4}}>
                         Iniciar sesión con Facebook
                     </Button>
                     <Divider plain><div className="divider">O</div></Divider>
@@ -48,26 +49,26 @@ const Register = props => {
                 </div>
                 <div className="form">
                     <Form form={form} name="register" onFinish={onFinish} scrollToFirstError >
-                        <Form.Item name="email" rules={[
+                        <Form.Item name="email" style={{marginBottom: 10}} rules={[
                             { required: true, message: 'Ingrese su correo electrónico', }, ]} >
                             <Input placeholder="Correo electrónico" />
                         </Form.Item>
-                        <Form.Item name="name" rules={[
+                        <Form.Item name="name" style={{marginBottom: 10}} rules={[
                             { required: true, message: 'Ingrese su nombre completo', }, ]} >
                             <Input placeholder="Nombre completo" />
                         </Form.Item>
-                        <Form.Item name="username" rules={[
+                        <Form.Item name="username" style={{marginBottom: 10}} rules={[
                             { required: true, message: 'Ingrese su nombre de usuario', }, ]} >
                             <Input placeholder="Nombre de usuario" />
                         </Form.Item>
-                        <Form.Item name="password" rules={[
+                        <Form.Item name="password" style={{marginBottom: 10}} rules={[
                             { required: true, message: 'Ingrese su contraseña', }, ]} hasFeedback >
                             <Input.Password placeholder="Contraseña"/>
                         </Form.Item>
                         <Row justify="center">
                             <Col>
                                 <Form.Item >
-                                    <Button type="primary" htmlType="submit">
+                                    <Button type="primary" htmlType="submit" style={{width: 270, borderRadius:4}}>
                                         Registrarse
                                     </Button>
                                 </Form.Item>
