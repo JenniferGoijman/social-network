@@ -5,7 +5,8 @@ import './App.css';
 import Header from './components/Header/Header';
 import Profile from './containers/Profile/Profile';
 import Register from './containers/User/Register/Register';
-import Login from './containers/User/Login/Login';
+import LoginContainer from './containers/User/Login/LoginContainer';
+import Home from './containers/Home/Home';
 
 function App() {
 
@@ -22,7 +23,8 @@ function App() {
         <Switch>
           <Route path='/profile' component={Profile} exact />
           <Route path='/register' component={Register} exact />
-          <Route path='/login' component={Login} exact />
+          <Route path='/login' component={LoginContainer} exact />
+          <Route path='' component={Home} exact />
         </Switch>
       </BrowserRouter>
     </div>

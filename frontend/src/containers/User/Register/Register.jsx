@@ -27,7 +27,7 @@ const Register = props => {
     };
   
     return (
-        <div className="card-out">
+        <div className="register-container">
             <div className="card-in">
                 <div className="header">
                     <div className="logo">

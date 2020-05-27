@@ -2,13 +2,13 @@ import React from 'react'
 import { Form, Input, Row, Col, Button, notification, Divider } from 'antd';
 import { FacebookFilled } from '@ant-design/icons';
 
-import './Login.scss'
-import Logo from '../../../img/logoGrande.png';
+import './LoginComponent.scss';
+import Logo from '../../img/logoGrande.png';
 
-import { login } from '../../../redux/actions/users'
+import { login } from '../../redux/actions/users'
 
 
-const Login = props => {
+const LoginComponent = props => {
     const [form] = Form.useForm();
 
     const onFinish = values => {
@@ -25,7 +25,7 @@ const Login = props => {
     };
   
     return (
-        <div className="card-out">
+        <div className="login-component">
             <div className="card-in">
                 <div className="header">
                     <div className="logo">
@@ -70,4 +70,4 @@ const Login = props => {
                 
       
 
-export default Login;
+export default LoginComponent;

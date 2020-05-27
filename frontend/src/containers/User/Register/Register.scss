@@ -1,4 +1,4 @@
-.card-out {
+.register-container {
     display: flex;
     align-items: center;
     flex-direction: column;
@@ -26,11 +26,10 @@
                 width: 175px;
             }
         }
-        
         a {
             font-weight: 600;
         }
-
+        
         h5 {
             color: #8e8e8e;
             font-weight: 400;
