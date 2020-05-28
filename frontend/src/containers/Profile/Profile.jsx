@@ -1,26 +1,27 @@
 import React from 'react';
-import './Profile.scss'
+import { connect } from 'react-redux';
+import './Profile.scss';
+import { IMAGES_URL } from '../../api-config';
 
-const Profile = props => {
+const Profile = ({ user }) => {
     return (
         <div className="profile">
             <div className="photo">
-                <img src="https://yeux.com.mx/ColumnaUniversitaria/wp-content/uploads/2015/01/lctrtmd.jpg" alt="Foto de perfil"/>
+                <img src={IMAGES_URL + user.pic} alt="Foto de perfil"/>
             </div>
             <div className="info">
-                <div><h1>juanperez</h1></div>
+                <div><h1>{user.username}</h1></div>
                 <div className="datas">
                     <div className="data">0 publicaciones</div>
                     <div className="data">0 seguidores</div>
                     <div className="data">0 seguidos</div>                
                 </div>
-                <div>
-                    Juan Perez
-                </div>
+                <div>{user.name}</div>
             </div>
         </div>
         
     )
 }
 
-export default Profile
+const mapStateToProps = ({user}) => ({ user: user.user });
+export default connect(mapStateToProps)(Profile);

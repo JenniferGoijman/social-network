@@ -17,6 +17,7 @@ class UserController extends Controller
             $body = $request->all();
             $body['password'] = Hash::make($body['password']);
             $body['role'] = 'customer';
+            $body['pic'] = 'nopic.png';
             $user = User::create($body);
             return response($user, 201);
         } catch (\Exception $e) {
