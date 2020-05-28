@@ -15,3 +15,19 @@ export const login = async(user) => {
     localStorage.setItem('authToken', res.data.token);
     return res;
 }
+export const uploadImage = async(id, image) => {
+    try {
+        const res = await axios.post(API_URL + 'users/image/'+ id, image, {
+            headers: {
+                Authorization: localStorage.getItem('authToken')
+            }
+        });
+        store.dispatch({
+            type: 'UPLOAD_IMAGE',
+            payload: res.data
+        });
+        return res;
+    } catch (error) {
+        console.error(error)
+    }
+}

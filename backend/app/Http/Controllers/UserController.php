@@ -34,8 +34,6 @@ class UserController extends Controller
         } else {
             $credentials = ['username' => $usernameOrEmail, 'password' => $password];
         }
-
-        //dd($credentials);
         
         if (!Auth::attempt($credentials)) {
             return response(['message' => 'Wrong Credentials'], 400);
@@ -43,13 +41,30 @@ class UserController extends Controller
         $user = Auth::user();
         $token = $user->createToken('authToken')->accessToken;
         return response(['user' => $user, 'token' => $token]);
+    }
+    // public function update(Request $request, $id)
+    // {
+    //     try {
+    //         $body = $request->all();
+    //         $user = User::find($id);
+    //         // $product->update($body);
+    //         // return response($user);
+    //     } catch (\Exception $e) {
+    //         return response(['error' => $e], 500);
+    //     }
+    // }
+    public function uploadImage(Request $request, $id)
+    {
+        try {
+            $request->validate(['image' => 'required|image']);
+            $imageName = time() . '-' . request()->image->getClientOriginalName();
+            request()->image->move(public_path('images'), $imageName);
 
-        // $credentials = $request->only('username', 'password');
-        // if (!Auth::attempt($credentials)) {
-        //     return response(['message' => 'Wrong Credentials'], 400);
-        // }
-        // $user = Auth::user();
-        // $token = $user->createToken('authToken')->accessToken;
-        // return response(['user' => $user, 'token' => $token]);
+            $user = User::find($id);
+            $user->update(['pic' => $imageName]);
+            return response($user);
+        } catch (\Exception $e) {
+            return response(['error' => $e,], 500);
+        }
     }
 }

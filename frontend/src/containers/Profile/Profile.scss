@@ -7,14 +7,26 @@
     .photo {
         display: flex;
         align-items: center;
+        
         img {
             width: 150px;
             height: 150px;
             border-radius: 80px;
-            padding: 5px;
+            //padding: 5px;
             border: 1px rgb(200, 200, 200) solid;
         }
+        
+        img:hover {
+            cursor: pointer;
+        }
+        
+        input[type=file] { 
+            visibility: hidden;
+            position: absolute;
+        }
     }
+    
+    
 
     .info {
         display: flex;
