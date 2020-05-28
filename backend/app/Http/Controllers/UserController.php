@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
 
 class UserController extends Controller
 {
@@ -24,12 +25,30 @@ class UserController extends Controller
     }
     public function login(Request $request)
     {
-        $credentials = $request->only('username', 'password');
+        $usernameOrEmail = $request->input('usernameOrEmail');
+        $password = $request->input('password');
+        
+        if (Str::contains($usernameOrEmail, '@')) {
+            $credentials = ['email' => $usernameOrEmail, 'password' => $password];
+        } else {
+            $credentials = ['username' => $usernameOrEmail, 'password' => $password];
+        }
+
+        //dd($credentials);
+        
         if (!Auth::attempt($credentials)) {
             return response(['message' => 'Wrong Credentials'], 400);
         }
         $user = Auth::user();
         $token = $user->createToken('authToken')->accessToken;
         return response(['user' => $user, 'token' => $token]);
+
+        // $credentials = $request->only('username', 'password');
+        // if (!Auth::attempt($credentials)) {
+        //     return response(['message' => 'Wrong Credentials'], 400);
+        // }
+        // $user = Auth::user();
+        // $token = $user->createToken('authToken')->accessToken;
+        // return response(['user' => $user, 'token' => $token]);
     }
 }

@@ -16,7 +16,8 @@ const LoginComponent = props => {
         login(user)
         .then(res => {
             notification.success({message:'Login', description:res.data.message})
-            setTimeout(() => { props.history.push('/profile') }, 1500);
+            // console.log(props) // props vacio
+            // setTimeout(() => { props.history.push('/profile') }, 1500); // tira error
         })
         .catch((res) =>{
             notification.error({message:'Login', description:'Hubo un problema al tratar de iniciar sesión'})
@@ -34,13 +35,9 @@ const LoginComponent = props => {
                 </div>
                 <div className="form">
                     <Form form={form} name="register" onFinish={onFinish} scrollToFirstError >
-                        {/* <Form.Item name="email" style={{marginBottom: 10}} rules={[
-                            { required: true, message: 'Ingrese su correo electrónico', }, ]} >
-                            <Input placeholder="Correo electrónico" />
-                        </Form.Item> */}
-                        <Form.Item name="username" style={{marginBottom: 10}} rules={[
-                            { required: true, message: 'Ingrese su nombre de usuario', }, ]} >
-                            <Input placeholder="Nombre de usuario" />
+                        <Form.Item name="usernameOrEmail" style={{marginBottom: 10}} rules={[
+                            { required: true, message: 'Ingrese su usuario o correo electrónico', }, ]} >
+                            <Input placeholder="Usuario o correo electrónico" />
                         </Form.Item>
                         <Form.Item name="password" style={{marginBottom: 10}} rules={[
                             { required: true, message: 'Ingrese su contraseña', }, ]} hasFeedback >
