@@ -16,11 +16,23 @@ header {
     }
 
     .icons {
-        display: flex;
+        display: flex;        
         
         .icon {
             margin: 0 10px;
             font-size: 22px;
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+
+            img {
+                width: 25px;
+                height: 25px;
+                border-radius: 80px;
+                padding: 2px;
+                border: 1px black solid;
+                
+            }
         }
     }
 }

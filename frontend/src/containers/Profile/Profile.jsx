@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import { connect } from 'react-redux';
 import './Profile.scss';
 import { IMAGES_URL } from '../../api-config';
-import { Tooltip, Button } from 'antd';
+import { Tooltip } from 'antd';
 import { uploadImage, logout } from '../../redux/actions/users';
 import { SettingOutlined } from '@ant-design/icons'
 
