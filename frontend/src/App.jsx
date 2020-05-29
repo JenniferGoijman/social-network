@@ -3,17 +3,22 @@ import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import './App.css';
 
 import Header from './components/Header/Header';
-import Profile from './containers/Profile/Profile';
+
 import Register from './containers/User/Register/Register';
 import LoginContainer from './containers/User/Login/LoginContainer';
 import Home from './containers/Home/Home';
+import Profile from './containers/Profile/Profile';
 
 function App() {
 
   const showHeader = (path) => {
+    let show;
     if (path.includes('register') || path.includes('login')) {
-      return false;
+      show = false;
+    } else {
+      show = true;
     }
+    return show
   }
 
   return (

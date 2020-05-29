@@ -42,17 +42,20 @@ class UserController extends Controller
         $token = $user->createToken('authToken')->accessToken;
         return response(['user' => $user, 'token' => $token]);
     }
-    // public function update(Request $request, $id)
-    // {
-    //     try {
-    //         $body = $request->all();
-    //         $user = User::find($id);
-    //         // $product->update($body);
-    //         // return response($user);
-    //     } catch (\Exception $e) {
-    //         return response(['error' => $e], 500);
-    //     }
-    // }
+    public function logout()
+    {
+        try {
+            Auth::user()->token()->revoke();
+            return response([
+                'message'=>'User successfully disconected.'
+            ]);
+        } catch (\Exception $e) {
+            return response([
+                'message' => 'There was an error trying to login the user',
+                'error' => $e->getMessage()
+            ], 500);
+        }
+    }
     public function uploadImage(Request $request, $id)
     {
         try {

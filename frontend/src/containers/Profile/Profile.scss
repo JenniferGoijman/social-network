@@ -24,9 +24,7 @@
             visibility: hidden;
             position: absolute;
         }
-    }
-    
-    
+    } 
 
     .info {
         display: flex;
@@ -35,10 +33,18 @@
         align-items: flex-start;
         margin-left: 30px;
 
-        h1 {
-            font-family: NoahRegular;
-        }
+        .name {
+            display: flex;
+            align-items: center;
+            
+            h1 {
+                font-family: NoahRegular;
+            }
 
+            h2 {
+                margin-left: 20px;
+            }
+        }
         .datas {
             display: flex;
             align-items: flex-start;

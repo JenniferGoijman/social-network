@@ -8,5 +8,9 @@ Route::prefix('v1')->group( function () {
         Route::post('/register', 'UserController@register');
         Route::post('/login', 'UserController@login');
         Route::post('/image/{id}', 'UserController@uploadImage');
+        
+        Route::middleware('auth:api')->group(function(){
+            Route::get('/logout','UserController@logout');
+        });
     });
 });

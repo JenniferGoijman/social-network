@@ -1,7 +1,8 @@
-import { LOGIN } from '../types'
+import { LOGIN, LOGOUT } from '../types'
 const userReducer = (state = {}, action) => {
     switch (action.type) {
         case LOGIN:
+        case LOGOUT:
         case 'UPLOAD_IMAGE':
             return {
                 ...state,
