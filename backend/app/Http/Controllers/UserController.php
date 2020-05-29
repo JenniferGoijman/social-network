@@ -70,4 +70,12 @@ class UserController extends Controller
             return response(['error' => $e,], 500);
         }
     }
+    public function getFollowings($id) {
+        $user = User::find($id);
+        return $user->followers()->get();
+    }
+    public function getFollowers($id) {
+        $user = User::find($id);
+        return $user->followings()->get();
+    }
 }

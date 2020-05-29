@@ -29,7 +29,7 @@ const Header = ({ user }) => {
                     <FontAwesomeIcon icon={faHeart} />
                 </div>
                 <div className="icon">
-                    <img src={IMAGES_URL + user?.pic} alt="Foto de perfil"/>
+                    {user && <img src={IMAGES_URL + user?.pic} alt="Foto de perfil"/>}
                 </div>
             </div>
         </header>
