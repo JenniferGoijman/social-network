@@ -3,10 +3,14 @@
     justify-content: center;
     height: 218px;
     width: 100vw;
+    margin-top: 30px;
     
     .photo {
         display: flex;
         align-items: center;
+        width: 150px;
+        height: 150px;
+        margin-top: 10px;
         
         img {
             width: 150px;
@@ -28,7 +32,7 @@
     .info {
         display: flex;
         flex-direction: column;
-        justify-content: center;
+        justify-content: flex-start;
         align-items: flex-start;
         margin-left: 30px;
 
@@ -44,6 +48,11 @@
                 margin-left: 20px;
             }
         }
+
+        .bold {
+            font-weight: bold;
+        }
+
         .datas {
             display: flex;
             align-items: flex-start;
@@ -51,6 +60,11 @@
             .data {
                 margin-right: 30px;
             }
+        }
+
+        .description {
+            max-width: 300px;
+            text-align: left;
         }
     }
 }

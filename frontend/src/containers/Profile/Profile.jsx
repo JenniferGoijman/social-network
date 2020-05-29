@@ -48,13 +48,14 @@ const Profile = ({ user, followers, followings }) => {
                     <h1>{user?.username}</h1>
                     <h2><SettingOutlined onClick={disconnect} /></h2>
                 </div>
-                
+
                 <div className="datas">
-                    <div className="data">0 publicaciones</div>
-                    <div className="data">{followers.length} seguidores</div>
-                    <div className="data">{followings?.length} seguidos</div>                
-                </div>
-                <div>{user?.name}</div>
+                    <div className="data"><span className="bold">0</span> publicaciones</div>
+                    <div className="data"><span className="bold">{followers.length}</span> seguidores</div>
+                    <div className="data"><span className="bold">{followings?.length}</span> seguidos</div>                
+                </div><br />
+                <div className="bold">{user?.name}</div>
+                <div className="description">{user?.description}</div>
             </div>
         </div>
         
