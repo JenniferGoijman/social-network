@@ -1,7 +1,7 @@
 import store from '../store';
 import axios from 'axios';
 import { API_URL } from '../../api-config';
-import { LOGIN, LOGOUT } from '../types'
+import { LOGIN, LOGOUT, GET_FOLLOWERS } from '../types'
 
 export const register = async(user) => {
     return axios.post(API_URL + 'users/register', user)
@@ -31,7 +31,7 @@ export const uploadImage = async(id, image) => {
     try {
         const res = await axios.post(API_URL + 'users/image/'+ id, image, {
             headers: {
-                Authorization: localStorage.getItem('authToken')
+                Authorization: "Bearer " + localStorage.getItem('authToken')
             }
         });
         store.dispatch({
@@ -39,6 +39,21 @@ export const uploadImage = async(id, image) => {
             payload: res.data
         });
         return res;
+    } catch (error) {
+        console.error(error)
+    }
+}
+export const getFollowers = async(id) => {
+    try {
+        const res = await axios.get(API_URL + 'users/followers/' + id, {
+            headers: {
+                Authorization: "Bearer " + localStorage.getItem('authToken')
+            }
+        });
+        store.dispatch({
+            type: GET_FOLLOWERS,
+            payload: res.data
+        })
     } catch (error) {
         console.error(error)
     }
