@@ -5,11 +5,11 @@ import { IMAGES_URL } from '../../api-config';
 import { Tooltip } from 'antd';
 import { uploadImage, logout } from '../../redux/actions/users';
 import { SettingOutlined } from '@ant-design/icons';
-import { getFollowers } from '../../redux/actions/users';
+import { getFollowers, getFollowings } from '../../redux/actions/users';
 
-const Profile = ({ user, followers }) => {
+const Profile = ({ user, followers, followings }) => {
     const [selectedFile, setSelectedFile] = useState(user?.pic);
-    useEffect(() => { getFollowers(user.id); }, []);
+    useEffect(() => { getFollowers(user.id); getFollowings(user.id);}, []);
     
     const fileSelectedHandler = event => {
         setSelectedFile(event.target.files[0]);
@@ -52,7 +52,7 @@ const Profile = ({ user, followers }) => {
                 <div className="datas">
                     <div className="data">0 publicaciones</div>
                     <div className="data">{followers.length} seguidores</div>
-                    <div className="data">0 seguidos</div>                
+                    <div className="data">{followings?.length} seguidos</div>                
                 </div>
                 <div>{user?.name}</div>
             </div>
@@ -61,5 +61,5 @@ const Profile = ({ user, followers }) => {
     )
 }
 
-const mapStateToProps = ({user, followers}) => ({ user: user.user, followers: user.followers });
+const mapStateToProps = ({user, followers, followings}) => ({ user: user.user, followers: user.followers, followings: user.followings });
 export default connect(mapStateToProps)(Profile);

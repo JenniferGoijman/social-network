@@ -1,7 +1,7 @@
 import store from '../store';
 import axios from 'axios';
 import { API_URL } from '../../api-config';
-import { LOGIN, LOGOUT, GET_FOLLOWERS } from '../types'
+import { LOGIN, LOGOUT, GET_FOLLOWERS, GET_FOLLOWINGS } from '../types'
 
 export const register = async(user) => {
     return axios.post(API_URL + 'users/register', user)
@@ -52,6 +52,21 @@ export const getFollowers = async(id) => {
         });
         store.dispatch({
             type: GET_FOLLOWERS,
+            payload: res.data
+        })
+    } catch (error) {
+        console.error(error)
+    }
+}
+export const getFollowings = async(id) => {
+    try {
+        const res = await axios.get(API_URL + 'users/followings/' + id, {
+            headers: {
+                Authorization: "Bearer " + localStorage.getItem('authToken')
+            }
+        });
+        store.dispatch({
+            type: GET_FOLLOWINGS,
             payload: res.data
         })
     } catch (error) {

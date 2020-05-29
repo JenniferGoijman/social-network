@@ -1,4 +1,4 @@
-import { LOGIN, LOGOUT, GET_FOLLOWERS } from '../types'
+import { LOGIN, LOGOUT, GET_FOLLOWERS, GET_FOLLOWINGS } from '../types'
 const userReducer = (state = {}, action) => {
     switch (action.type) {
         case LOGIN:
@@ -12,6 +12,11 @@ const userReducer = (state = {}, action) => {
             return {
                 ...state,
                 followers: action.payload
+            }
+        case GET_FOLLOWINGS:
+            return {
+                ...state,
+                followings: action.payload
             }
 
         default:
