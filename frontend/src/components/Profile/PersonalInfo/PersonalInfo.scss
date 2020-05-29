@@ -1,0 +1,72 @@
+.profile {
+    display: flex;
+    justify-content: center;
+    height: 218px;
+    width: 100vw;
+    margin-top: 30px;
+    
+    .photo {
+        display: flex;
+        align-items: center;
+        width: 150px;
+        height: 150px;
+        margin: 10px 30px 0 30px;
+        
+        img {
+            width: 150px;
+            height: 150px;
+            border-radius: 80px;
+            border: 1px rgb(200, 200, 200) solid;
+        }
+        
+        img:hover {
+            cursor: pointer;
+        }
+        
+        input[type=file] { 
+            visibility: hidden;
+            position: absolute;
+        }
+    } 
+
+    .info {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: flex-start;
+        margin-left: 30px;
+        width: 550px;
+
+        .name {
+            display: flex;
+            align-items: center;
+            
+            h1 {
+                font-family: NoahRegular;
+            }
+
+            h2 {
+                margin-left: 20px;
+            }
+        }
+
+        .bold {
+            font-weight: bold;
+        }
+
+        .datas {
+            display: flex;
+            align-items: flex-start;
+
+            .data {
+                margin-right: 30px;
+            }
+        }
+
+        .description {
+            max-width: 450px;
+            text-align: left;
+        }
+    }
+}
+
