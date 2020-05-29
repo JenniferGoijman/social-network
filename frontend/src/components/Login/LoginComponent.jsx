@@ -15,9 +15,9 @@ const LoginComponent = props => {
         const user = values;
         login(user)
         .then(res => {
-            notification.success({message:'Login', description:res.data.message})
-            // console.log(props) // props vacio
-            // setTimeout(() => { props.history.push('/profile') }, 1500); // tira error
+            setTimeout(() => {
+                window.location.pathname='/profile'
+            }, 1500);
         })
         .catch((res) =>{
             notification.error({message:'Login', description:'Hubo un problema al tratar de iniciar sesión'})
@@ -65,6 +65,4 @@ const LoginComponent = props => {
     );
   };
                 
-      
-
 export default LoginComponent;

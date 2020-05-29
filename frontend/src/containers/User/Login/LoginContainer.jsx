@@ -4,7 +4,9 @@ import Login from '../../../components/Login/LoginComponent';
 
 const LoginContainer = props => {
     return (
-      <div className="login-container"><Login></Login></div>    
+      <div className="login-container">
+        <Login></Login>
+      </div>    
     );
   };
 

@@ -5,6 +5,7 @@ import Logo from '../../img/logo.png';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHome, faPaperPlane, faCompass, faHeart } from '@fortawesome/free-solid-svg-icons'
 import { IMAGES_URL } from '../../api-config';
+import Search from '../Search/Search';
 
 const Header = ({ user }) => {
     return (
@@ -13,7 +14,7 @@ const Header = ({ user }) => {
                 <img src={Logo} alt="Logo Instagram"/>
             </div>
             <div>
-                <input type="text" name="" id="" placeholder="Busca" className="search" />
+               <Search placeholder="Busca" style={{ width: 200 }}></Search>
             </div>
             <div className="icons">
                 <div className="icon">

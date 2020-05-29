@@ -6,15 +6,20 @@ import { Tooltip } from 'antd';
 import { uploadImage, logout, getFollowers, getFollowings } from '../../../redux/actions/users';
 import { SettingOutlined } from '@ant-design/icons';
 
-const PersonalInfo = ({ user, followers, followings }) => {
-    const [selectedFile, setSelectedFile] = useState(user?.pic);
-    useEffect(() => { getFollowers(user.id); getFollowings(user.id);}, []);
+const PersonalInfo = props => {
+    const [user, setUser] = useState(props.user);
+    const [followers, setFollowers] = useState(props.followers);
+    const [followings, setFollowings] = useState(props.followings);
+
+    useEffect(() => { 
+        getFollowers(user?.id); 
+        getFollowings(user?.id);
+    }, []);
     
     const fileSelectedHandler = event => {
-        setSelectedFile(event.target.files[0]);
-        const fd = new FormData();
-        //fd.append("image", selectedFile, selectedFile.name);
-        fd.append("image", event.target.files[0], event.target.files[0].name);
+        setUser(user.pic = event.target.files[0].name);
+        const fd = new FormData();        
+        fd.append("image", event.target.files[0], user.pic);
         uploadImage(user.id, fd)
         .then((res) => { console.log(":)") })
           .catch(() => { console.log(":(") });
@@ -24,7 +29,9 @@ const PersonalInfo = ({ user, followers, followings }) => {
     const disconnect = () => {
         logout()
         .then((res) => { 
-            //redirigir al login 
+            setTimeout(() => {
+                window.location.pathname='/' //tira error
+            }, 1500);
         })
         .catch(() => { 
             console.log(":("); //poner mensaje de error 
@@ -36,7 +43,7 @@ const PersonalInfo = ({ user, followers, followings }) => {
             <div className="photo">
                 <label htmlFor='single'>
                     <Tooltip title="Cambiar foto de perfil">
-                        <img src={IMAGES_URL + selectedFile} alt="Foto de perfil"/>
+                        <img src={IMAGES_URL + user?.pic} alt="Foto de perfil"/>
                     </Tooltip>
                 </label>
                 <input type="file" id='single' onChange={fileSelectedHandler} />
@@ -51,7 +58,7 @@ const PersonalInfo = ({ user, followers, followings }) => {
                 <div className="datas">
                     <div className="data"><span className="bold">0</span> publicaciones</div>
                     <div className="data"><span className="bold">{followers.length}</span> seguidores</div>
-                    <div className="data"><span className="bold">{followings?.length}</span> seguidos</div>                
+                    <div className="data"><span className="bold">{followings.length}</span> seguidos</div>                
                 </div><br />
                 <div className="bold">{user?.name}</div>
                 <div className="description">{user?.description}</div>

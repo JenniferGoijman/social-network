@@ -13,7 +13,7 @@ function App() {
 
   const showHeader = (path) => {
     let show;
-    if (path.includes('register') || path.includes('login')) {
+    if (path==='/register' || path==='/login' || path==='/') {
       show = false;
     } else {
       show = true;
@@ -24,7 +24,7 @@ function App() {
   return (
     <div className="App">   
       <BrowserRouter>
-        { showHeader(window.location.href) ? <Header/> : '' }
+        { showHeader(window.location.pathname) ? <Header/> : '' }
         <Switch>
           <Route path='/profile' component={Profile} exact />
           <Route path='/register' component={Register} exact />

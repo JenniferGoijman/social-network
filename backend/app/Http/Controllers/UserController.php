@@ -78,4 +78,14 @@ class UserController extends Controller
         $user = User::find($id);
         return $user->followings()->get();
     }
+    public function getAll()
+    {
+        try {
+            return User::all();
+        } catch (\Exception $e) {
+            return response([
+                'error' => $e
+            ], 500);
+        }
+    }
 }
