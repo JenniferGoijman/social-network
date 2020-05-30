@@ -4,8 +4,10 @@ import './User.scss';
 import { IMAGES_URL } from '../../api-config';
 import { Tooltip, Button } from 'antd';
 import { uploadImage, logout, getFollowers, getFollowings } from '../../redux/actions/users';
-import { SettingOutlined, UserOutlined, CheckOutlined } from '@ant-design/icons';
+import { SettingOutlined } from '@ant-design/icons';
 import NotFound from '../NotFound/NotFound';
+import Unfollow from '../Unfollow/Unfollow';
+import Follow from '../Follow/Follow';
 
 const User = props => {    
     //const [user, setUser] = useState(props.users?.filter(u=>u.username===props.match.params.username)[0]);
@@ -19,14 +21,7 @@ const User = props => {
     }, []);
 
     const isAlreadyFollowed = props.myFollowings?.filter(f => f?.id === user?.id).length>0 ? true : false;
-    
-    const follow = () => {
-        console.log('follow');
-    }
-
-    const unfollow = () => {
-        console.log('unfollow');
-    }
+        
     const fileSelectedHandler = event => {
         //setUser(user.pic = event.target.files[0].name);
         const fd = new FormData();        
@@ -69,12 +64,18 @@ const User = props => {
                         <div className="name">
                             <h1>{user?.username}</h1>
                             { !isMe && !isAlreadyFollowed && <div className="follow">
-                                <Button type="primary" htmlType="submit" size="small" onClick={follow}>Seguir</Button>
+                                <Follow user={user}></Follow>
                             </div>}
-                            { isAlreadyFollowed && <div className="unfollow">
-                                <Button type="default" htmlType="submit" size="small" onClick={unfollow}><Fragment><UserOutlined /><CheckOutlined /></Fragment></Button>
-                            </div>}
-                            { isMe && <h2><SettingOutlined onClick={disconnect} /></h2>}
+                            { isAlreadyFollowed && 
+                                <div className="unfollow">
+                                    <Unfollow user={user}></Unfollow>
+                                </div>
+                            }
+                            { isMe && 
+                                <h2>
+                                    <SettingOutlined onClick={disconnect} />
+                                </h2>
+                            }
                         </div>
 
                         <div className="datas">

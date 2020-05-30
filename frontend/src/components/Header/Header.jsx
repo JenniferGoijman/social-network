@@ -8,8 +8,6 @@ import { IMAGES_URL } from '../../api-config';
 import Search from '../Search/Search';
 
 const Header = props => {
-    console.log(props)
-
     const myProfile = () => {
         window.location.pathname='/'+ props.myUser.username;
     }
