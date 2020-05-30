@@ -1,7 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { Select } from 'antd';
 import { getAll }  from '../../redux/actions/users'
+import { IMAGES_URL } from '../../api-config';
+import './Search.scss'
 const { Option } = Select;
 
 const Search = props => {
@@ -18,10 +20,20 @@ const Search = props => {
     };
     
     const handleChange = value => {
-        setValue(value)
+        window.location.pathname='/'+ value;
     };
-    
-    const options = data?.map(d => <Option key={d.id}>{d.username}</Option>); // agregar onClick que te lleve al perfil
+
+    const options = data?.map(d => 
+        <Option key={d.username}>
+            <div className="userSearch">
+                <img src={IMAGES_URL + d.pic} alt="Foto de perfil" />
+                <div className="names">
+                    <span className="username">{d.username}</span>
+                    <span>{d.name}</span>
+                </div>
+            </div>
+        </Option>
+        );
     
     return (
         <Select
@@ -41,5 +53,5 @@ const Search = props => {
     )
 }
 
-const mapStateToProps = ({user}) => ({ users: user.users, myUser: user.user });
+const mapStateToProps = ({user}) => ({ users: user.users, myUser: user.myUser });
 export default connect(mapStateToProps)(Search);

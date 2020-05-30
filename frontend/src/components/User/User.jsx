@@ -54,14 +54,16 @@ const User = props => {
             {user !== undefined && 
             <Fragment>
                 <div className="profile">
-                    <div className="photo">
+                    {isMe && <div className="photo">
                         <label htmlFor='single'>
                             <Tooltip title="Cambiar foto de perfil">
                                 <img src={IMAGES_URL + user?.pic} alt="Foto de perfil"/>
                             </Tooltip>
                         </label>
                         <input type="file" id='single' onChange={fileSelectedHandler} />
-                    </div>
+                    </div>}
+                    {!isMe && <div className="photo"><img src={IMAGES_URL + user?.pic} alt="Foto de perfil"/></div>}
+                    
                 
                     <div className="info">
                         <div className="name">

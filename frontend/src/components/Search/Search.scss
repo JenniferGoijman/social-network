@@ -1,0 +1,21 @@
+.userSearch{
+    display: flex;
+    align-items: center;
+    //cursor: pointer;
+
+    img {
+        width: 38px;
+        height: 38px;
+        border-radius: 80px;
+    }
+
+    .names {
+        display: flex;
+        flex-direction: column;
+        margin-left: 10px;
+
+        .username {
+            font-weight: bold;
+        }
+    }
+}
