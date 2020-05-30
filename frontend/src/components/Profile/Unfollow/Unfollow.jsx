@@ -9,9 +9,11 @@ const Unfollow = props => {
     }
 
     return (
-        <Button type="default" htmlType="submit" size="small" onClick={unfollow}>
-            <Fragment><UserOutlined /><CheckOutlined /></Fragment>
-        </Button>
+        <div className="unfollow">
+            <Button type="default" htmlType="submit" size="small" onClick={unfollow}>
+                <Fragment><UserOutlined /><CheckOutlined /></Fragment>
+            </Button>
+        </div>
     )
 }
 

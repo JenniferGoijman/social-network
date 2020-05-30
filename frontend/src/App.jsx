@@ -8,7 +8,6 @@ import User from './components/User/User';
 import Register from './containers/User/Register/Register';
 import LoginContainer from './containers/User/Login/LoginContainer';
 import Home from './containers/Home/Home';
-import Profile from './containers/Profile/Profile';
 
 function App() {
 
@@ -27,7 +26,6 @@ function App() {
       <BrowserRouter>
         { showHeader(window.location.pathname) ? <Header/> : '' }
         <Switch>
-          <Route path='/profile' component={Profile} exact />
           <Route path='/register' component={Register} exact />
           <Route path='/login' component={LoginContainer} exact />
           <Route path='/:username' component={User} exact />

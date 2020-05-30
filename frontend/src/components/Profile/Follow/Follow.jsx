@@ -7,7 +7,9 @@ const Follow = props => {
     }
 
     return (
-        <Button type="primary" htmlType="submit" size="small" onClick={follow}>Seguir</Button>
+        <div className="follow">
+            <Button type="primary" htmlType="submit" size="small" onClick={follow}>Seguir</Button>
+        </div>
     )
 }
 

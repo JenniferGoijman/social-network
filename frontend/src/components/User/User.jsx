@@ -1,13 +1,15 @@
 import React, { useState, useEffect, Fragment } from 'react';
 import { connect } from 'react-redux';
-import './User.scss';
 import { IMAGES_URL } from '../../api-config';
-import { Tooltip, Button } from 'antd';
-import { uploadImage, logout, getFollowers, getFollowings } from '../../redux/actions/users';
-import { SettingOutlined } from '@ant-design/icons';
+import './User.scss';
+
+import { getFollowers, getFollowings } from '../../redux/actions/users';
+
 import NotFound from '../NotFound/NotFound';
-import Unfollow from '../Unfollow/Unfollow';
-import Follow from '../Follow/Follow';
+import Unfollow from '../Profile/Unfollow/Unfollow';
+import Follow from '../Profile/Follow/Follow';
+import ChangebleProfilePic from '../Profile/ChangebleProfilePic/ChangebleProfilePic';
+import Logout from '../Profile/Logout/Logout';
 
 const User = props => {    
     //const [user, setUser] = useState(props.users?.filter(u=>u.username===props.match.params.username)[0]);
@@ -21,61 +23,23 @@ const User = props => {
     }, []);
 
     const isAlreadyFollowed = props.myFollowings?.filter(f => f?.id === user?.id).length>0 ? true : false;
-        
-    const fileSelectedHandler = event => {
-        //setUser(user.pic = event.target.files[0].name);
-        const fd = new FormData();        
-        //fd.append("image", event.target.files[0], user.pic);
-        fd.append("image", event.target.files[0], event.target.files[0].name);
-        uploadImage(props.myUser.id, fd)
-        .then((res) => { console.log(":)") })
-          .catch(() => { console.log(":(") });
-    }
-
-    const disconnect = () => {
-        logout()
-        .then((res) => { 
-            setTimeout(() => {
-                props.history.push('/')
-            }, 1500);
-        })
-        .catch(() => { 
-            console.log(":("); //poner mensaje de error 
-        });
-    }
-   
+           
     return (
         <Fragment>
             {user !== undefined && 
             <Fragment>
                 <div className="profile">
-                    {isMe && <div className="photo">
-                        <label htmlFor='single'>
-                            <Tooltip title="Cambiar foto de perfil">
-                                <img src={IMAGES_URL + user?.pic} alt="Foto de perfil"/>
-                            </Tooltip>
-                        </label>
-                        <input type="file" id='single' onChange={fileSelectedHandler} />
-                    </div>}
-                    {!isMe && <div className="photo"><img src={IMAGES_URL + user?.pic} alt="Foto de perfil"/></div>}
+                    <div className="photo">
+                        {isMe && <ChangebleProfilePic myUser={props.myUser}></ChangebleProfilePic>}
+                        {!isMe && <img src={IMAGES_URL + user?.pic} alt="Foto de perfil"/>}
+                    </div>
                     
-                
                     <div className="info">
                         <div className="name">
                             <h1>{user?.username}</h1>
-                            { !isMe && !isAlreadyFollowed && <div className="follow">
-                                <Follow user={user}></Follow>
-                            </div>}
-                            { isAlreadyFollowed && 
-                                <div className="unfollow">
-                                    <Unfollow user={user}></Unfollow>
-                                </div>
-                            }
-                            { isMe && 
-                                <h2>
-                                    <SettingOutlined onClick={disconnect} />
-                                </h2>
-                            }
+                            { !isMe && !isAlreadyFollowed && <Follow user={user}></Follow>}
+                            { isAlreadyFollowed && <Unfollow user={user}></Unfollow>}
+                            { isMe && <Logout></Logout>}
                         </div>
 
                         <div className="datas">
@@ -92,7 +56,7 @@ const User = props => {
         </Fragment>
     )
 }
-const mapStateToProps = ({user, myFollowers, myFollowings}) => ({ 
+const mapStateToProps = ({user}) => ({ 
     myUser: user.myUser, myFollowers: user.myFollowers, myFollowings: user.myFollowings, users: user.users
 });
 export default connect(mapStateToProps)(User);
