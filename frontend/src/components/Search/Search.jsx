@@ -5,7 +5,6 @@ import { getAll }  from '../../redux/actions/users'
 const { Option } = Select;
 
 const Search = props => {
-    console.log(props)
     useEffect(() => { getAll(); }, []);
     const [data, setData] = useState();
     const [value, setValue] = useState(undefined);
@@ -44,4 +43,3 @@ const Search = props => {
 
 const mapStateToProps = ({user}) => ({ users: user.users, myUser: user.user });
 export default connect(mapStateToProps)(Search);
-//export default Search;

@@ -16,7 +16,7 @@ const LoginComponent = props => {
         login(user)
         .then(res => {
             setTimeout(() => {
-                window.location.pathname='/profile'
+                window.location.pathname='/'+ res.data.user.username;
             }, 1500);
         })
         .catch((res) =>{

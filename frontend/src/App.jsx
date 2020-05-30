@@ -3,6 +3,7 @@ import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import './App.css';
 
 import Header from './components/Header/Header';
+import User from './components/User/User';
 
 import Register from './containers/User/Register/Register';
 import LoginContainer from './containers/User/Login/LoginContainer';
@@ -29,7 +30,9 @@ function App() {
           <Route path='/profile' component={Profile} exact />
           <Route path='/register' component={Register} exact />
           <Route path='/login' component={LoginContainer} exact />
+          <Route path='/:username' component={User} exact />
           <Route path='' component={Home} exact />
+          
         </Switch>
       </BrowserRouter>
     </div>

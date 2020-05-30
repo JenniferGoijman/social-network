@@ -7,7 +7,13 @@ import { faHome, faPaperPlane, faCompass, faHeart } from '@fortawesome/free-soli
 import { IMAGES_URL } from '../../api-config';
 import Search from '../Search/Search';
 
-const Header = ({ user }) => {
+const Header = props => {
+    console.log(props)
+
+    const myProfile = () => {
+        window.location.pathname='/'+ props.myUser.username;
+    }
+    
     return (
         <header>
             <div className="logo">
@@ -30,12 +36,13 @@ const Header = ({ user }) => {
                     <FontAwesomeIcon icon={faHeart} />
                 </div>
                 <div className="icon">
-                    {user && <img src={IMAGES_URL + user?.pic} alt="Foto de perfil"/>}
+                    {props.myUser && <img src={IMAGES_URL + props.myUser?.pic} alt="Foto de perfil"
+                        onClick={myProfile} />}
                 </div>
             </div>
         </header>
     )
 }
 
-const mapStateToProps = ({user}) => ({ user: user.user });
+const mapStateToProps = ({user}) => ({ myUser: user.myUser });
 export default connect(mapStateToProps)(Header);

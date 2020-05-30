@@ -11,7 +11,17 @@ const userReducer = (state = {}, action) => {
         case 'UPLOAD_IMAGE':
             return {
                 ...state,
-                user: action.payload
+                myUser: action.payload
+            }
+        case 'GET_MY_FOLLOWERS':
+            return {
+                ...state,
+                myFollowers: action.payload
+            }
+        case 'GET_MY_FOLLOWINGS':
+            return {
+                ...state,
+                myFollowings: action.payload
             }
         case GET_FOLLOWERS:
             return {
