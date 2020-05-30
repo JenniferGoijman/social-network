@@ -1,4 +1,4 @@
-import React, { useState, useEffect, Fragment } from 'react';
+import React, { useEffect, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { IMAGES_URL } from '../../api-config';
 import './User.scss';
@@ -12,7 +12,6 @@ import ChangebleProfilePic from '../Profile/ChangebleProfilePic/ChangebleProfile
 import Logout from '../Profile/Logout/Logout';
 
 const User = props => {    
-    //const [user, setUser] = useState(props.users?.filter(u=>u.username===props.match.params.username)[0]);
     const user = props.users?.filter(u=>u.username===props.match.params.username)[0]; //si no existe 404
     
     const isMe = props.myUser?.id === user?.id;
@@ -20,7 +19,7 @@ const User = props => {
     useEffect(() => { 
         getFollowers(props.myUser?.id, true); 
         getFollowings(props.myUser?.id, true);
-    }, []);
+    }, [props]);
 
     const isAlreadyFollowed = props.myFollowings?.filter(f => f?.id === user?.id).length>0 ? true : false;
            

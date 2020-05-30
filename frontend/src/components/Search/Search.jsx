@@ -1,4 +1,4 @@
-import React, { useState, useEffect, Fragment } from 'react';
+import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { Select } from 'antd';
 import { getAll }  from '../../redux/actions/users'
@@ -9,7 +9,7 @@ const { Option } = Select;
 const Search = props => {
     useEffect(() => { getAll(); }, []);
     const [data, setData] = useState();
-    const [value, setValue] = useState(undefined);
+    const value = undefined;
 
     const handleSearch = value => {
         if (value) {
