@@ -9,9 +9,7 @@ const Logout = props => {
     const disconnect = () => {
         logout()
         .then((res) => { 
-            setTimeout(() => {
-                history.push('/')
-            }, 1500);
+            history.push('/');
         })
         .catch(() => { 
             console.log(":("); //poner mensaje de error 

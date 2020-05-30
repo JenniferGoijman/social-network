@@ -16,4 +16,8 @@ Route::prefix('v1')->group( function () {
             Route::get('followers/{id}','UserController@getFollowers');
         });
     });
+
+    Route::prefix('followers')->group(function () {
+        Route::post('/', 'FollowerController@follow');
+    });
 });

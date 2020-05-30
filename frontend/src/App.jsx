@@ -10,6 +10,7 @@ import LoginContainer from './containers/User/Login/LoginContainer';
 import Home from './containers/Home/Home';
 
 function App() {
+  console.log(window.location.pathname);
 
   const showHeader = (path) => {
     let show;
@@ -18,7 +19,7 @@ function App() {
     } else {
       show = true;
     }
-    return show
+    return show;
   }
 
   return (
