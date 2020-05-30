@@ -5,11 +5,12 @@ import { IMAGES_URL } from '../../api-config';
 import { Tooltip, Button } from 'antd';
 import { uploadImage, logout, getFollowers, getFollowings } from '../../redux/actions/users';
 import { SettingOutlined, UserOutlined, CheckOutlined } from '@ant-design/icons';
+import NotFound from '../NotFound/NotFound';
 
 const User = props => {    
     //const [user, setUser] = useState(props.users?.filter(u=>u.username===props.match.params.username)[0]);
     const user = props.users?.filter(u=>u.username===props.match.params.username)[0]; //si no existe 404
-    console.log(user);
+    
     const isMe = props.myUser?.id === user?.id;
     
     useEffect(() => { 
@@ -17,7 +18,7 @@ const User = props => {
         getFollowings(props.myUser?.id, true);
     }, []);
 
-    const isAlreadyFollowed = props.myFollowings.filter(f => f.id === user.id).length>0 ? true : false;
+    const isAlreadyFollowed = props.myFollowings?.filter(f => f?.id === user?.id).length>0 ? true : false;
     
     const follow = () => {
         console.log('follow');
@@ -34,14 +35,13 @@ const User = props => {
         uploadImage(props.myUser.id, fd)
         .then((res) => { console.log(":)") })
           .catch(() => { console.log(":(") });
-        // TODO: que refresque la imagen al modificar el user.pic // con F5 funciona
     }
 
     const disconnect = () => {
         logout()
         .then((res) => { 
             setTimeout(() => {
-                window.location.pathname='/' //tira error
+                props.history.push('/')
             }, 1500);
         })
         .catch(() => { 
@@ -50,38 +50,43 @@ const User = props => {
     }
    
     return (
-        <div className="profile">
-            <div className="photo">
-                <label htmlFor='single'>
-                    <Tooltip title="Cambiar foto de perfil">
-                        <img src={IMAGES_URL + user?.pic} alt="Foto de perfil"/>
-                    </Tooltip>
-                </label>
-                <input type="file" id='single' onChange={fileSelectedHandler} />
-            </div>
-            
-            <div className="info">
-                <div className="name">
-                    <h1>{user?.username}</h1>
-                    { !isMe && !isAlreadyFollowed && <div className="follow">
-                        <Button type="primary" htmlType="submit" size="small" onClick={follow}>Seguir</Button>
-                    </div>}
-                    { isAlreadyFollowed && <div className="unfollow">
-                        <Button type="default" htmlType="submit" size="small" onClick={unfollow}><Fragment><UserOutlined /><CheckOutlined /></Fragment></Button>
-                    </div>}
-                    { isMe && <h2><SettingOutlined onClick={disconnect} /></h2>}
-                </div>
+        <Fragment>
+            {user !== undefined && 
+            <Fragment>
+                <div className="profile">
+                    <div className="photo">
+                        <label htmlFor='single'>
+                            <Tooltip title="Cambiar foto de perfil">
+                                <img src={IMAGES_URL + user?.pic} alt="Foto de perfil"/>
+                            </Tooltip>
+                        </label>
+                        <input type="file" id='single' onChange={fileSelectedHandler} />
+                    </div>
+                
+                    <div className="info">
+                        <div className="name">
+                            <h1>{user?.username}</h1>
+                            { !isMe && !isAlreadyFollowed && <div className="follow">
+                                <Button type="primary" htmlType="submit" size="small" onClick={follow}>Seguir</Button>
+                            </div>}
+                            { isAlreadyFollowed && <div className="unfollow">
+                                <Button type="default" htmlType="submit" size="small" onClick={unfollow}><Fragment><UserOutlined /><CheckOutlined /></Fragment></Button>
+                            </div>}
+                            { isMe && <h2><SettingOutlined onClick={disconnect} /></h2>}
+                        </div>
 
-                <div className="datas">
-                    <div className="data"><span className="bold">{user.amout_posts}</span> publicaciones</div>
-                    <div className="data"><span className="bold">{user.amout_followers}</span> seguidores</div>
-                    <div className="data"><span className="bold">{user.amout_followings}</span> seguidos</div>                
-                </div><br />
-                <div className="bold">{user?.name}</div>
-                <div className="description">{user?.description}</div>
-            </div>
-        </div>
-        
+                        <div className="datas">
+                            <div className="data"><span className="bold">{user?.amout_posts}</span> publicaciones</div>
+                            <div className="data"><span className="bold">{user?.amout_followers}</span> seguidores</div>
+                            <div className="data"><span className="bold">{user?.amout_followings}</span> seguidos</div>                
+                        </div><br />
+                        <div className="bold">{user?.name}</div>
+                        <div className="description">{user?.description}</div>
+                    </div>
+                </div>
+            </Fragment>}
+            {user === undefined && <NotFound></NotFound> }
+        </Fragment>
     )
 }
 const mapStateToProps = ({user, myFollowers, myFollowings}) => ({ 

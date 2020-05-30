@@ -30,7 +30,7 @@ const PersonalInfo = props => {
         logout()
         .then((res) => { 
             setTimeout(() => {
-                window.location.pathname='/' //tira error
+                props.history.push('/')
             }, 1500);
         })
         .catch(() => { 

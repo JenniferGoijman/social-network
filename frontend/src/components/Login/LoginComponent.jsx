@@ -4,19 +4,20 @@ import { FacebookFilled } from '@ant-design/icons';
 
 import './LoginComponent.scss';
 import Logo from '../../img/logoGrande.png';
-
-import { login } from '../../redux/actions/users'
+import { useHistory } from 'react-router-dom';
+import { login } from '../../redux/actions/users';
 
 
 const LoginComponent = props => {
     const [form] = Form.useForm();
+    const history = useHistory();
 
     const onFinish = values => {
         const user = values;
         login(user)
         .then(res => {
             setTimeout(() => {
-                window.location.pathname='/'+ res.data.user.username;
+                history.push('/'+ res.data.user.username);
             }, 1500);
         })
         .catch((res) =>{
