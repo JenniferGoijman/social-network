@@ -18,6 +18,10 @@ Route::prefix('v1')->group( function () {
     });
 
     Route::prefix('followers')->group(function () {
-        Route::post('/', 'FollowerController@follow');
+        Route::post('/follow', 'FollowerController@follow');
+        Route::get('/unfollow/{follower_id}/{followed_id}', 'FollowerController@unfollow');
+        // Route::middleware('auth:api')->group(function(){
+                    
+        // });
     });
 });

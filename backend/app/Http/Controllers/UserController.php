@@ -18,6 +18,10 @@ class UserController extends Controller
             $body['password'] = Hash::make($body['password']);
             $body['role'] = 'customer';
             $body['pic'] = 'nopic.png';
+            $body['amount_posts'] = 0;
+            $body['amount_followers'] = 0;
+            $body['amount_followings'] = 0;
+            $body['description'] = '';
             $user = User::create($body);
             return response($user, 201);
         } catch (\Exception $e) {

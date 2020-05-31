@@ -36,7 +36,7 @@ const User = props => {
                         <div className="name">
                             <h1>{user?.username}</h1>
                             { !isMe && !isAlreadyFollowed && <Follow myUser={props.myUser} user={user}></Follow>}
-                            { isAlreadyFollowed && <Unfollow user={user}></Unfollow>}
+                            { isAlreadyFollowed && <Unfollow myUser={props.myUser} user={user}></Unfollow>}
                             { isMe && <Logout></Logout>}
                         </div>
 

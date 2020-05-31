@@ -1,7 +1,7 @@
 import store from '../store';
 import axios from 'axios';
 import { API_URL } from '../../api-config';
-import { LOGIN, LOGOUT, GET_FOLLOWERS, GET_FOLLOWINGS, GET_ALL } from '../types'
+import { LOGIN, LOGOUT, GET_ALL } from '../types'
 
 export const register = async(user) => {
     return axios.post(API_URL + 'users/register', user)

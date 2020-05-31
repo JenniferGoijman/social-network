@@ -49,6 +49,10 @@ export const getFollowings = async(id, itsMe) => {
     }
 }
 export const follow = async(followerFollowed) => {
-    await axios.post(API_URL + 'followers', followerFollowed);
+    await axios.post(API_URL + 'followers/follow', followerFollowed);
     return getFollowings(followerFollowed.follower_id, true);
+}
+export const unfollow = async(follower_id, followed_id) => {
+    await axios.get(API_URL + 'followers/unfollow/' + follower_id + '/'+ followed_id);
+    return getFollowings(follower_id, true);
 }
