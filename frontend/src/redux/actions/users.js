@@ -44,7 +44,7 @@ export const uploadImage = async(id, image) => {
     }
 }
 export const getAll = async() => {
-    const res = await axios.get(API_URL + 'users/');
+    const res = await axios.get(API_URL + 'users');
     store.dispatch({
         type: GET_ALL,
         payload: res.data

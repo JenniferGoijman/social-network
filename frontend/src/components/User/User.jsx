@@ -2,6 +2,8 @@ import React, { useEffect, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { IMAGES_URL } from '../../api-config';
 import './User.scss';
+import { Divider } from 'antd';
+import { useMediaPredicate } from 'react-media-hook';
 
 import { getAll } from '../../redux/actions/users';
 import { getFollowers, getFollowings } from '../../redux/actions/followers';
@@ -13,7 +15,8 @@ import ChangebleProfilePic from '../Profile/ChangebleProfilePic/ChangebleProfile
 import SettingsButton from '../Profile/SettingsButton/SettingsButton';
 import Edit from '../Profile/Edit/Edit';
 
-const User = props => {    
+const User = props => {
+    const biggerThan415 = useMediaPredicate("(min-width: 415px)");
     const user = props.users?.filter(u=>u.username===props.match.params.username)[0]; //si no existe 404
     const isMe = props.myUser?.id === user?.id;
     
@@ -40,19 +43,37 @@ const User = props => {
                             <h1>{user?.username}</h1>
                             { !isMe && !isAlreadyFollowed && <Follow myUser={props.myUser} user={user}></Follow>}
                             { isAlreadyFollowed && <Unfollow myUser={props.myUser} user={user}></Unfollow>}
-                            { isMe && <Edit></Edit> }
-                            { isMe && <SettingsButton></SettingsButton>}
+                            <div className="editSettings">
+                                { isMe && <Edit></Edit> }
+                                { isMe && <SettingsButton></SettingsButton>}
+                            </div>
                         </div>
 
-                        <div className="datas">
+                        {biggerThan415 && <div className="datas">
                             <div className="data"><span className="bold">{user?.amount_posts}</span> publicaciones</div>
                             <div className="data"><span className="bold">{user?.amount_followers}</span> seguidores</div>
                             <div className="data"><span className="bold">{user?.amount_followings}</span> seguidos</div>                
-                        </div><br />
-                        <div className="bold">{user?.name}</div>
-                        <div className="description">{user?.description}</div>
+                        </div>}
+                        
+                        <br />
+                        {biggerThan415 && <div className="bold">{user?.name}</div>}
+                        {biggerThan415 && <div className="description">{user?.description}</div>}
                     </div>
                 </div>
+                {!biggerThan415 && <div className="usernameDescription">
+                    <div className="bold">{user?.name}</div>
+                    <div className="description">{user?.description}</div>
+                </div>}
+                {!biggerThan415 && <Divider /> }
+                    {!biggerThan415 && <div className="datasMobile">
+                        <div className="data"><span className="bold">{user?.amount_posts}</span> publicaciones</div>
+                        <div className="data"><span className="bold">{user?.amount_followers}</span> seguidores</div>
+                        <div className="data"><span className="bold">{user?.amount_followings}</span> seguidos</div>                
+                    </div>}
+                    {!biggerThan415 && <Divider /> }
+                    
+                    
+                    
             </Fragment>}
             {user === undefined && <NotFound></NotFound> }
         </Fragment>

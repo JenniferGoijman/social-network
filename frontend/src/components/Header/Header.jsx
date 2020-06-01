@@ -6,8 +6,11 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHome, faPaperPlane, faCompass, faHeart } from '@fortawesome/free-solid-svg-icons'
 import { IMAGES_URL } from '../../api-config';
 import Search from '../Search/Search';
+import { useMediaPredicate } from 'react-media-hook';
 
 const Header = props => {
+    const biggerThan415 = useMediaPredicate("(min-width: 415px)");
+
     const myProfile = () => {
         window.location.pathname='/'+ props.myUser.username;
     }
@@ -17,9 +20,9 @@ const Header = props => {
             <div className="logo">
                 <img src={Logo} alt="Logo Instagram"/>
             </div>
-            <div>
+            {biggerThan415 && <div>
                <Search placeholder="Busca" style={{ width: 200 }}></Search>
-            </div>
+            </div>}
             <div className="icons">
                 <div className="icon">
                     <FontAwesomeIcon icon={faHome} />
