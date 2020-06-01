@@ -16,7 +16,7 @@
         .settings-item, .settings-item-name {
             display: flex;
             justify-content: space-between;
-            align-items: center;
+            align-items: inherit;
             width: 600px;
             margin: 5px;
 
@@ -79,8 +79,9 @@
             .settings-item {
                 display: flex;
                 flex-direction: column;
-                max-width: 100%;
-                padding: 0 20px;
+                align-items: flex-start;
+                max-width: 300px;
+                //padding: 0 20px;
 
 
                 .left {
