@@ -3,19 +3,21 @@ import { connect } from 'react-redux';
 import { IMAGES_URL } from '../../api-config';
 import './User.scss';
 
+import { getAll } from '../../redux/actions/users';
 import { getFollowers, getFollowings } from '../../redux/actions/followers';
 
 import NotFound from '../NotFound/NotFound';
 import Unfollow from '../Profile/Unfollow/Unfollow';
 import Follow from '../Profile/Follow/Follow';
 import ChangebleProfilePic from '../Profile/ChangebleProfilePic/ChangebleProfilePic';
-import Logout from '../Profile/Logout/Logout';
+import Settings from '../Profile/Settings/Settings';
 
 const User = props => {    
     const user = props.users?.filter(u=>u.username===props.match.params.username)[0]; //si no existe 404
     const isMe = props.myUser?.id === user?.id;
     
     useEffect(() => { 
+        getAll();
         getFollowers(props.myUser?.id, true); 
         getFollowings(props.myUser?.id, true);
     }, []);
@@ -37,7 +39,7 @@ const User = props => {
                             <h1>{user?.username}</h1>
                             { !isMe && !isAlreadyFollowed && <Follow myUser={props.myUser} user={user}></Follow>}
                             { isAlreadyFollowed && <Unfollow myUser={props.myUser} user={user}></Unfollow>}
-                            { isMe && <Logout></Logout>}
+                            { isMe && <Settings></Settings>}
                         </div>
 
                         <div className="datas">
