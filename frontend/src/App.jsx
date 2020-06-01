@@ -11,21 +11,11 @@ import User from './components/User/User';
 import Settings from './containers/User/Settings/Settings';
 
 function App() {
-  const showHeader = () => {
-    const path = window.location.pathname;
-    let show;
-    if (path==='/register' || path==='/login' || path==='/') {
-      show = false;
-    } else {
-      show = true;
-    }
-    return show;
-  }
 
   return (
     <div className="App">   
       <BrowserRouter>
-        { showHeader() ? <Header/> : '' }
+        <Header/>
         <Switch>
           <Route path='/register' component={Register} exact />
           <Route path='/login' component={LoginContainer} exact />

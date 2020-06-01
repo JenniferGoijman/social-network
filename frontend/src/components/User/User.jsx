@@ -17,7 +17,7 @@ import Edit from '../Profile/Edit/Edit';
 
 const User = props => {
     const biggerThan415 = useMediaPredicate("(min-width: 415px)");
-    const user = props.users?.filter(u=>u.username===props.match.params.username)[0]; //si no existe 404
+    const user = props.users?.find(u=>u.username===props.match.params.username); //si no existe 404
     const isMe = props.myUser?.id === user?.id;
     
     useEffect(() => { 
@@ -30,7 +30,7 @@ const User = props => {
            
     return (
         <Fragment>
-            {user !== undefined && 
+            {user && 
             <Fragment>
                 <div className="profile">
                     <div className="photo">
@@ -75,7 +75,7 @@ const User = props => {
                     
                     
             </Fragment>}
-            {user === undefined && <NotFound></NotFound> }
+            {!user && props.users?.length>0 && <NotFound /> }
         </Fragment>
     )
 }

@@ -7,14 +7,16 @@ import { faHome, faPaperPlane, faCompass, faHeart } from '@fortawesome/free-soli
 import { IMAGES_URL } from '../../api-config';
 import Search from '../Search/Search';
 import { useMediaPredicate } from 'react-media-hook';
+import { useLocation } from 'react-router-dom';
 
 const Header = props => {
     const biggerThan415 = useMediaPredicate("(min-width: 415px)");
-
+    const location = useLocation();
     const myProfile = () => {
         window.location.pathname='/'+ props.myUser.username;
     }
-    
+    const routesWithoutHeader =['/register','/login','/']
+    if(routesWithoutHeader.includes(location.pathname)) return '';
     return (
         <header>
             <div className="logo">
