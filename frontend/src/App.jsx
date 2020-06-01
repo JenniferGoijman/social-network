@@ -8,6 +8,7 @@ import Home from './containers/Home/Home';
 
 import Header from './components/Header/Header';
 import User from './components/User/User';
+import Settings from './containers/User/Settings/Settings';
 
 function App() {
   const showHeader = () => {
@@ -29,6 +30,7 @@ function App() {
           <Route path='/register' component={Register} exact />
           <Route path='/login' component={LoginContainer} exact />
           <Route path='/:username' component={User} exact />
+          <Route path='/accounts/edit' component={Settings} exact />
           <Route path='' component={Home} exact />
         </Switch>
       </BrowserRouter>

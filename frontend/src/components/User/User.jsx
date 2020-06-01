@@ -10,7 +10,8 @@ import NotFound from '../NotFound/NotFound';
 import Unfollow from '../Profile/Unfollow/Unfollow';
 import Follow from '../Profile/Follow/Follow';
 import ChangebleProfilePic from '../Profile/ChangebleProfilePic/ChangebleProfilePic';
-import Settings from '../Profile/Settings/Settings';
+import SettingsButton from '../Profile/SettingsButton/SettingsButton';
+import Edit from '../Profile/Edit/Edit';
 
 const User = props => {    
     const user = props.users?.filter(u=>u.username===props.match.params.username)[0]; //si no existe 404
@@ -39,7 +40,8 @@ const User = props => {
                             <h1>{user?.username}</h1>
                             { !isMe && !isAlreadyFollowed && <Follow myUser={props.myUser} user={user}></Follow>}
                             { isAlreadyFollowed && <Unfollow myUser={props.myUser} user={user}></Unfollow>}
-                            { isMe && <Settings></Settings>}
+                            { isMe && <Edit></Edit> }
+                            { isMe && <SettingsButton></SettingsButton>}
                         </div>
 
                         <div className="datas">
