@@ -13,7 +13,7 @@
         align-items: center;
         padding-top: 30px;
 
-        .settings-item {
+        .settings-item, .settings-item-name {
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -46,5 +46,49 @@
                 }
             }
         }
+    }
+}
+
+@media only screen and (max-width: 415px) {
+    .settings-container {
+        .settings-items-container {
+            max-width: 100%;
+            margin: 0;
+            padding-top: 0;
+            border: 0;
+
+            .settings-item-name {
+                max-width: 100%;
+                display: flex;
+                justify-content: flex-start;
+                align-items: center;
+                margin: 5px;
+                
+                .left {
+                    max-width: 38px;
+                    margin: 0 20px;
+                    padding: 0;
+                    img {
+                        width: 38px;
+                        height: 38px;
+                        border-radius: 80px;
+                    }
+                }
+            }
+
+            .settings-item {
+                display: flex;
+                flex-direction: column;
+                max-width: 100%;
+                padding: 0 20px;
+
+
+                .left {
+                    display: flex;
+                    justify-content: flex-start;
+                    //max-width: 100%;
+                }
+            }
+        }   
     }
 }

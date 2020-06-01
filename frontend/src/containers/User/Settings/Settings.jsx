@@ -10,7 +10,7 @@ const Settings = props => {
     return (
         <div className="settings-container">
             <div className="settings-items-container">
-                <div className="settings-item">
+                <div className="settings-item-name">
                     <div className="left">
                         <img src={IMAGES_URL + props.myUser.pic} alt="Foto de perfil" />
                     </div>
