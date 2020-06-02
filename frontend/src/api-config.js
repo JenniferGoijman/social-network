@@ -1,11 +1,9 @@
-let backendHost, images;
+let base;
 if (window.location.href.includes('localhost')) {
-    backendHost = 'http://localhost:8000/api/v1';
-    images = 'http://localhost:8000';
+    base = 'http://localhost:8000';
 } else {
-    backendHost = 'https://social-network-insta-api.herokuapp.com/api/v1';
-    images = 'https://social-network-insta-api.herokuapp.com'
+    base = 'https://social-network-insta-api.herokuapp.com';
 }
-console.log(backendHost)
-export const API_URL = `${backendHost}/`;
-export const IMAGES_URL = `${images}/images/`;
+console.log(base);
+export const API_URL = `${base}/api/v1/`;
+export const IMAGES_URL = `${base}/images/`;

@@ -16,9 +16,7 @@ const LoginComponent = props => {
         const user = values;
         login(user)
         .then(res => {
-            setTimeout(() => {
                 history.push('/'+ res.data.user.username);
-            }, 1500);
         })
         .catch((res) =>{
             notification.error({message:'Login', description:'Hubo un problema al tratar de iniciar sesión'})

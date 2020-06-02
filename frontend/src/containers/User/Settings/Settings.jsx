@@ -1,16 +1,22 @@
-import React, { useState } from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { IMAGES_URL } from '../../../api-config';
 import './Settings.scss'
 import { Form, Input, Button } from 'antd';
+import { getUserInfo, updateInfo } from '../../../redux/actions/users';
 
 const Settings = props => {
-    //const [form] = Form.useForm();
     const { TextArea } = Input;
-    const [myUser, setMyUser] = useState(props.myUser);
+    let myUser = props.myUser;
+
+    useEffect(() => {
+        getUserInfo()
+        .catch(console.error)
+    }, [])
 
     const onFinish = values => {
         console.log(values);
+        updateInfo(values);
     }
     
     return (        
@@ -20,7 +26,7 @@ const Settings = props => {
                     <div className="left">
                         <img src={IMAGES_URL + props.myUser.pic} alt="Foto de perfil" />
                     </div>
-                    <div className="name">
+                    <div className="usernamePic">
                         <h2>{myUser.username}</h2>
                         <h4><a href="#">Cambiar foto de perfil</a></h4>
                     </div>
@@ -41,7 +47,7 @@ const Settings = props => {
                     <div className="settings-item">
                         <div className="left">Biografía</div>
                         <Form.Item name={['myUser', 'description']}>
-                            <TextArea name="description" autoSize={{ minRows: 2, maxRows: 4 }} style={{ width: 300 }}/>
+                            <TextArea name="description" autoSize={{ minRows: 4, maxRows: 4 }} style={{ width: 300 }}/>
                         </Form.Item>
                     </div>
                     <div className="settings-item">

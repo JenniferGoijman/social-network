@@ -51,3 +51,30 @@ export const getAll = async() => {
     })
     return res;
 }
+export const updateInfo = async(user) => {
+    console.log(user);
+    try {
+        const res = await axios.put(API_URL + 'users/update', user, {
+            headers: {
+                Authorization: "Bearer " + localStorage.getItem('authToken')
+            }
+        });
+        store.dispatch({
+            type: 'SET_USER',
+            payload: res.data
+        });
+    } catch (error) {
+        console.error(error)
+    }
+}
+export const getUserInfo = async(user) => {
+    const res = await axios.get(API_URL + 'users/user', {
+        headers: {
+            Authorization: 'Bearer ' + localStorage.getItem('authToken')
+        }
+    });
+    store.dispatch({
+        type: 'SET_USER',
+        payload: res.data
+    });
+}

@@ -9,6 +9,7 @@ const userReducer = (state = {}, action) => {
         case LOGIN:
         case LOGOUT:
         case 'UPLOAD_IMAGE':
+        case 'SET_USER':
             return {
                 ...state,
                 myUser: action.payload

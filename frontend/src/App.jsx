@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import './App.css';
 
@@ -9,8 +9,17 @@ import Home from './containers/Home/Home';
 import Header from './components/Header/Header';
 import User from './components/User/User';
 import Settings from './containers/User/Settings/Settings';
+import { getUserInfo } from './redux/actions/users';
 
 function App() {
+
+  useEffect(() => {
+    const token = localStorage.getItem('authToken');
+    if (token) {
+      getUserInfo()
+      .catch(console.error)
+    }
+  }, [])
 
   return (
     <div className="App">   

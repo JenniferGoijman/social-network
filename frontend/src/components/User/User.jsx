@@ -24,7 +24,7 @@ const User = props => {
         getAll();
         getFollowers(props.myUser?.id, true); 
         getFollowings(props.myUser?.id, true);
-    }, []);
+    }, [props.myUser]);
 
     const isAlreadyFollowed = props.myFollowings?.filter(f => f?.id === user?.id).length>0 ? true : false;
            

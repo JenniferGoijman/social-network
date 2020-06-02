@@ -92,4 +92,33 @@ class UserController extends Controller
             ], 500);
         }
     }
+    public function update(Request $request) {
+        try {
+            //dd($request);
+            $body = $request->validate([
+                'name' => 'required|string',
+                'username' => 'required|string',
+                'description' => 'required|string',
+                'email' => 'required|string']);
+            $id = Auth::id();
+            $user = User::find($id);
+            $user->update($body);
+            return response($user);
+        } catch (\Exception $e) {
+            return response([
+                'error' => $e
+            ], 500);
+        }
+    }
+    public function userInfo() {
+        try {
+            $user = Auth::user();
+            return response($user);
+        } catch (\Exception $e) {
+            return response([
+                'message' => 'There was an error trying to get the user',
+                'error' => $e->getMessage()
+            ], 500);
+        }
+    }
 }
