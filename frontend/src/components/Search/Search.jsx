@@ -13,7 +13,7 @@ const Search = props => {
 
     const handleSearch = value => {
         if (value) {
-            setData(props.users.filter(u => u.id!==props.myUser.id).filter(d => d.username.includes(value)));
+            setData(props.users.filter(d => d.username.toLowerCase().includes(value.toLowerCase())));
         } else {
             setData([])
         }

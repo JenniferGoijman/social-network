@@ -17,7 +17,7 @@ import Edit from '../Profile/Edit/Edit';
 
 const User = props => {
     const biggerThan415 = useMediaPredicate("(min-width: 415px)");
-    const user = props.users?.find(u=>u.username===props.match.params.username); //si no existe 404
+    const user = props.users?.find(u=>u.username.toLowerCase()===props.match.params.username.toLowerCase()); //si no existe 404
     const isMe = props.myUser?.id === user?.id;
     
     useEffect(() => { 
