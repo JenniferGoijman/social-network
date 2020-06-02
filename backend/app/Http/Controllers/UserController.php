@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\File; 
 use Illuminate\Support\Str;
 
 class UserController extends Controller
@@ -60,14 +61,23 @@ class UserController extends Controller
             ], 500);
         }
     }
-    public function uploadImage(Request $request, $id)
+    public function uploadImage(Request $request)
     {
         try {
             $request->validate(['image' => 'required|image']);
             $imageName = time() . '-' . request()->image->getClientOriginalName();
             request()->image->move(public_path('images'), $imageName);
 
+            $id = Auth::id();
             $user = User::find($id);
+            
+            $picDefault = "nopic.png";
+            $oldPic = $user->pic;
+            
+            if ($oldPic != $picDefault) {
+                $image_path = public_path('images/'. $oldPic);
+                unlink($image_path);
+            }
             $user->update(['pic' => $imageName]);
             return response($user);
         } catch (\Exception $e) {

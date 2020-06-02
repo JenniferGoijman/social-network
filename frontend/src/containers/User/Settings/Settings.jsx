@@ -15,9 +15,8 @@ const Settings = props => {
         .catch(console.error)
     }, [])
 
-    const onFinish = values => {
-        console.log(values);
-        updateInfo(values);
+    const onFinish = ({myUser}) => {
+        updateInfo(myUser);
     }
     
     return (        
@@ -29,7 +28,7 @@ const Settings = props => {
                     </div>
                     <div className="usernamePic">
                         <h2>{myUser.username}</h2>
-                        <ChangeablePicThroughLink myUser={myUser} />
+                        <ChangeablePicThroughLink />
                     </div>
                 </div>
                 <Form name="settings" onFinish={onFinish} initialValues={{myUser}}>

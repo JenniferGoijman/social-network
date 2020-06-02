@@ -27,9 +27,9 @@ export const logout = async() => {
     })
     return res;
 }
-export const uploadImage = async(id, image) => {
+export const uploadImage = async(image) => {
     try {
-        const res = await axios.post(API_URL + 'users/image/'+ id, image, {
+        const res = await axios.post(API_URL + 'users/image', image, {
             headers: {
                 Authorization: "Bearer " + localStorage.getItem('authToken')
             }

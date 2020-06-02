@@ -11,7 +11,7 @@ Route::prefix('v1')->group( function () {
         
         Route::middleware('auth:api')->group(function(){
             Route::get('user','UserController@userInfo');
-            Route::post('image/{id}', 'UserController@uploadImage');
+            Route::post('image', 'UserController@uploadImage');
             Route::get('logout','UserController@logout');
             Route::get('followings/{id}','UserController@getFollowings');
             Route::get('followers/{id}','UserController@getFollowers');
