@@ -2,11 +2,13 @@ import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { IMAGES_URL } from '../../../api-config';
 import './Settings.scss'
-import { Form, Input, Button } from 'antd';
+import { Form, Input, Button, notification } from 'antd';
 import { getUserInfo, updateInfo } from '../../../redux/actions/users';
 import ChangeablePicThroughLink from '../../../components/Profile/ChangeablePicThroughLink/ChangeablePicThroughLink';
+import { useHistory } from 'react-router-dom';
 
 const Settings = props => {
+    const history = useHistory();
     const { TextArea } = Input;
     let myUser = props.myUser;
 
@@ -16,7 +18,14 @@ const Settings = props => {
     }, [])
 
     const onFinish = ({myUser}) => {
-        updateInfo(myUser);
+        updateInfo(myUser)
+        .then(res => {
+            history.push('/'+ myUser.username);
+        })
+        .catch((res) =>{
+            notification.error({message:'Ajustes', description:'Hubo un problema al tratar de guardar los cambios.'})
+            console.log(res)
+        })
     }
     
     return (        
@@ -34,13 +43,13 @@ const Settings = props => {
                 <Form name="settings" onFinish={onFinish} initialValues={{myUser}}>
                     <div className="settings-item">
                         <div className="left">Nombre</div>
-                        <Form.Item name={['myUser', 'name']}>
+                        <Form.Item name={['myUser', 'name']} rules={[{ required: true, message: 'Ingrese su nombre completo' }]} >
                             <Input name="name" placeholder="Nombre" style={{ width: 300 }}/>
                         </Form.Item>
                     </div>
                     <div className="settings-item">
                         <div className="left">Nombre de usuario</div>
-                        <Form.Item name={['myUser', 'username']}>
+                        <Form.Item name={['myUser', 'username']} rules={[{ required: true, message: 'Ingrese su nombre de usuario' }]} >
                             <Input name="username" placeholder="Nombre" style={{ width: 300 }}/>
                         </Form.Item>
                     </div>
@@ -52,8 +61,8 @@ const Settings = props => {
                     </div>
                     <div className="settings-item">
                         <div className="left">Correo electrónico</div>
-                        <Form.Item name={['myUser', 'email']}>
-                        <Input name="email" placeholder="Correo electrónico" style={{ width: 300 }}/>
+                        <Form.Item name={['myUser', 'email']} rules={[{ type: 'email', message: 'Ingrese un email válido' }]} >
+                            <Input name="email" placeholder="Correo electrónico" style={{ width: 300 }}/>
                         </Form.Item>
                     </div>
                     <div className="settings-item">

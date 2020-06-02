@@ -107,7 +107,7 @@ class UserController extends Controller
             $body = $request->validate([
                 'name' => 'required|string',
                 'username' => 'required|string',
-                'description' => 'required|string',
+                'description' => 'string',
                 'email' => 'required|string']);
             $id = Auth::id();
             $user = User::find($id);

@@ -43,7 +43,7 @@ const Register = props => {
                 <div className="form">
                     <Form form={form} name="register" onFinish={onFinish} scrollToFirstError >
                         <Form.Item name="email" style={{marginBottom: 10}} rules={[
-                            { required: true, message: 'Ingrese su correo electrónico', }, ]} >
+                            { type: 'email', message: 'Ingrese su correo electrónico', }, ]} >
                             <Input placeholder="Correo electrónico" />
                         </Form.Item>
                         <Form.Item name="name" style={{marginBottom: 10}} rules={[
