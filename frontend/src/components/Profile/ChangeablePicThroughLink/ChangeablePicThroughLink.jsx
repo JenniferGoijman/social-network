@@ -1,9 +1,7 @@
 import React, { Fragment } from 'react';
-import { Tooltip } from 'antd';
 import { uploadImage } from '../../../redux/actions/users';
-import { IMAGES_URL } from '../../../api-config';
 
-const ChangebleProfilePic = props => {
+const ChangeablePicThroughLink = props => {
 
     const fileSelectedHandler = event => {
         const fd = new FormData();        
@@ -16,13 +14,11 @@ const ChangebleProfilePic = props => {
     return (
         <Fragment>
             <label htmlFor='single'>
-                <Tooltip title="Cambiar foto de perfil">
-                    <img src={IMAGES_URL + props.myUser?.pic} alt="Foto de perfil"/>
-                </Tooltip>
+                <h4>Cambiar foto de perfil</h4>
             </label>
             <input type="file" id='single' onChange={fileSelectedHandler} />
         </Fragment>
     )
 }
 
-export default ChangebleProfilePic
+export default ChangeablePicThroughLink

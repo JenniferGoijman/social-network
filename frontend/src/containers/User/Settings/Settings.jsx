@@ -4,6 +4,7 @@ import { IMAGES_URL } from '../../../api-config';
 import './Settings.scss'
 import { Form, Input, Button } from 'antd';
 import { getUserInfo, updateInfo } from '../../../redux/actions/users';
+import ChangeablePicThroughLink from '../../../components/Profile/ChangeablePicThroughLink/ChangeablePicThroughLink';
 
 const Settings = props => {
     const { TextArea } = Input;
@@ -28,7 +29,7 @@ const Settings = props => {
                     </div>
                     <div className="usernamePic">
                         <h2>{myUser.username}</h2>
-                        <h4><a href="#">Cambiar foto de perfil</a></h4>
+                        <ChangeablePicThroughLink myUser={myUser} />
                     </div>
                 </div>
                 <Form name="settings" onFinish={onFinish} initialValues={{myUser}}>

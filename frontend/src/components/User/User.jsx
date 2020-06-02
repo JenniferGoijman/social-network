@@ -11,7 +11,7 @@ import { getFollowers, getFollowings } from '../../redux/actions/followers';
 import NotFound from '../NotFound/NotFound';
 import Unfollow from '../Profile/Unfollow/Unfollow';
 import Follow from '../Profile/Follow/Follow';
-import ChangebleProfilePic from '../Profile/ChangebleProfilePic/ChangebleProfilePic';
+import ChangeablePicThroughPic from '../Profile/ChangeablePicThroughPic/ChangeablePicThroughPic';
 import SettingsButton from '../Profile/SettingsButton/SettingsButton';
 import Edit from '../Profile/Edit/Edit';
 
@@ -34,18 +34,18 @@ const User = props => {
             <Fragment>
                 <div className="profile">
                     <div className="photo">
-                        {isMe && <ChangebleProfilePic myUser={props.myUser}></ChangebleProfilePic>}
+                        {isMe && <ChangeablePicThroughPic myUser={props.myUser} />}
                         {!isMe && <img src={IMAGES_URL + user?.pic} alt="Foto de perfil"/>}
                     </div>
                     
                     <div className="info">
                         <div className="name">
                             <h1>{user?.username}</h1>
-                            { !isMe && !isAlreadyFollowed && <Follow myUser={props.myUser} user={user}></Follow>}
-                            { isAlreadyFollowed && <Unfollow myUser={props.myUser} user={user}></Unfollow>}
+                            { !isMe && !isAlreadyFollowed && <Follow myUser={props.myUser} user={user} />}
+                            { isAlreadyFollowed && <Unfollow myUser={props.myUser} user={user} />}
                             <div className="editSettings">
-                                { isMe && <Edit></Edit> }
-                                { isMe && <SettingsButton></SettingsButton>}
+                                { isMe && <Edit /> }
+                                { isMe && <SettingsButton />}
                             </div>
                         </div>
 

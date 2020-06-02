@@ -29,6 +29,17 @@
                 h2 {
                     margin: 0;
                 }
+                
+                h4 {
+                    color: #1890ff;
+                    text-decoration: none;
+                    cursor: pointer;
+                }
+
+                input[type=file] { 
+                    visibility: hidden;
+                    position: absolute;
+                }
             }
 
             .left {

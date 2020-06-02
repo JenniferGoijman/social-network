@@ -94,7 +94,6 @@ class UserController extends Controller
     }
     public function update(Request $request) {
         try {
-            //dd($request);
             $body = $request->validate([
                 'name' => 'required|string',
                 'username' => 'required|string',
