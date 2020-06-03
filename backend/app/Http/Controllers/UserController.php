@@ -104,11 +104,11 @@ class UserController extends Controller
     }
     public function update(Request $request) {
         try {
-            $body = $request->validate([
+            $request->validate([
                 'name' => 'required|string',
                 'username' => 'required|string',
-                'description' => 'string',
                 'email' => 'required|string']);
+            $body = $request->all();    
             $id = Auth::id();
             $user = User::find($id);
             $user->update($body);

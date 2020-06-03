@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { SettingOutlined } from '@ant-design/icons';
 import { Modal } from 'antd';
-//import { List } from 'antd';
+import { List } from 'antd';
 import './SettingsButton.scss'
 import { logout } from '../../../redux/actions/users';
 import { useHistory } from 'react-router-dom';
@@ -27,18 +27,18 @@ const SettingsButton = () => {
     return (
         <h2>
             <SettingOutlined onClick={showModal} />
-            <Modal visible={visible} onOk={hideModal} onCancel={hideModal} footer={null}>
+            {/* <Modal visible={visible} onOk={hideModal} onCancel={hideModal} footer={null}>
                 <div className="list">
                     <div className="dataSettings" onClick={changePass}>Cambiar contraseña</div>
                     <div className="dataSettings" onClick={disconnect}>Cerrar sesión</div>
                     <div className="dataSettings" onClick={hideModal}>Cancelar</div>
                 </div>
-            </Modal>
-            {/* <Modal visible={visible} onOk={hideModal} onCancel={hideModal} footer={null}>
-                <List header={null} footer={null} bordered dataSource={[
-                    <div className="data" onClick={changePass}>Cambiar contraseña</div>,
-                    <div className="data" onClick={disconnect}>Cerrar sesión</div>,
-                    <div className="data" onClick={hideModal}>Cancelar</div>
+            </Modal> */}
+            <Modal visible={visible} onOk={hideModal} onCancel={hideModal} footer={null}>
+                <List header={null} footer={null} dataSource={[
+                    <div className="dataSettings" onClick={changePass}>Cambiar contraseña</div>,
+                    <div className="dataSettings" onClick={disconnect}>Cerrar sesión</div>,
+                    <div className="dataSettings" onClick={hideModal}>Cancelar</div>
                 ]} 
                     renderItem={item => (
                         <List.Item>                            
@@ -46,7 +46,7 @@ const SettingsButton = () => {
                         </List.Item>
                     )}
                 />
-            </Modal> */}
+            </Modal>
         </h2>
     )
 }

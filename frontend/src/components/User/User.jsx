@@ -27,7 +27,11 @@ const User = props => {
     }, [props.myUser]);
 
     const isAlreadyFollowed = props.myFollowings?.filter(f => f?.id === user?.id).length>0 ? true : false;
-           
+
+    // function truncate(str, n){
+    //     return (str.length > n) ? str.substr(0, n-1) + '&hellip;' : str;
+    //   };
+
     return (
         <Fragment>
             {user && 
@@ -40,7 +44,8 @@ const User = props => {
                     
                     <div className="info">
                         <div className="name">
-                            <h1>{user?.username}</h1>
+                            {biggerThan415 && <h1>{user?.username}</h1>}
+                            {!biggerThan415 && <h1>{(user?.username.length > 14) ? user.username.substr(0, 12) + '...' : user.username}</h1>}
                             { !isMe && !isAlreadyFollowed && <Follow myUser={props.myUser} user={user} />}
                             { isAlreadyFollowed && <Unfollow myUser={props.myUser} user={user} />}
                             <div className="editSettings">
