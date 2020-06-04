@@ -6,4 +6,4 @@ if (window.location.href.includes('localhost')) {
 }
 console.log(base);
 export const API_URL = `${base}/api/v1/`;
-export const IMAGES_URL = `${base}/images/`;
+export const IMAGES_URL = `https://social-network-insta.s3.eu-west-3.amazonaws.com/`;

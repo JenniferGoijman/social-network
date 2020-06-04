@@ -18,14 +18,14 @@ const ShowFollowings = props => {
     }, []);
     return (
         <div>
-            <div className="data" onClick={hasFollowings?showModal:""} style={hasFollowings?{cursor:'pointer'}:{}}>
+            <div className="data" onClick={hasFollowings?showModal:null} style={hasFollowings?{cursor:'pointer'}:{}}>
                 <span className="bold">{props.currentUser?.followings.length}</span> siguiendo
             </div>
             <Modal title="Siguiendo" visible={visible} onOk={hideModal} onCancel={hideModal} footer={null} className="showFollowings">
                 <List header={null} footer={null} dataSource={[
                     props.currentUser.followings.map(followed => {
                         const isMe = props.myUser?.id === followed.id;
-                        const isAlreadyFollowed = props.myUser.followings?.filter(f => f.id === followed.id).length>0 ? true : false;
+                        const isAlreadyFollowed = props.myUser?.followings?.filter(f => f.id === followed.id).length>0 ? true : false;
                         return(
                         <div className="userFollowings" key={followed.id}>
                             <div className="imgName">

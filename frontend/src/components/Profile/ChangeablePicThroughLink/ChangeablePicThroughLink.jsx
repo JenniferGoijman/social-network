@@ -7,7 +7,7 @@ const ChangeablePicThroughLink = props => {
         const fd = new FormData();        
         fd.append("image", event.target.files[0], event.target.files[0].name);
         uploadImage(fd)
-        .then((res) => { console.log(res); })
+        .then((res) => { console.log(":)"); })
           .catch(() => { console.log(":("); });
     }
 

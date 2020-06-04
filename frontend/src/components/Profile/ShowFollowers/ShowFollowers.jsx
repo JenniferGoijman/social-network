@@ -19,7 +19,7 @@ const ShowFollowers = props => {
     }, []);
     return (
         <Fragment>
-            <div className="data" onClick={hasFollowers?showModal:""} style={hasFollowers?{cursor:'pointer'}:{}}>
+            <div className="data" onClick={hasFollowers?showModal:null} style={hasFollowers?{cursor:'pointer'}:{}}>
                 <span className="bold">{props.currentUser?.followers.length}</span> seguidores
             </div>
             <Modal title="Seguidores" visible={visible} onOk={hideModal} onCancel={hideModal} footer={null} className="showFollowers">

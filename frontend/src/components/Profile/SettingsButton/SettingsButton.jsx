@@ -12,9 +12,8 @@ const SettingsButton = () => {
     const hideModal = () => { setVisible(false); };
 
     const disconnect = () => {
-        logout()
-        .then((res) => { history.push('/'); })
-        .catch(() => { console.log(":("); }); //poner mensaje de error 
+        logout();
+        history.push('/');
         hideModal();
     }
 

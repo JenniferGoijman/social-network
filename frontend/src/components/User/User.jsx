@@ -21,7 +21,7 @@ const User = props => {
     const [currentUser, setCurrentUser] = useState();
     const myUser = props.myUser;
     const isMe = myUser?.id === currentUser?.id;
-    const isAlreadyFollowed = myUser?.followings.filter(f => f?.id === currentUser?.id).length>0 ? true : false;
+    const isAlreadyFollowed = myUser?.followings?.filter(f => f?.id === currentUser?.id).length>0 ? true : false;
     const usernameFromParams = props.match.params.username.toLowerCase();
     
     useEffect(() => {   
@@ -76,10 +76,8 @@ const User = props => {
                         <ShowFollowings myUser={myUser} user={currentUser} locationUser={usernameFromParams}/>
                     </div>}
                     {!biggerThan415 && <Divider /> }
-                    
-                    
-                    
             </Fragment>}
+            
             {!currentUser && props.users?.length>0 && <NotFound /> }
         </Fragment>
     )

@@ -70,7 +70,7 @@ class UserController extends Controller
             $id = Auth::id();
             $user = User::find($id);
             
-            $picDefault = "nopic.png";
+            $picDefault = "images/nopic.png";
             $oldPic = $user->pic;
             
             if ($oldPic !== $picDefault) {
