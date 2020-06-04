@@ -8,7 +8,9 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\File; 
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
+use Aws\S3\S3Client;
 
 class UserController extends Controller
 {
@@ -18,7 +20,7 @@ class UserController extends Controller
             $body = $request->all();
             $body['password'] = Hash::make($body['password']);
             $body['role'] = 'customer';
-            $body['pic'] = 'nopic.png';
+            $body['pic'] = 'images/nopic.png';
             $body['amount_posts'] = 0;
             $body['description'] = '';
             $user = User::create($body);
@@ -63,8 +65,7 @@ class UserController extends Controller
     {
         try {
             $request->validate(['image' => 'required|image']);
-            $imageName = time() . '-' . request()->image->getClientOriginalName();
-            request()->image->move(public_path('images'), $imageName);
+            $image_path = $request->image->store('images','s3');
 
             $id = Auth::id();
             $user = User::find($id);
@@ -72,13 +73,14 @@ class UserController extends Controller
             $picDefault = "nopic.png";
             $oldPic = $user->pic;
             
-            if ($oldPic != $picDefault) {
-                $image_path = public_path('images/'. $oldPic);
-                unlink($image_path);
+            if ($oldPic !== $picDefault) {
+                Storage::disk('s3')->delete($oldPic);
+                File::delete($oldPic);
             }
-            $user->update(['pic' => $imageName]);
+            $user->update(['pic' => $image_path]);
             return response($user);
         } catch (\Exception $e) {
+            dd($e);
             return response(['error' => $e,], 500);
         }
     }

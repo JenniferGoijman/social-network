@@ -19,12 +19,14 @@ import ShowFollowings from '../Profile/ShowFollowings/ShowFollowings';
 const User = props => {
     const biggerThan415 = useMediaPredicate("(min-width: 415px)");
     const [currentUser, setCurrentUser] = useState();
-    const isMe = props.myUser?.id === currentUser?.id;
-    const isAlreadyFollowed = props.myUser?.followings.filter(f => f?.id === currentUser?.id).length>0 ? true : false;
+    const myUser = props.myUser;
+    const isMe = myUser?.id === currentUser?.id;
+    const isAlreadyFollowed = myUser?.followings.filter(f => f?.id === currentUser?.id).length>0 ? true : false;
+    const usernameFromParams = props.match.params.username.toLowerCase();
     
     useEffect(() => {   
         getMyUser();
-        getByUsername(props.match.params.username.toLowerCase())
+        getByUsername(usernameFromParams)
         .then(res => {
             setCurrentUser(res.data);
         });
@@ -36,7 +38,7 @@ const User = props => {
             <Fragment>
                 <div className="profile">
                     <div className="photo">
-                        {isMe && <ChangeablePicThroughPic myUser={props.myUser} />}
+                        {isMe && <ChangeablePicThroughPic myUser={myUser} />}
                         {!isMe && <img src={IMAGES_URL + currentUser?.pic} alt="Foto de perfil"/>}
                     </div>
                     
@@ -44,8 +46,8 @@ const User = props => {
                         <div className="name">
                             {biggerThan415 && <h1>{currentUser?.username}</h1>}
                             {!biggerThan415 && <h1>{(currentUser?.username.length > 14) ? currentUser.username.substr(0, 12) + '...' : currentUser.username}</h1>}
-                            { !isMe && !isAlreadyFollowed && <Follow myUser={props.myUser} currentUser={currentUser} locationUser={props.match.params.username} />}
-                            { isAlreadyFollowed && <Unfollow myUser={props.myUser} currentUser={currentUser} locationUser={props.match.params.username} />}
+                            { !isMe && !isAlreadyFollowed && <Follow myUser={myUser} currentUser={currentUser} locationUser={usernameFromParams} />}
+                            { isAlreadyFollowed && <Unfollow myUser={myUser} currentUser={currentUser} locationUser={usernameFromParams} />}
                             <div className="editSettings">
                                 { isMe && <Edit /> }
                                 { isMe && <SettingsButton />}
@@ -54,8 +56,8 @@ const User = props => {
 
                         {biggerThan415 && <div className="datas">
                             <div className="data"><span className="bold">{currentUser?.amount_posts}</span> publicaciones</div>
-                            <ShowFollowers myUser={props.myUser} user={currentUser} locationUser={props.match.params.username}/>
-                            <ShowFollowings myUser={props.myUser} user={currentUser} locationUser={props.match.params.username}/>
+                            <ShowFollowers myUser={myUser} user={currentUser} locationUser={usernameFromParams}/>
+                            <ShowFollowings myUser={myUser} user={currentUser} locationUser={usernameFromParams}/>
                         </div>}
                         
                         <br />
@@ -70,8 +72,8 @@ const User = props => {
                 {!biggerThan415 && <Divider /> }
                     {!biggerThan415 && <div className="datasMobile">
                         <div className="data"><span className="bold">{currentUser?.amount_posts}</span> publicaciones</div>
-                        <div className="data"><span className="bold">{currentUser?.followers.length}</span> seguidores</div>
-                        <div className="data"><span className="bold">{currentUser?.followings.length}</span> seguidos</div>                
+                        <ShowFollowers myUser={myUser} user={currentUser} locationUser={usernameFromParams}/>
+                        <ShowFollowings myUser={myUser} user={currentUser} locationUser={usernameFromParams}/>
                     </div>}
                     {!biggerThan415 && <Divider /> }
                     
