@@ -1,7 +1,7 @@
 import store from '../store';
 import axios from 'axios';
 import { API_URL } from '../../api-config';
-import { LOGIN, LOGOUT, GET_ALL } from '../types'
+import { LOGIN, LOGOUT, GET_ALL, UPLOAD_IMAGE, SET_CURRENT_USER, SET_MY_USER } from '../types'
 
 export const register = async(user) => {
     return axios.post(API_URL + 'users/register', user)
@@ -35,7 +35,7 @@ export const uploadImage = async(image) => {
             }
         });
         store.dispatch({
-            type: 'UPLOAD_IMAGE',
+            type: UPLOAD_IMAGE,
             payload: res.data
         });
         return res;
@@ -60,21 +60,56 @@ export const updateInfo = async(user) => {
             }
         });
         store.dispatch({
-            type: 'SET_USER',
+            type: SET_MY_USER,
             payload: res.data
         });
     } catch (error) {
         console.error(error)
     }
 }
-export const getUserInfo = async(user) => {
+export const getMyUser = async() => {
     const res = await axios.get(API_URL + 'users/user', {
         headers: {
             Authorization: 'Bearer ' + localStorage.getItem('authToken')
         }
     });
     store.dispatch({
-        type: 'SET_USER',
+        type: SET_MY_USER,
         payload: res.data
     });
+}
+export const getById = async(id) => {
+    const res = await axios.get(API_URL + 'users/byId/' + id, {
+        headers: {
+            Authorization: 'Bearer ' + localStorage.getItem('authToken')
+        }
+    });
+    store.dispatch({
+        type: SET_CURRENT_USER,
+        payload: res.data
+    })
+    return res;
+}
+export const getByUsername = async(username) => {
+    const res = await axios.get(API_URL + 'users/byUsername/' + username, {
+        headers: {
+            Authorization: 'Bearer ' + localStorage.getItem('authToken')
+        }
+    });
+    console.log(res)
+    store.dispatch({
+        type: SET_CURRENT_USER,
+        payload: res.data
+    })
+    return res;
+}
+export const follow = async(followerFollowed) => {
+    await axios.post(API_URL + 'followers/follow', followerFollowed);
+    getMyUser();
+    return getById(followerFollowed.followed_id);
+}
+export const unfollow = async(follower_id, followed_id) => {
+    await axios.get(API_URL + 'followers/unfollow/' + follower_id + '/'+ followed_id);
+    getMyUser();
+    return getById(followed_id);
 }

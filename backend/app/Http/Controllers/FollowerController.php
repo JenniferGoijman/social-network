@@ -15,11 +15,11 @@ class FollowerController extends Controller
             $body = $request->all();
             $follower = Follower::create($body);
             
-            $userfollower = User::find($body['follower_id']);
-            $userfollower->increment('amount_followings');
+            // $userfollower = User::find($body['follower_id']);
+            // $userfollower->increment('amount_followings');
 
-            $userfollowed = User::find($body['followed_id']);
-            $userfollowed->increment('amount_followers');
+            // $userfollowed = User::find($body['followed_id']);
+            // $userfollowed->increment('amount_followers');
 
             return response($follower, 201);
         } catch (\Exception $e) {
@@ -34,13 +34,13 @@ class FollowerController extends Controller
         try {
             $follower = Follower::where('follower_id', $follower_id)->where('followed_id', $followed_id)->delete();
             
-            $userUnfollower = User::find($follower_id);
-            $userUnfollower->amount_followings--;
-            $userUnfollower->save();
+            // $userUnfollower = User::find($follower_id);
+            // $userUnfollower->amount_followings--;
+            // $userUnfollower->save();
             
-            $userUnfollowed = User::find($followed_id);
-            $userUnfollowed->amount_followers--;
-            $userUnfollowed->save();
+            // $userUnfollowed = User::find($followed_id);
+            // $userUnfollowed->amount_followers--;
+            // $userUnfollowed->save();
             
             return response($follower, 201);
         } catch (\Exception $e) {

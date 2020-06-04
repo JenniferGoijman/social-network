@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { IMAGES_URL } from '../../../api-config';
 import './Settings.scss'
 import { Form, Input, Button, notification } from 'antd';
-import { getUserInfo, updateInfo } from '../../../redux/actions/users';
+import { getMyUser, updateInfo } from '../../../redux/actions/users';
 import ChangeablePicThroughLink from '../../../components/Profile/ChangeablePicThroughLink/ChangeablePicThroughLink';
 import { useHistory } from 'react-router-dom';
 
@@ -13,7 +13,7 @@ const Settings = props => {
     let myUser = props.myUser;
 
     useEffect(() => {
-        getUserInfo()
+        getMyUser()
         .catch(console.error)
     }, [])
 

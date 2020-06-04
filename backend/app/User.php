@@ -17,8 +17,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'username', 'name', 'email', 'password', 'pic', 'amount_posts', 'amount_followers', 
-        'amount_followings', 'description', 
+        'username', 'name', 'email', 'password', 'pic', 'amount_posts', 'description', 
     ];
 
     /**
@@ -44,8 +43,8 @@ class User extends Authenticatable
         return $this->belongsToMany(
             self::class,
             'followers',
-            'follower_id',
             'followed_id',
+            'follower_id',
         );
     }
     public function followings()
@@ -53,8 +52,8 @@ class User extends Authenticatable
         return $this->belongsToMany(
             self::class,
             'followers',
-            'followed_id',
             'follower_id',
+            'followed_id',
         );
     }
 }

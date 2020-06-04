@@ -1,6 +1,7 @@
 export const REGISTER = 'REGISTER';
 export const LOGIN = 'LOGIN';
 export const LOGOUT = 'LOGOUT';
-export const GET_FOLLOWERS = 'GET_FOLLOWERS';
-export const GET_FOLLOWINGS = 'GET_FOLLOWINGS';
 export const GET_ALL = 'GET_ALL';
+export const UPLOAD_IMAGE = 'UPLOAD_IMAGE';
+export const SET_CURRENT_USER = 'SET_CURRENT_USER';
+export const SET_MY_USER = 'SET_MY_USER';

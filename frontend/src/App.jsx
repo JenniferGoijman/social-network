@@ -9,14 +9,14 @@ import Home from './containers/Home/Home';
 import Header from './components/Header/Header';
 import User from './components/User/User';
 import Settings from './containers/User/Settings/Settings';
-import { getUserInfo } from './redux/actions/users';
+import { getMyUser } from './redux/actions/users';
 
 function App() {
 
   useEffect(() => {
     const token = localStorage.getItem('authToken');
     if (token) {
-      getUserInfo()
+      getMyUser()
       .catch(console.error)
     }
   }, [])

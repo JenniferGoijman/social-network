@@ -13,8 +13,10 @@ Route::prefix('v1')->group( function () {
             Route::get('user','UserController@userInfo');
             Route::post('image', 'UserController@uploadImage');
             Route::get('logout','UserController@logout');
-            Route::get('followings/{id}','UserController@getFollowings');
-            Route::get('followers/{id}','UserController@getFollowers');
+            Route::get('byId/{id}','UserController@getById');
+            Route::get('byUsername/{username}','UserController@getByUsername');
+            // Route::get('followings/{id}','UserController@getFollowings');
+            // Route::get('followers/{id}','UserController@getFollowers');
             Route::put('update', 'UserController@update');
         });
     });

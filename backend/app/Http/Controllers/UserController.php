@@ -20,8 +20,6 @@ class UserController extends Controller
             $body['role'] = 'customer';
             $body['pic'] = 'nopic.png';
             $body['amount_posts'] = 0;
-            $body['amount_followers'] = 0;
-            $body['amount_followings'] = 0;
             $body['description'] = '';
             $user = User::create($body);
             return response($user, 201);
@@ -45,7 +43,7 @@ class UserController extends Controller
         }
         $user = Auth::user();
         $token = $user->createToken('authToken')->accessToken;
-        return response(['user' => $user, 'token' => $token]);
+        return response(['user' => $user->load('followers', 'followings'), 'token' => $token]);
     }
     public function logout()
     {
@@ -84,18 +82,32 @@ class UserController extends Controller
             return response(['error' => $e,], 500);
         }
     }
-    public function getFollowings($id) {
-        $user = User::find($id);
-        return $user->followers()->get();
-    }
-    public function getFollowers($id) {
-        $user = User::find($id);
-        return $user->followings()->get();
-    }
     public function getAll()
     {
         try {
             return User::all();
+        } catch (\Exception $e) {
+            return response([
+                'error' => $e
+            ], 500);
+        }
+    }
+    public function getById($id)
+    {
+        try {
+            $user = User::find($id);
+            return response($user->load('followers', 'followings'));
+        } catch (\Exception $e) {
+            return response([
+                'error' => $e
+            ], 500);
+        }
+    }
+    public function getByUsername($username)
+    {
+        try {
+            $user = User::where('username', $username)->first();
+            return response($user->load('followers', 'followings'));
         } catch (\Exception $e) {
             return response([
                 'error' => $e
@@ -122,7 +134,7 @@ class UserController extends Controller
     public function userInfo() {
         try {
             $user = Auth::user();
-            return response($user);
+            return response($user->load('followers', 'followings'));
         } catch (\Exception $e) {
             return response([
                 'message' => 'There was an error trying to get the user',

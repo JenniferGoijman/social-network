@@ -20,8 +20,6 @@ class CreateUsersTable extends Migration
             $table->string('email')->unique();
             $table->string('pic')->nullable()->default('nopic.png');
             $table->integer('amount_posts')->default('0');
-            $table->integer('amount_followers')->default('0');
-            $table->integer('amount_followings')->default('0');
             $table->string('description')->nullable()->default('');
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
