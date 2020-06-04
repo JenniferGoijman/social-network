@@ -1,4 +1,4 @@
-import React, { useEffect, Fragment } from 'react';
+import React, { useEffect, useState, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { IMAGES_URL } from '../../api-config';
 import './User.scss';
@@ -14,19 +14,22 @@ import ChangeablePicThroughPic from '../Profile/ChangeablePicThroughPic/Changeab
 import SettingsButton from '../Profile/SettingsButton/SettingsButton';
 import Edit from '../Profile/Edit/Edit';
 import ShowFollowers from '../Profile/ShowFollowers/ShowFollowers';
+import ShowFollowings from '../Profile/ShowFollowings/ShowFollowings';
 
 const User = props => {
     const biggerThan415 = useMediaPredicate("(min-width: 415px)");
-    const currentUser = props.currentUser;
+    const [currentUser, setCurrentUser] = useState();
     const isMe = props.myUser?.id === currentUser?.id;
-
+    const isAlreadyFollowed = props.myUser?.followings.filter(f => f?.id === currentUser?.id).length>0 ? true : false;
+    
     useEffect(() => {   
         getMyUser();
-        getByUsername(props.match.params.username.toLowerCase());
+        getByUsername(props.match.params.username.toLowerCase())
+        .then(res => {
+            setCurrentUser(res.data);
+        });
     }, []);
-
-    const isAlreadyFollowed = props.myUser?.followings.filter(f => f?.id === currentUser?.id).length>0 ? true : false;
-    console.log(props.myUser);
+    
     return (
         <Fragment>
             {currentUser && 
@@ -52,7 +55,7 @@ const User = props => {
                         {biggerThan415 && <div className="datas">
                             <div className="data"><span className="bold">{currentUser?.amount_posts}</span> publicaciones</div>
                             <ShowFollowers myUser={props.myUser} user={currentUser}/>
-                            <div className="data"><span className="bold">{currentUser?.followings.length}</span> seguidos</div>                
+                            <ShowFollowings myUser={props.myUser} user={currentUser}/>
                         </div>}
                         
                         <br />

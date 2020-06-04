@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { Select } from 'antd';
-import { getAll }  from '../../redux/actions/users'
+import { getAll, getByUsername }  from '../../redux/actions/users'
 import { IMAGES_URL } from '../../api-config';
 import './Search.scss'
 const { Option } = Select;
@@ -20,6 +20,7 @@ const Search = props => {
     };
     
     const handleChange = value => {
+        getByUsername(value);
         window.location.pathname='/'+ value;
     };
 
@@ -36,20 +37,11 @@ const Search = props => {
         );
     
     return (
-        <Select
-        showSearch
-        value={value}
-        placeholder={props.placeholder}
-        style={props.style}
-        defaultActiveFirstOption={false}
-        showArrow={false}
-        filterOption={false}
-        onSearch={handleSearch}
-        onChange={handleChange}
-        notFoundContent={null}
-    >
-        {options}
-    </Select>
+        <Select showSearch value={value} placeholder={props.placeholder} style={props.style} 
+            defaultActiveFirstOption={false} showArrow={false} filterOption={false}
+            onSearch={handleSearch} onChange={handleChange} notFoundContent={null}>
+            {options}
+        </Select>
     )
 }
 
