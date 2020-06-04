@@ -106,11 +106,13 @@
                 padding-left: 15px;
                 
                 .editSettings {
-                    margin-top: 10px;
+                    margin-top: 15px;
                 }
 
                 h1 {
                     margin: 0;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
                 }
             }
         }
@@ -128,10 +130,11 @@
         display: flex;
         justify-content: center;
 
+
         .data {
             display: flex;
             flex-direction: column;
-            margin-right: 30px;
+            margin: 0 15px;
         }
     }
 

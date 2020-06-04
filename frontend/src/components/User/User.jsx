@@ -44,8 +44,7 @@ const User = props => {
                     
                     <div className="info">
                         <div className="name">
-                            {biggerThan415 && <h1>{currentUser?.username}</h1>}
-                            {!biggerThan415 && <h1>{(currentUser?.username.length > 14) ? currentUser.username.substr(0, 12) + '...' : currentUser.username}</h1>}
+                            <h1>{currentUser?.username}</h1>
                             { !isMe && !isAlreadyFollowed && <Follow myUser={myUser} currentUser={currentUser} locationUser={usernameFromParams} />}
                             { isAlreadyFollowed && <Unfollow myUser={myUser} currentUser={currentUser} locationUser={usernameFromParams} />}
                             <div className="editSettings">

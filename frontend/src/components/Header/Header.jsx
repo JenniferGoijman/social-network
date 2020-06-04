@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import './Header.scss';
 import Logo from '../../img/logo.png';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHome, faPaperPlane, faCompass, faHeart } from '@fortawesome/free-solid-svg-icons'
+import { faHome, faPaperPlane, faPlusSquare, faHeart } from '@fortawesome/free-solid-svg-icons'
 import { IMAGES_URL } from '../../api-config';
 import Search from '../Search/Search';
 import { useMediaPredicate } from 'react-media-hook';
@@ -12,11 +12,18 @@ import { useLocation } from 'react-router-dom';
 const Header = props => {
     const biggerThan415 = useMediaPredicate("(min-width: 415px)");
     const location = useLocation();
+
     const myProfile = () => {
         window.location.pathname='/'+ props.myUser.username;
     }
+
+    const newPost = () => {
+        window.location.pathname='/create';
+    }
+
     const routesWithoutHeader =['/register','/login','/']
     if(routesWithoutHeader.includes(location.pathname)) return '';
+    
     return (
         <header>
             <div className="logo">
@@ -33,7 +40,7 @@ const Header = props => {
                     <FontAwesomeIcon icon={faPaperPlane} />
                 </div>
                 <div className="icon">
-                    <FontAwesomeIcon icon={faCompass} />
+                    <FontAwesomeIcon icon={faPlusSquare} onClick={newPost}/>
                     </div>
                 <div className="icon">
                     <FontAwesomeIcon icon={faHeart} />
