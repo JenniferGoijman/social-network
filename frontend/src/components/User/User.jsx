@@ -44,8 +44,8 @@ const User = props => {
                         <div className="name">
                             {biggerThan415 && <h1>{currentUser?.username}</h1>}
                             {!biggerThan415 && <h1>{(currentUser?.username.length > 14) ? currentUser.username.substr(0, 12) + '...' : currentUser.username}</h1>}
-                            { !isMe && !isAlreadyFollowed && <Follow myUser={props.myUser} currentUser={currentUser} />}
-                            { isAlreadyFollowed && <Unfollow myUser={props.myUser} currentUser={currentUser} />}
+                            { !isMe && !isAlreadyFollowed && <Follow myUser={props.myUser} currentUser={currentUser} locationUser={props.match.params.username} />}
+                            { isAlreadyFollowed && <Unfollow myUser={props.myUser} currentUser={currentUser} locationUser={props.match.params.username} />}
                             <div className="editSettings">
                                 { isMe && <Edit /> }
                                 { isMe && <SettingsButton />}
@@ -54,8 +54,8 @@ const User = props => {
 
                         {biggerThan415 && <div className="datas">
                             <div className="data"><span className="bold">{currentUser?.amount_posts}</span> publicaciones</div>
-                            <ShowFollowers myUser={props.myUser} user={currentUser}/>
-                            <ShowFollowings myUser={props.myUser} user={currentUser}/>
+                            <ShowFollowers myUser={props.myUser} user={currentUser} locationUser={props.match.params.username}/>
+                            <ShowFollowings myUser={props.myUser} user={currentUser} locationUser={props.match.params.username}/>
                         </div>}
                         
                         <br />

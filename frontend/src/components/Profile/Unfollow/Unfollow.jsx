@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
 import { UserOutlined, CheckOutlined } from '@ant-design/icons';
 import { Button } from 'antd';
-import { unfollow } from '../../../redux/actions/users';
+import { unfollow, getByUsername } from '../../../redux/actions/users';
 
 const Unfollow = props => {
 
@@ -10,10 +10,11 @@ const Unfollow = props => {
         const followed_id = props.currentUser.id;
         unfollow(follower_id, followed_id)
         .then(res => {
-            console.log(":)")
+            console.log(":)");
+            getByUsername(props.locationUser);
         })
         .catch(()=>{
-            console.log(":(")
+            console.log(":(");
         })
     }
 

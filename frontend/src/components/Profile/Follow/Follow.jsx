@@ -1,13 +1,14 @@
 import React from 'react';
 import { Button } from 'antd';
-import { follow } from '../../../redux/actions/users';
+import { follow, getByUsername } from '../../../redux/actions/users';
 
 const Follow = props => {
     const handleFollow = () => {
         const followerFollowed = {follower_id: props.myUser.id, followed_id: props.currentUser.id};
         follow(followerFollowed)
         .then(res => {
-            console.log(":)")
+            console.log(":)");
+            getByUsername(props.locationUser);
         })
         .catch(()=>{
             console.log(":(")

@@ -6,7 +6,7 @@ const Edit = props => {
     const history = useHistory();
     
     const edit = () => {
-        history.push('/accounts/edit')
+        history.push('/accounts/edit');
     }
 
     return (
