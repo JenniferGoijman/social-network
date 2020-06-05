@@ -20,12 +20,12 @@ class PostController extends Controller
         try {
             $request->validate(['image' => 'required|image']);
             $image_path = $request->image->store('images','s3');
-
+            
             $id = Auth::id();
             $user = User::find($id);
-
-            $description = $request->input('description');
-            $body = ['image' => $image_path, 'description' => $description, 'user_id' => $user->id];
+                      
+            $body = ['image' => $image_path, 'description' => $request->description, 'user_id' => $user->id];
+            
             $post = Post::create($body);
             return response($post);
         } catch (\Exception $e) {
