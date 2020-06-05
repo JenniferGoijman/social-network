@@ -13,6 +13,7 @@ import Header from './components/Header/Header';
 import User from './components/User/User';
 
 import { getMyUser } from './redux/actions/users';
+import SearchMobile from './containers/SearchMobile/SearchMobile';
 
 
 function App() {
@@ -34,6 +35,7 @@ function App() {
           <Route path='/login' component={LoginContainer} exact />
           <Route path='/create' component={NewPost} exact />
           <Route path='/feed' component={Posts} exact />
+          <Route path='/search' component={SearchMobile} exact />
           <Route path='/:username' component={User} exact />
           <Route path='/accounts/edit' component={Settings} exact />
           <Route path='' component={Home} exact />
