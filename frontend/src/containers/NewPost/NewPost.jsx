@@ -67,7 +67,7 @@ const NewPost = props => {
                     <div className="comment">
                          <Comment 
                             avatar={
-                                <Avatar src={IMAGES_URL + props.myUser?.pic} alt="Han Solo"/>
+                                <Avatar src={IMAGES_URL + props.myUser?.pic}/>
                             }
                             content={
                                 <Form.Item>

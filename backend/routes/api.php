@@ -22,6 +22,7 @@ Route::prefix('v1')->group( function () {
     Route::prefix('posts')->group(function () {
         Route::middleware('auth:api')->group(function(){
             Route::post('postImage', 'PostController@uploadPostImage');
+            Route::get('', 'PostController@getFeed');
         });
     });
     

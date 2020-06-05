@@ -1,12 +1,12 @@
 import React, { Fragment } from 'react';
-import { uploadImage } from '../../../redux/actions/users';
+import { uploadProfileImage } from '../../../redux/actions/users';
 
 const ChangeablePicThroughLink = props => {
 
     const fileSelectedHandler = event => {
         const fd = new FormData();        
         fd.append("image", event.target.files[0], event.target.files[0].name);
-        uploadImage(fd)
+        uploadProfileImage(fd)
         .then((res) => { console.log(":)"); })
           .catch(() => { console.log(":("); });
     }

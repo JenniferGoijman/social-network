@@ -32,7 +32,14 @@ class PostController extends Controller
             return response(['error' => $e,], 500);
         }
     }
-    
-            // $table->string('image');
-            // $table->string('description')->nullable()->default('');
+    public function getFeed() 
+    {
+        $id = Auth::id();
+        $user = User::find($id);
+        $userIds = $user->followings()->pluck('followed_id');
+        // dd($userIds);
+        
+        // $userIds[] = $user->id;
+        return Post::whereIn('user_id', $userIds)->with('user')->latest()->get();
+    }
 }

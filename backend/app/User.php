@@ -56,4 +56,8 @@ class User extends Authenticatable
             'followed_id',
         );
     }
+    public function posts()
+    {
+        return $this->hasMany('\App\Post');
+    }
 }
