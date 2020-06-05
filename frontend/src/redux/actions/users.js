@@ -27,9 +27,9 @@ export const logout = async() => {
     })
     return res;
 }
-export const uploadImage = async(image) => {
+export const uploadProfileImage = async(image) => {
     try {
-        const res = await axios.post(API_URL + 'users/image', image, {
+        const res = await axios.post(API_URL + 'users/profileImage', image, {
             headers: {
                 Authorization: "Bearer " + localStorage.getItem('authToken')
             }
@@ -105,13 +105,9 @@ export const getByUsername = async(username) => {
 }
 export const follow = async(followerFollowed) => {
     await axios.post(API_URL + 'followers/follow', followerFollowed);
-    // getMyUser();
-    // return getById(followerFollowed.followed_id);
     return getMyUser();
 }
 export const unfollow = async(follower_id, followed_id) => {
     await axios.get(API_URL + 'followers/unfollow/' + follower_id + '/'+ followed_id);
-    // getMyUser();
-    // return getById(followed_id);
     return getMyUser();
 }
