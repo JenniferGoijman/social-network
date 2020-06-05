@@ -1,10 +1,10 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
-import Post from '../../components/Post/Post';
+import PostFeed from '../../components/PostFeed/PostFeed';
 import { getFeed } from '../../redux/actions/posts';
-import './Posts.scss';
+import './PostsFeed.scss';
 
-const Posts = props => {
+const PostsFeed = props => {
 
     useEffect(() => {   
         getFeed();
@@ -13,10 +13,10 @@ const Posts = props => {
     return (
         <div className="posts-container">
             {props.posts?.map(post => 
-                <Post key={post.id} post={post} myUser={props.myUser} />)}
+                <PostFeed key={post.id} post={post} myUser={props.myUser} />)}
         </div>
     )
 }
 
 const mapStateToProps = ({user, post}) => ({ myUser: user.myUser, posts: post.posts });
-export default connect(mapStateToProps)(Posts);
+export default connect(mapStateToProps)(PostsFeed);

@@ -7,14 +7,13 @@ import LoginContainer from './containers/User/Login/LoginContainer';
 import Settings from './containers/User/Settings/Settings';
 import Home from './containers/Home/Home';
 import NewPost from './containers/NewPost/NewPost';
-import Posts from './containers/Posts/Posts';
-
-import Header from './components/Header/Header';
-import User from './components/User/User';
-
-import { getMyUser } from './redux/actions/users';
+import PostsFeed from './containers/PostsFeed/PostsFeed';
+import Profile from './containers/User/Profile/Profile';
 import SearchMobile from './containers/SearchMobile/SearchMobile';
 
+import Header from './components/Header/Header';
+
+import { getMyUser } from './redux/actions/users';
 
 function App() {
 
@@ -34,9 +33,9 @@ function App() {
           <Route path='/register' component={Register} exact />
           <Route path='/login' component={LoginContainer} exact />
           <Route path='/create' component={NewPost} exact />
-          <Route path='/feed' component={Posts} exact />
+          <Route path='/feed' component={PostsFeed} exact />
           <Route path='/search' component={SearchMobile} exact />
-          <Route path='/:username' component={User} exact />
+          <Route path='/:username' component={Profile} exact />
           <Route path='/accounts/edit' component={Settings} exact />
           <Route path='' component={Home} exact />
         </Switch>

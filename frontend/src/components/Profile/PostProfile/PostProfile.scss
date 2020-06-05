@@ -1,10 +1,11 @@
-.new-post-container {
+.post-profile-container {
     display: flex;
     justify-content: center;
-    width: 100%; 
     
-    .new-post {
-        width: 85vw;
+    .post {
+        width: fit-content;
+        height: fit-content;
+        max-width: 600px;
         background-color: white;
         border: 1px solid rgb(200, 200, 200);
         margin: 30px 0 10px 0;
@@ -14,16 +15,12 @@
 
         .header {
             display: flex;
-            justify-content: space-between;
+            align-items: center;
             font-size: 15px;
             width: 100%;
             border-bottom: 1px solid rgb(200, 200, 200);
             padding: 6px 16px;
             font-weight: 500;
-
-            .title {
-                color: black;
-            }
         }
 
         .body {
@@ -32,32 +29,34 @@
             align-items: center;
             width: fit-content;
             height: fit-content;
-            min-width: 70vh;
-            min-height: 50vh;
+            max-width: 600px;
 
             img {
-                max-width: 84.8vw;
-                max-height: 100vh;
+                max-width: 600px;
             }
         }
 
-        .comment {
+        .description {
             width: 100%;
             margin: 10px;
-            padding: 0 10px 0 10px;
+            padding: 0 16px;
+            display: flex;
         }
     }
 }
 
 @media only screen and (max-width: 415px) {
-    .new-post-container {   
-        display: inline;
-        width: fit-content;
-
-        .new-post {
-            width: fit-content;
+    .post-profile-container {        
+        .post {
             max-width: 320px;
-            margin: 10px 0 0 0;
+    
+            .body {
+                max-width: 320px;
+    
+                img {
+                    max-width: 320px;
+                }
+            }
         }
     }
 }

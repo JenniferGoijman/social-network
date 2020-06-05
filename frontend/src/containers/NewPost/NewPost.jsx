@@ -42,7 +42,8 @@ const NewPost = props => {
         fd.append("image", selectedFile, selectedFile.name);
         fd.append("description", comment);
         uploadPostImage(fd)
-        .then((res) => { console.log(":)"); })
+        .then((res) => { console.log(":)"); 
+            window.location.pathname='/feed';})
         .catch(() => { console.log(":("); });
     }
     

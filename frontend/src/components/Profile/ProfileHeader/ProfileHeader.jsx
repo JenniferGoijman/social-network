@@ -1,36 +1,26 @@
-import React, { useEffect, useState, Fragment } from 'react';
+import React, { Fragment } from 'react';
 import { connect } from 'react-redux';
-import { IMAGES_URL } from '../../api-config';
-import './User.scss';
+import { IMAGES_URL } from '../../../api-config';
+import './ProfileHeader.scss';
 import { Divider } from 'antd';
 import { useMediaPredicate } from 'react-media-hook';
 
-import { getMyUser, getByUsername } from '../../redux/actions/users';
+import NotFound from '../../NotFound/NotFound';
+import Unfollow from '../Unfollow/Unfollow';
+import Follow from '../Follow/Follow';
+import ChangeablePicThroughPic from '../ChangeablePicThroughPic/ChangeablePicThroughPic';
+import SettingsButton from '../SettingsButton/SettingsButton';
+import Edit from '../Edit/Edit';
+import ShowFollowers from '../ShowFollowers/ShowFollowers';
+import ShowFollowings from '../ShowFollowings/ShowFollowings';
 
-import NotFound from '../NotFound/NotFound';
-import Unfollow from '../Profile/Unfollow/Unfollow';
-import Follow from '../Profile/Follow/Follow';
-import ChangeablePicThroughPic from '../Profile/ChangeablePicThroughPic/ChangeablePicThroughPic';
-import SettingsButton from '../Profile/SettingsButton/SettingsButton';
-import Edit from '../Profile/Edit/Edit';
-import ShowFollowers from '../Profile/ShowFollowers/ShowFollowers';
-import ShowFollowings from '../Profile/ShowFollowings/ShowFollowings';
-
-const User = props => {
+const ProfileHeader = props => {
     const biggerThan415 = useMediaPredicate("(min-width: 415px)");
-    const [currentUser, setCurrentUser] = useState();
+    const currentUser = props.currentUser;
     const myUser = props.myUser;
     const isMe = myUser?.id === currentUser?.id;
     const isAlreadyFollowed = myUser?.followings?.filter(f => f?.id === currentUser?.id).length>0 ? true : false;
-    const usernameFromParams = props.match.params.username.toLowerCase();
-    
-    useEffect(() => {   
-        getMyUser();
-        getByUsername(usernameFromParams)
-        .then(res => {
-            setCurrentUser(res.data);
-        });
-    }, []);
+    const usernameFromParams = props.usernameFromParams;
     
     return (
         <Fragment>
@@ -82,4 +72,4 @@ const User = props => {
     )
 }
 const mapStateToProps = ({user}) => ({ myUser: user.myUser, currentUser: user.currentUser });
-export default connect(mapStateToProps)(User);
+export default connect(mapStateToProps)(ProfileHeader);

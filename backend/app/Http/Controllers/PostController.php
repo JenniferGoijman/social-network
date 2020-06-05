@@ -37,9 +37,6 @@ class PostController extends Controller
         $id = Auth::id();
         $user = User::find($id);
         $userIds = $user->followings()->pluck('followed_id');
-        // dd($userIds);
-        
-        // $userIds[] = $user->id;
         return Post::whereIn('user_id', $userIds)->with('user')->latest()->get();
     }
 }

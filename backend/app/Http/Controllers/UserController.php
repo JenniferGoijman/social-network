@@ -45,7 +45,7 @@ class UserController extends Controller
         }
         $user = Auth::user();
         $token = $user->createToken('authToken')->accessToken;
-        return response(['user' => $user->load('followers', 'followings'), 'token' => $token]);
+        return response(['user' => $user->load('followers', 'followings', 'posts'), 'token' => $token]);
     }
     public function logout()
     {
@@ -75,7 +75,7 @@ class UserController extends Controller
     {
         try {
             $user = User::find($id);
-            return response($user->load('followers', 'followings'));
+            return response($user->load('followers', 'followings', 'posts'));
         } catch (\Exception $e) {
             return response([
                 'error' => $e
@@ -86,7 +86,7 @@ class UserController extends Controller
     {
         try {
             $user = User::where('username', $username)->first();
-            return response($user->load('followers', 'followings'));
+            return response($user->load('followers', 'followings', 'posts'));
         } catch (\Exception $e) {
             return response([
                 'error' => $e
@@ -136,7 +136,7 @@ class UserController extends Controller
     public function userInfo() {
         try {
             $user = Auth::user();
-            return response($user->load('followers', 'followings'));
+            return response($user->load('followers', 'followings', 'posts'));
         } catch (\Exception $e) {
             return response([
                 'message' => 'There was an error trying to get the user',
