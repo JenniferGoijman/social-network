@@ -11,21 +11,23 @@ Route::prefix('v1')->group( function () {
         
         Route::middleware('auth:api')->group(function(){
             Route::get('user','UserController@userInfo');
-            Route::post('image', 'UserController@uploadImage');
+            Route::post('profileImage', 'UserController@uploadProfileImage');
             Route::get('logout','UserController@logout');
             Route::get('byId/{id}','UserController@getById');
             Route::get('byUsername/{username}','UserController@getByUsername');
-            // Route::get('followings/{id}','UserController@getFollowings');
-            // Route::get('followers/{id}','UserController@getFollowers');
             Route::put('update', 'UserController@update');
         });
     });
 
+    Route::prefix('posts')->group(function () {
+        Route::middleware('auth:api')->group(function(){
+            Route::post('postImage', 'PostController@uploadPostImage');
+        });
+    });
+    
+
     Route::prefix('followers')->group(function () {
         Route::post('/follow', 'FollowerController@follow');
         Route::get('/unfollow/{follower_id}/{followed_id}', 'FollowerController@unfollow');
-        // Route::middleware('auth:api')->group(function(){
-                    
-        // });
     });
 });

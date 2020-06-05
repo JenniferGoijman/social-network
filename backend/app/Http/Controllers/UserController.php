@@ -61,29 +61,6 @@ class UserController extends Controller
             ], 500);
         }
     }
-    public function uploadImage(Request $request)
-    {
-        try {
-            $request->validate(['image' => 'required|image']);
-            $image_path = $request->image->store('images','s3');
-
-            $id = Auth::id();
-            $user = User::find($id);
-            
-            $picDefault = "images/nopic.png";
-            $oldPic = $user->pic;
-            
-            if ($oldPic !== $picDefault) {
-                Storage::disk('s3')->delete($oldPic);
-                File::delete($oldPic);
-            }
-            $user->update(['pic' => $image_path]);
-            return response($user);
-        } catch (\Exception $e) {
-            dd($e);
-            return response(['error' => $e,], 500);
-        }
-    }
     public function getAll()
     {
         try {
@@ -131,6 +108,29 @@ class UserController extends Controller
             return response([
                 'error' => $e
             ], 500);
+        }
+    }
+    public function uploadProfileImage(Request $request)
+    {
+        try {
+            $request->validate(['image' => 'required|image']);
+            $image_path = $request->image->store('images','s3');
+
+            $id = Auth::id();
+            $user = User::find($id);
+            
+            $picDefault = "images/nopic.png";
+            $oldPic = $user->pic;
+            
+            if ($oldPic !== $picDefault) {
+                Storage::disk('s3')->delete($oldPic);
+                File::delete($oldPic);
+            }
+            $user->update(['pic' => $image_path]);
+            return response($user);
+        } catch (\Exception $e) {
+            dd($e);
+            return response(['error' => $e,], 500);
         }
     }
     public function userInfo() {
