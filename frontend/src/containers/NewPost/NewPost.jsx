@@ -6,12 +6,14 @@ import { faTimes } from '@fortawesome/free-solid-svg-icons';
 import { uploadPostImage } from '../../redux/actions/posts';
 import { Comment, Avatar, Form, Input } from 'antd';
 import { IMAGES_URL } from '../../api-config';
+import { useHistory } from 'react-router-dom';
 
 const NewPost = props => {
     const [selectedFile, setSelectedFile] = useState();
     const [preview, setPreview] = useState();
     const [comment, setComment] = useState();
-    const [ value, setValue] = useState();
+    const [value, setValue] = useState();
+    const history = useHistory();
     const { TextArea } = Input;
 
     useEffect(() => {
@@ -34,7 +36,7 @@ const NewPost = props => {
     }
 
     const close = () => {
-        window.location.pathname='/'+ props.myUser.username;
+        history.push('/'+ props.myUser.username);
     }
 
     const onClick = () => {
@@ -43,7 +45,7 @@ const NewPost = props => {
         fd.append("description", comment);
         uploadPostImage(fd)
         .then((res) => { console.log(":)"); 
-            window.location.pathname='/feed';})
+            history.push('/feed')})
         .catch(() => { console.log(":("); });
     }
     

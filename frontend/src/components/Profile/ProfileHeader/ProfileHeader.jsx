@@ -13,6 +13,7 @@ import SettingsButton from '../SettingsButton/SettingsButton';
 import Edit from '../Edit/Edit';
 import ShowFollowers from '../ShowFollowers/ShowFollowers';
 import ShowFollowings from '../ShowFollowings/ShowFollowings';
+import AmountPosts from '../AmountPosts/AmountPosts';
 
 const ProfileHeader = props => {
     const biggerThan415 = useMediaPredicate("(min-width: 415px)");
@@ -21,7 +22,7 @@ const ProfileHeader = props => {
     const isMe = myUser?.id === currentUser?.id;
     const isAlreadyFollowed = myUser?.followings?.filter(f => f?.id === currentUser?.id).length>0 ? true : false;
     const usernameFromParams = props.usernameFromParams;
-    
+    console.log(currentUser);
     return (
         <Fragment>
             {currentUser && 
@@ -44,7 +45,7 @@ const ProfileHeader = props => {
                         </div>
 
                         {biggerThan415 && <div className="datas">
-                            <div className="data"><span className="bold">{currentUser?.amount_posts}</span> publicaciones</div>
+                            <AmountPosts />
                             <ShowFollowers myUser={myUser} user={currentUser} locationUser={usernameFromParams}/>
                             <ShowFollowings myUser={myUser} user={currentUser} locationUser={usernameFromParams}/>
                         </div>}
@@ -60,7 +61,7 @@ const ProfileHeader = props => {
                 </div>}
                 {!biggerThan415 && <Divider /> }
                     {!biggerThan415 && <div className="datasMobile">
-                        <div className="data"><span className="bold">{currentUser?.amount_posts}</span> publicaciones</div>
+                        <AmountPosts />
                         <ShowFollowers myUser={myUser} user={currentUser} locationUser={usernameFromParams}/>
                         <ShowFollowings myUser={myUser} user={currentUser} locationUser={usernameFromParams}/>
                     </div>}

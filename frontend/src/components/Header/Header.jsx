@@ -7,26 +7,27 @@ import { faHome, faPaperPlane, faSearch, faPlusSquare, faHeart } from '@fortawes
 import { IMAGES_URL } from '../../api-config';
 import Search from '../Search/Search';
 import { useMediaPredicate } from 'react-media-hook';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useHistory } from 'react-router-dom';
 
 const Header = props => {
     const biggerThan415 = useMediaPredicate("(min-width: 415px)");
     const location = useLocation();
+    const history = useHistory();
 
     const showFeed = () => {
-        window.location.pathname='/feed';
+        history.push('/feed');
     }
 
     const search = () => {
-        window.location.pathname='/search';
+        history.push('/search');
     }
 
     const newPost = () => {
-        window.location.pathname='/create';
+        history.push('/create');
     }
 
     const myProfile = () => {
-        window.location.pathname='/'+ props.myUser.username;
+        history.push('/'+ props.myUser.username);
     }  
 
     const routesWithoutHeader =['/register','/login','/']

@@ -1,22 +1,34 @@
-import React from 'react'
+import React, { useEffect } from 'react';
+import { connect } from 'react-redux';
 import { Form, Input, Row, Col, Button, notification, Divider } from 'antd';
 import { FacebookFilled } from '@ant-design/icons';
+import { getMyUser } from '../../redux/actions/users';
 
 import './LoginComponent.scss';
 import Logo from '../../img/logoGrande.png';
 import { useHistory } from 'react-router-dom';
 import { login } from '../../redux/actions/users';
 
-
 const LoginComponent = props => {
     const [form] = Form.useForm();
     const history = useHistory();
+
+    useEffect(() => { 
+        const token = localStorage.getItem('authToken');
+        if (token) {
+            getMyUser()
+            .then(res => {
+                history.push('/'+ props.myUser.username);
+            })
+            .catch(console.error)
+        }
+    }, []);
 
     const onFinish = values => {
         const user = values;
         login(user)
         .then(res => {
-                history.push('/'+ res.data.user.username);
+            history.push('/'+ res.data.user.username);
         })
         .catch((res) =>{
             notification.error({message:'Login', description:'Hubo un problema al tratar de iniciar sesión'})
@@ -64,4 +76,5 @@ const LoginComponent = props => {
     );
   };
                 
-export default LoginComponent;
+const mapStateToProps = ({user}) => ({ myUser: user.myUser });
+export default connect(mapStateToProps)(LoginComponent);
