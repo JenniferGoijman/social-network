@@ -4,13 +4,12 @@ import { Modal, List} from 'antd';
 import './ShowFollowers.scss';
 import { IMAGES_URL } from '../../../api-config';
 import { getById } from '../../../redux/actions/users'
-import { useHistory } from 'react-router-dom';
 
 import Follow from '../Follow/Follow';
 import Unfollow from '../Unfollow/Unfollow';
+import UsernameBold from '../../UsernameBold/UsernameBold';
 
 const ShowFollowers = props => {
-    const history = useHistory();
     const [visible, setVisible] = useState();
     const showModal = () => { setVisible(true); };
     const hideModal = () => { setVisible(false); };
@@ -19,10 +18,6 @@ const ShowFollowers = props => {
     useEffect(() => { 
         getById(props.currentUser?.id); 
     }, []);
-
-    const goToUserProfile = (user)=> {
-        history.push('/'+ user.username);
-    }
 
     return (
         <Fragment>
@@ -39,12 +34,14 @@ const ShowFollowers = props => {
                             <div className="imgName">
                                 <img src={IMAGES_URL + follower.pic} alt="Foto de perfil" />
                                 <div className="names">
-                                    <span className="username" onClick={goToUserProfile.bind(this, follower)}>{follower.username}</span>
-                                    <span>{follower.name}</span>
+                                    <UsernameBold user={follower} />
+                                    <span style={{marginLeft:10}}>{follower.name}</span>
                                 </div>
                             </div>
-                            { !isMe && !isAlreadyFollowed && <Follow myUser={props.myUser} currentUser={follower} locationUser={props.locationUser}/>}
-                            { !isMe && isAlreadyFollowed && <Unfollow myUser={props.myUser} currentUser={follower} locationUser={props.locationUser}/>}
+                            { !isMe && !isAlreadyFollowed && 
+                                <Follow myUser={props.myUser} currentUser={follower} locationUser={props.locationUser}/>}
+                            { !isMe && isAlreadyFollowed && 
+                                <Unfollow myUser={props.myUser} currentUser={follower} locationUser={props.locationUser}/>}
                         </div>)
                     })
                 ]} 

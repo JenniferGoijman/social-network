@@ -38,16 +38,16 @@
 
         .description {
             width: 100%;
-            margin: 10px 0;
+            margin-top: 10px;
             padding: 0 6px;
             display: flex;
         }
 
-        .username  {
-            color: black;
-            font-weight: 500;
-            margin-left: 10px;
-            cursor: pointer;
+        .date {
+            width: 100%;
+            margin-bottom: 10px;
+            padding-left: 16px;
+            display: flex;
         }
     }
 }

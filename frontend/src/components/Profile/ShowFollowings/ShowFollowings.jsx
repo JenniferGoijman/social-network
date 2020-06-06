@@ -7,6 +7,7 @@ import { getById } from '../../../redux/actions/users'
 
 import Follow from '../Follow/Follow';
 import Unfollow from '../Unfollow/Unfollow';
+import UsernameBold from '../../UsernameBold/UsernameBold';
 
 const ShowFollowings = props => {
     const [visible, setVisible] = useState();
@@ -17,10 +18,6 @@ const ShowFollowings = props => {
     useEffect(() => { 
         getById(props.currentUser?.id); 
     }, []);
-
-    const goToUserProfile = (user)=> {
-        window.location.pathname='/'+ user.username;
-    }
 
     return (
         <div>
@@ -37,8 +34,8 @@ const ShowFollowings = props => {
                             <div className="imgName">
                                 <img src={IMAGES_URL + followed.pic} alt="Foto de perfil" />
                                 <div className="names">
-                                    <span className="username" onClick={goToUserProfile.bind(this, followed)}>{followed.username}</span>
-                                    <span>{followed.name}</span>
+                                    <UsernameBold user={followed} />
+                                    <span style={{marginLeft:10}}>{followed.name}</span>
                                 </div>
                             </div>
                             { !isMe && !isAlreadyFollowed && <Follow myUser={props.myUser} currentUser={followed} locationUser={props.locationUser}/>}

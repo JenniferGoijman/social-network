@@ -2,33 +2,32 @@ import React from 'react';
 import { Avatar } from 'antd';
 import { IMAGES_URL } from '../../api-config';
 import './PostFeed.scss';
-import { useHistory } from 'react-router-dom';
+import Moment from 'react-moment';
+import 'moment/locale/es';
+import UsernameBold from '../UsernameBold/UsernameBold';
 
-const PostFeed = props => {
-    const history = useHistory();
-    
-    const goToUserProfile = (user)=> {
-        history.push('/'+ user.username);
-    }
+const PostFeed = ({post}) => {
 
     return (
-        // {props.post.created_at}           
         <div className="post-feed-container">
             <div className="post">
                 <div className="header">
-                    <Avatar src={IMAGES_URL + props.post.user.pic}/>
-                    <div className="username" onClick={goToUserProfile.bind(this, props.post.user)}>
-                        {props.post.user.username}</div>
+                    <Avatar src={IMAGES_URL + post.user.pic}/>
+                    <UsernameBold user={post.user} />
                 </div>
                 <div className="body">
-                    <img src={IMAGES_URL + props.post.image} />
+                    <img src={IMAGES_URL + post.image} />
                 </div>
 
                 <div className="description">
-                    <div className="username" onClick={goToUserProfile.bind(this, props.post.user)}>
-                        {props.post.user.username}</div>
-                    <div style={{marginLeft:10}}>{props.post.description}</div>                
+                    <UsernameBold user={post.user} />
+                    <div>{post.description}</div>                
                 </div>
+                
+                <div className="date">
+                    <Moment fromNow>{post.created_at}</Moment>
+                </div>
+                
             </div>
         </div>
     )
