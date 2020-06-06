@@ -1,27 +1,29 @@
-.ant-modal-content {
-    border-radius: 12px;
-
-    .ant-modal-close {
-        visibility: hidden;
-    }
-
-    .ant-modal-body {
-        padding: 0;
-
-        .dataSettings {
-            display: flex;
-            justify-content: center;
-            width: 100%;
-            cursor: pointer;
-            padding: 4px 8px;
-            font-size: 14px;
+.ant-modal.settings-button{
+    .ant-modal-content {
+        border-radius: 12px;
+    
+        .ant-modal-close {
+            visibility: hidden;
+        }
+    
+        .ant-modal-body {
+            padding: 0;
+    
+            .dataSettings {
+                display: flex;
+                justify-content: center;
+                width: 100%;
+                cursor: pointer;
+                padding: 4px 8px;
+                font-size: 14px;
+            }
         }
     }
-}
-
-.list {
-    display: flex;
-    flex-direction: column;
-
     
+    .list {
+        display: flex;
+        flex-direction: column;
+    
+        
+    }    
 }

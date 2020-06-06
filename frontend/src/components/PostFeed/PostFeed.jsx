@@ -4,7 +4,7 @@ import { IMAGES_URL } from '../../api-config';
 import './PostFeed.scss';
 import Moment from 'react-moment';
 import 'moment/locale/es';
-import UsernameBold from '../UsernameBold/UsernameBold';
+import UsernameBold from '../Profile/UsernameBold/UsernameBold';
 
 const PostFeed = ({post}) => {
 

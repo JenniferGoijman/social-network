@@ -1,0 +1,60 @@
+.ant-modal.post-profile{
+    .ant-modal-content {
+        width: 70vw;
+        border-radius: 0;
+
+        .ant-modal-body {
+            
+            .big-post-container {
+                display: flex;
+            
+                img {
+                    width: 50vw;
+                }
+
+                .modal-body {
+                    width: 100%;
+                    min-width: 20vw;
+
+                    .header-container {
+                        display: flex;
+                        justify-content: space-between;
+                        align-items: center;
+                        border-bottom: 1px solid rgb(200, 200, 200);
+                        padding: 5px 0;
+                        
+                        .header {
+                            display: flex;
+                            align-items: center;
+                            font-size: 15px;
+                            width: 100%;
+                            padding: 6px 16px;
+                            font-weight: 500;
+                        }
+
+                        .icon {
+                            margin-right: 10px;
+                            margin-top: 10px;
+                        }
+                    }
+
+                    .comments {
+                        display: flex;
+                        align-items: center;
+                        font-size: 15px;
+                        width: 100%;
+                        //border-bottom: 1px solid rgb(200, 200, 200);
+                        padding: 6px 16px;
+                        font-weight: 500;
+                    }
+
+                    .datePost {
+                        width: 100%;
+                        margin-left: 10px;
+                        display: flex;
+                    }
+                }
+            }
+        }
+    }
+}

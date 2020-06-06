@@ -21,7 +21,6 @@ class UserController extends Controller
             $body['password'] = Hash::make($body['password']);
             $body['role'] = 'customer';
             $body['pic'] = 'images/nopic.png';
-            $body['amount_posts'] = 0;
             $body['description'] = '';
             $user = User::create($body);
             return response($user, 201);

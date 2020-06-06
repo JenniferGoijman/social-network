@@ -7,7 +7,7 @@ import { getById } from '../../../redux/actions/users'
 
 import Follow from '../Follow/Follow';
 import Unfollow from '../Unfollow/Unfollow';
-import UsernameBold from '../../UsernameBold/UsernameBold';
+import UsernameBold from '../UsernameBold/UsernameBold';
 
 const ShowFollowings = props => {
     const [visible, setVisible] = useState();
