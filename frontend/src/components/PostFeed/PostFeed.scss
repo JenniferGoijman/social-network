@@ -38,9 +38,16 @@
 
         .description {
             width: 100%;
-            margin: 10px;
-            padding: 0 16px;
+            margin: 10px 0;
+            padding: 0 6px;
             display: flex;
+        }
+
+        .username  {
+            color: black;
+            font-weight: 500;
+            margin-left: 10px;
+            cursor: pointer;
         }
     }
 }

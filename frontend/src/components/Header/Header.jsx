@@ -1,13 +1,15 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { useMediaPredicate } from 'react-media-hook';
+import { useLocation, useHistory } from 'react-router-dom';
 import './Header.scss';
-import Logo from '../../img/logo.png';
+
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHome, faPaperPlane, faSearch, faPlusSquare, faHeart } from '@fortawesome/free-solid-svg-icons'
 import { IMAGES_URL } from '../../api-config';
+
+import Logo from '../../img/logo.png';
 import Search from '../Search/Search';
-import { useMediaPredicate } from 'react-media-hook';
-import { useLocation, useHistory } from 'react-router-dom';
 
 const Header = props => {
     const biggerThan415 = useMediaPredicate("(min-width: 415px)");

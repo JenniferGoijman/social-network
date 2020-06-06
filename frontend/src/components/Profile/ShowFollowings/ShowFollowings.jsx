@@ -13,9 +13,15 @@ const ShowFollowings = props => {
     const showModal = () => { setVisible(true); };
     const hideModal = () => { setVisible(false); };
     const hasFollowings = props.currentUser.followings.length>0? true : false;
+    
     useEffect(() => { 
         getById(props.currentUser?.id); 
     }, []);
+
+    const goToUserProfile = (user)=> {
+        window.location.pathname='/'+ user.username;
+    }
+
     return (
         <div>
             <div className="data" onClick={hasFollowings?showModal:null} style={hasFollowings?{cursor:'pointer'}:{}}>
@@ -31,7 +37,7 @@ const ShowFollowings = props => {
                             <div className="imgName">
                                 <img src={IMAGES_URL + followed.pic} alt="Foto de perfil" />
                                 <div className="names">
-                                    <span className="username">{followed.username}</span>
+                                    <span className="username" onClick={goToUserProfile.bind(this, followed)}>{followed.username}</span>
                                     <span>{followed.name}</span>
                                 </div>
                             </div>
