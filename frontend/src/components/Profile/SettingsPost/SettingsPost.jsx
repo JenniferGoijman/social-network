@@ -3,18 +3,24 @@ import { useHistory } from 'react-router-dom';
 import { EllipsisOutlined } from '@ant-design/icons';
 import { Modal, List } from 'antd';
 import './SettingsPost.scss'
-//import { logout } from '../../../redux/actions/users';
+import { deletePost } from '../../../redux/actions/posts';
 
-const SettingsPost = () => {
-    const [visible, setVisible] = useState();
+const SettingsPost = props => {
     const history = useHistory();
+    const [visible, setVisible] = useState();
     const showModal = () => { setVisible(true); };
     const hideModal = () => { setVisible(false); };
 
-    const deletePost = () => {
-        // logout();
-        // history.push('/');
-        hideModal();
+    const deleteOne = (id) => {
+        console.log(id);
+        deletePost(id)
+        .then(res => {
+            console.log(":)");
+            window.location.pathname='/'+ props.myUser.username;
+        })
+        .catch(()=>{
+            console.log(":(")
+        })  
     }
     
     return (
@@ -22,7 +28,7 @@ const SettingsPost = () => {
             <EllipsisOutlined onClick={showModal}/>
             <Modal visible={visible} onOk={hideModal} onCancel={hideModal} footer={null}>
                 <List header={null} footer={null} dataSource={[
-                    <div className="dataSettings" onClick={deletePost}>Eliminar publicación</div>,
+                    <div className="dataSettings" onClick={deleteOne.bind(this, props.post.id)}>Eliminar publicación</div>,
                     <div className="dataSettings" onClick={hideModal}>Cancelar</div>
                 ]} 
                     renderItem={item => (

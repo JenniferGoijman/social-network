@@ -39,4 +39,13 @@ class PostController extends Controller
         $userIds = $user->followings()->pluck('followed_id');
         return Post::whereIn('user_id', $userIds)->with('user')->latest()->get();
     }
+    public function deletePost($id) {          
+        $post = Post::find($id);
+
+        Storage::disk('s3')->delete($post->image);
+        File::delete($post->image);
+        
+        $post->delete();
+        return response($post);
+    }
 }

@@ -21,7 +21,8 @@ const PostProfile = props => {
             </div>
             <Modal visible={visible} onOk={hideModal} onCancel={hideModal} footer={null} className="post-profile"
                 style={{ display:'inline-flex', justifyContent:'center', alignItems:'center', height:'100vh' }} centered >
-                <BigPost visible={visible} onOk={hideModal} onCancel={hideModal} footer={null} post={props.post} />
+                <BigPost visible={visible} onOk={hideModal} onCancel={hideModal} footer={null} 
+                    post={props.post} />
             </Modal>
         </div>
     )
