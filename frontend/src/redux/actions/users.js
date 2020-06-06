@@ -27,6 +27,13 @@ export const logout = async() => {
     })
     return res;
 }
+export const resetPassword = async(id, password) => {
+    try {
+        return axios.put(API_URL + 'users/resetPassword/' + id, password);
+    } catch (error) {
+        console.error(error)
+    }
+}
 export const uploadProfileImage = async(image) => {
     try {
         const res = await axios.post(API_URL + 'users/profileImage', image, {

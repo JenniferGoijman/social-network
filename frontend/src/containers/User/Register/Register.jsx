@@ -74,7 +74,7 @@ const Register = props => {
                     las cookies y tecnologías similares en nuestra Política de cookies.</h5>
             </div>
             <div className="card-in">
-                ¿Tienes una cuenta?  <a href="/login">Entrar</a> {/* chequear href para redirigir a login*/}
+                ¿Tienes una cuenta?  <a href="/login">Entrar</a>
             </div>
         </div>
     );

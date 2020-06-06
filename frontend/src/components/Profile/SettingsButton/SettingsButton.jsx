@@ -18,8 +18,7 @@ const SettingsButton = () => {
     }
 
     const changePass = event =>{
-        console.log("cambiar", event.target);
-        // TODO
+        history.push('/accounts/password/reset');
     }
     
     return (

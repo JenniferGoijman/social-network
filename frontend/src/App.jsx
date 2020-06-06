@@ -10,6 +10,7 @@ import NewPost from './containers/NewPost/NewPost';
 import PostsFeed from './containers/PostsFeed/PostsFeed';
 import Profile from './containers/User/Profile/Profile';
 import SearchMobile from './containers/SearchMobile/SearchMobile';
+import ResetPassword from './containers/User/ResetPassword/ResetPassword';
 
 import Header from './components/Header/Header';
 
@@ -32,6 +33,7 @@ function App() {
         <Switch>
           <Route path='/register' component={Register} exact />
           <Route path='/login' component={LoginContainer} exact />
+          <Route path='/accounts/password/reset' component={ResetPassword} exact />
           <Route path='/create' component={NewPost} exact />
           <Route path='/feed' component={PostsFeed} exact />
           <Route path='/search' component={SearchMobile} exact />

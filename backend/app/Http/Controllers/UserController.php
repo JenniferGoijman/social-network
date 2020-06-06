@@ -46,6 +46,20 @@ class UserController extends Controller
         $token = $user->createToken('authToken')->accessToken;
         return response(['user' => $user->load('followers', 'followings', 'posts'), 'token' => $token]);
     }
+    public function resetPassword(Request $request, $id) 
+    {
+        try {
+            $body = $request->all();
+            $newPassword = Hash::make($body['password']);
+            $user = User::find($id);
+            $user->update(['password' => $newPassword]);
+            return response($user);
+        } catch (\Exception $e) {
+            return response([
+                'error' => $e
+            ], 500);
+        }
+    }
     public function logout()
     {
         try {

@@ -36,6 +36,10 @@ const LoginComponent = props => {
         })
     };
   
+    const resetPassword = () => {
+        history.push('/accounts/password/reset');
+    }
+
     return (
         <div className="login-component">
             <div className="card-in">
@@ -67,7 +71,7 @@ const LoginComponent = props => {
                 </div>
                 <Divider plain><div className="divider">O</div></Divider>
                 <h4><FacebookFilled /> Iniciar sesión con Facebook</h4>
-                <h5>¿Has olvidado la contraseña?</h5>                 
+                <h5 onClick={resetPassword}>¿Has olvidado la contraseña?</h5>                 
             </div>
             <div className="card-in">
                 ¿No tienes una cuenta?  <a href="/register">Regístrate</a>
