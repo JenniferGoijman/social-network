@@ -1,60 +1,44 @@
 .post-profile-container {
     display: flex;
-    justify-content: center;
-    
+    margin: 3vw 3vw;
+
     .post {
-        width: fit-content;
-        height: fit-content;
+        width: 25vw;
+        height: 25vw;
         max-width: 600px;
         background-color: white;
         border: 1px solid rgb(200, 200, 200);
         margin: 30px 0 10px 0;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
 
-        .header {
-            display: flex;
-            align-items: center;
-            font-size: 15px;
-            width: 100%;
-            border-bottom: 1px solid rgb(200, 200, 200);
-            padding: 6px 16px;
-            font-weight: 500;
-        }
-
-        .body {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            width: fit-content;
-            height: fit-content;
-            max-width: 600px;
-
+         .body {
+            width: 25vw;
+            height: 25vw;
+            
             img {
-                max-width: 600px;
+                width: 25vw;
+                height: 25vw;
+                object-fit: cover;
             }
-        }
-
-        .description {
-            width: 100%;
-            margin: 10px;
-            padding: 0 16px;
-            display: flex;
         }
     }
 }
 
 @media only screen and (max-width: 415px) {
     .post-profile-container {        
+        // max-height: 100px;
+        margin: 0 2vw;
+
         .post {
-            max-width: 320px;
+            width: 25vw;
+            height: 25vw;
     
             .body {
-                max-width: 320px;
+                width: 25vw;
+                height: 25vw;
     
                 img {
-                    max-width: 320px;
+                    width: 25vw;
+                    height: 25vw;
                 }
             }
         }

@@ -1,0 +1,36 @@
+.grid-center {
+    display: flex;
+    justify-content: center;
+
+    .profile-wraper {
+        display: flex;
+        align-content: center;    
+        flex-direction: column;
+        margin: 0 20px;
+    
+        .posts-wraper {
+            display: inline-grid;
+            align-items: center;
+            grid-template-columns: 30vw 30vw 30vw;
+            //margin: 0 1.5vw;
+        }
+    }
+}
+
+@media only screen and (max-width: 415px) {
+    .grid-center {
+        display: flex;
+        justify-content: center;
+
+        .profile-wraper {
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+
+            .posts-wraper {
+                display: flex;
+                flex-flow: wrap;
+            }
+        }
+    }
+}

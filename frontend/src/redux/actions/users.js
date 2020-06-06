@@ -96,7 +96,7 @@ export const getByUsername = async(username) => {
             Authorization: 'Bearer ' + localStorage.getItem('authToken')
         }
     });
-    console.log(res)
+
     store.dispatch({
         type: SET_CURRENT_USER,
         payload: res.data

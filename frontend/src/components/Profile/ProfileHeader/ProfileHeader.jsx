@@ -71,5 +71,5 @@ const ProfileHeader = props => {
         </Fragment>
     )
 }
-const mapStateToProps = ({user}) => ({ myUser: user.myUser, currentUser: user.currentUser });
+const mapStateToProps = ({user}) => ({ myUser: user.myUser });
 export default connect(mapStateToProps)(ProfileHeader);
