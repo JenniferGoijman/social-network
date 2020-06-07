@@ -13,7 +13,7 @@ const ShowFollowers = props => {
     const [visible, setVisible] = useState();
     const showModal = () => { setVisible(true); };
     const hideModal = () => { setVisible(false); };
-    const hasFollowers = props.currentUser.followers.length>0? true : false;
+    const hasFollowers = props.currentUser.followers.length > 0? true : false;
     
     useEffect(() => { 
         getById(props.currentUser?.id); 

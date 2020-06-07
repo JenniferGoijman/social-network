@@ -13,16 +13,14 @@ const LoginComponent = props => {
     const [form] = Form.useForm();
     const history = useHistory();
 
-    useEffect(() => { 
-        const token = localStorage.getItem('authToken');
-        if (token) {
-            getMyUser()
-            .then(res => {
-                history.push('/'+ props.myUser.username);
-            })
-            .catch(console.error)
-        }
-    }, []);
+    const token = localStorage.getItem('authToken');
+    if (token) {
+        getMyUser()
+        .then(res => {
+            history.push('/'+ props.myUser.username);
+        })
+        .catch(console.error)
+    }
 
     const onFinish = values => {
         const user = values;

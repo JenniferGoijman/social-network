@@ -6,7 +6,8 @@ import { faLock } from '@fortawesome/free-solid-svg-icons'
 
 import './ResetPassword.scss'
 
-import { resetPassword } from '../../../redux/actions/users'
+import { resetPassword } from '../../../redux/actions/users';
+import { logout } from '../../../redux/actions/users';
 
 
 const ResetPassword = props => {
@@ -25,6 +26,7 @@ const ResetPassword = props => {
             const newPassword = { password: values.password }
             resetPassword(match.id, newPassword)
             .then(res => {
+                logout();
                 notification.success({message:'Nueva contraseña', description:'Ha cambiado correctamente su contraseña'})
                 setTimeout(() => {
                     props.history.push('/login')
@@ -34,8 +36,6 @@ const ResetPassword = props => {
                 notification.error({message:'Nueva contraseña', description:'Hubo un problema al intentar cambiar la contraseña'});
                 console.log(res);
             })
-
-            //si esta logueando, logout
         }        
     };
   
@@ -57,11 +57,7 @@ const ResetPassword = props => {
                         </div>
                     </div>
                     <h3>¿Tienes problemas para entrar?</h3>
-                    <h4>Introduce tu nombre completo y dirección de correo electrónico para que recuperes el acceso a tu cuenta.</h4>
-                    {/* <Button type="primary" htmlType="submit" icon={<FacebookFilled />} style={{width: 270, borderRadius:4}}>
-                        Iniciar sesión con Facebook
-                    </Button>*/}
-                    
+                    <h4>Introduce tu nombre completo y dirección de correo electrónico para que recuperes el acceso a tu cuenta.</h4>                    
                 </div>
                 <div className="form">
                     <Form form={form} name="register" onFinish={onFinish} scrollToFirstError >
@@ -92,8 +88,10 @@ const ResetPassword = props => {
                 </div>
 
                 <Divider plain><div className="divider">O</div></Divider>
-                <div onClick={register} style={{cursor:'pointer'}}>Crear cuenta nueva</div>
-                <div onClick={login} style={{cursor:'pointer'}}>Volver al inicio de sesión</div>              
+                <div className="register" onClick={register}>Crear cuenta nueva</div>
+            </div>
+            <div className="card-in">
+                <div className="login" onClick={login}>Volver al inicio de sesión</div>
             </div>
         </div>
     );

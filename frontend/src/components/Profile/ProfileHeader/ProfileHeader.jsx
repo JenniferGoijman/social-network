@@ -5,7 +5,6 @@ import './ProfileHeader.scss';
 import { Divider } from 'antd';
 import { useMediaPredicate } from 'react-media-hook';
 
-import NotFound from '../../NotFound/NotFound';
 import Unfollow from '../Unfollow/Unfollow';
 import Follow from '../Follow/Follow';
 import ChangeablePicThroughPic from '../ChangeablePicThroughPic/ChangeablePicThroughPic';
@@ -20,12 +19,11 @@ const ProfileHeader = props => {
     const currentUser = props.currentUser;
     const myUser = props.myUser;
     const isMe = myUser?.id === currentUser?.id;
-    const isAlreadyFollowed = myUser?.followings?.filter(f => f?.id === currentUser?.id).length>0 ? true : false;
+    const isAlreadyFollowed = myUser?.followings?.filter(f => f?.id === currentUser?.id).length > 0 ? true : false;
     const usernameFromParams = props.usernameFromParams;
-    console.log(currentUser);
+    
     return (
         <Fragment>
-            {currentUser && 
             <Fragment>
                 <div className="profile">
                     <div className="photo">
@@ -66,9 +64,7 @@ const ProfileHeader = props => {
                         <ShowFollowings myUser={myUser} user={currentUser} locationUser={usernameFromParams}/>
                     </div>}
                     {!biggerThan415 && <Divider /> }
-            </Fragment>}
-            
-            {!currentUser && props.users?.length>0 && <NotFound /> }
+            </Fragment>
         </Fragment>
     )
 }

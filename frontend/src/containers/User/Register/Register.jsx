@@ -1,10 +1,9 @@
-import React from 'react'
+import React from 'react';
 import { Form, Input, Row, Col, Button, notification, Divider } from 'antd';
 import { FacebookFilled } from '@ant-design/icons';
 
 import './Register.scss'
 import Logo from '../../../img/logoGrande.png';
-
 import { register } from '../../../redux/actions/users'
 
 

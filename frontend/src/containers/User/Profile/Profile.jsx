@@ -5,6 +5,7 @@ import { getMyUser, getByUsername } from '../../../redux/actions/users';
 
 import ProfileHeader from '../../../components/Profile/ProfileHeader/ProfileHeader';
 import PostProfile from '../../../components/Profile/PostProfile/PostProfile';
+import NotFound from '../../../components/NotFound/NotFound';
 
 const Profile = props => {
     const [currentUser, setCurrentUser] = useState();
@@ -20,17 +21,22 @@ const Profile = props => {
 
     return (
         <Fragment>
-            <ProfileHeader currentUser={currentUser} usernameFromParams={usernameFromParams} />
-            
-            <div className="grid-center">
-                <div className="posts-wraper">
-                    {props.currentUser?.posts?.map(post => 
-                        <PostProfile key={post.id} post={post} currentUser={currentUser} />)}
+            {currentUser && 
+            <Fragment>
+                <ProfileHeader currentUser={currentUser} usernameFromParams={usernameFromParams} />
+                
+                <div className="grid-center">
+                    <div className="posts-wraper">
+                        {props.currentUser?.posts?.map(post => 
+                            <PostProfile key={post.id} post={post} currentUser={currentUser} />)}
+                    </div>
                 </div>
-            </div>
+            </Fragment>}
+
+            {!currentUser && !props.users?.find(u => u.username===usernameFromParams) && <NotFound /> }
         </Fragment>
     )
 }
 
-const mapStateToProps = ({user}) => ({ myUser: user.myUser, currentUser: user.currentUser });
+const mapStateToProps = ({user}) => ({ myUser: user.myUser, currentUser: user.currentUser, users: user.users });
 export default connect(mapStateToProps)(Profile);

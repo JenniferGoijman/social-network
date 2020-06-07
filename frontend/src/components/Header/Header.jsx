@@ -32,7 +32,7 @@ const Header = props => {
         history.push('/'+ props.myUser.username);
     }  
 
-    const routesWithoutHeader =['/register','/login','/']
+    const routesWithoutHeader =['/register','/login','/', '/accounts/password/reset']
     if(routesWithoutHeader.includes(location.pathname)) return '';
     
     return (

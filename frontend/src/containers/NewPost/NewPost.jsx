@@ -4,15 +4,16 @@ import './NewPost.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
 import { uploadPostImage } from '../../redux/actions/posts';
-import { Comment, Avatar, Form, Input } from 'antd';
+import { Comment, Avatar, Form, Input, Button } from 'antd';
 import { IMAGES_URL } from '../../api-config';
 import { useHistory } from 'react-router-dom';
 
 const NewPost = props => {
     const [selectedFile, setSelectedFile] = useState();
     const [preview, setPreview] = useState();
-    const [comment, setComment] = useState();
+    const [comment, setComment] = useState('');
     const [value, setValue] = useState();
+    const [loading, setLoading] = useState(false);
     const history = useHistory();
     const { TextArea } = Input;
 
@@ -36,10 +37,11 @@ const NewPost = props => {
     }
 
     const close = () => {
-        history.push('/'+ props.myUser.username);
+        setSelectedFile(undefined);
     }
 
     const onClick = () => {
+        setLoading(true);
         const fd = new FormData();        
         fd.append("image", selectedFile, selectedFile.name);
         fd.append("description", comment);
@@ -60,7 +62,8 @@ const NewPost = props => {
                 <div className="header">
                     <FontAwesomeIcon icon={faTimes} style={{fontSize:"x-large", cursor:"pointer"}} onClick={close}/>
                     <div className="title">Nueva publicación con foto</div>
-                    <a onClick={onClick} >Publicar</a>
+                    {/* <a onClick={onClick} >Publicar</a> */}
+                    <Button type="link" disabled={!selectedFile} loading={loading} onClick={onClick}>Publicar</Button>
                 </div>
                 <div className="body">
                     {!selectedFile && <input type="file" name="image" onChange={onSelectFile}/>}            
