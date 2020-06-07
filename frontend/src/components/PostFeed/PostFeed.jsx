@@ -25,8 +25,15 @@ const PostFeed = props => {
                 <div className="like">
                     <h1>
                         { !isLiked && <HeartOutlined onClick={like.bind(this, props.post.id)} /> }
-                        { isLiked && <HeartFilled onClick={unlike.bind(this, props.post.id)} /> }
+                        { isLiked && <HeartFilled onClick={unlike.bind(this, props.post.id)} style={{color:'rgb(237, 73, 86)'}}/> }
                     </h1>
+                    {props.post.likes.length > 0 && 
+                        <div style={{fontWeight:'500', color:'black'}}>{props.post.likes.length} Me gusta</div>}
+                    {!props.post.likes.length > 0 && 
+                        <div style={{color:'black'}}>Sé el primero en
+                            <span style={{fontWeight:'500', cursor:'pointer'}} 
+                                onClick={like.bind(this, props.post.id)}> indicar que te gusta esto</span>
+                        </div>}
                 </div>
 
                 <div className="description">
