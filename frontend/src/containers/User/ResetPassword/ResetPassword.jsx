@@ -19,37 +19,24 @@ const ResetPassword = props => {
             if (props.users.find(user => user.name === values.name && user.email === values.email)) {
                 setMatch(props.users.find(user => user.name === values.name && user.email === values.email));
             } else {
-                console.log("no se encontro");
+                notification.error({message:'Error', description:'Los campos ingresados no coinciden con ningún usuario. Vuelva a intentarlo.'});
             }
         } else {
             const newPassword = { password: values.password }
             resetPassword(match.id, newPassword)
             .then(res => {
-                notification.success({message:'Nueva contraseña', description:res.data.message})
+                notification.success({message:'Nueva contraseña', description:'Ha cambiado correctamente su contraseña'})
                 setTimeout(() => {
                     props.history.push('/login')
                 }, 1500);
             })
             .catch((res) =>{
-                notification.error({message:'Nueva contraseña', description:'Hubo un problema al intentar cambiar la contraseña'})
-                console.log(res)
+                notification.error({message:'Nueva contraseña', description:'Hubo un problema al intentar cambiar la contraseña'});
+                console.log(res);
             })
 
             //si esta logueando, logout
         }        
-        
-        // const user = values;
-        // register(user)
-        // .then(res => {
-        //     notification.success({message:'Register', description:res.data.message})
-        //     setTimeout(() => {
-        //         props.history.push('/login')
-        //     }, 1500);
-        // })
-        // .catch((res) =>{
-        //     notification.error({message:'Register', description:'Hubo un problema al registrar el usuario'})
-        //     console.log(res)
-        // })
     };
   
     const register = () => {

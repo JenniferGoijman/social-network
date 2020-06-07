@@ -30,7 +30,7 @@ const Search = props => {
                 <img src={IMAGES_URL + d.pic} alt="Foto de perfil" />
                 <div className="names">
                     <span className="username">{d.username}</span>
-                    <span>{d.name}</span>
+                    <span style={{marginLeft:10}}>{d.name}</span>
                 </div>
             </div>
         </Option>

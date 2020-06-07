@@ -45,7 +45,7 @@ const NewPost = props => {
         fd.append("description", comment);
         uploadPostImage(fd)
         .then((res) => { console.log(":)"); 
-            history.push('/feed')})
+            history.push('/' + props.myUser.username)})
         .catch(() => { console.log(":("); });
     }
     

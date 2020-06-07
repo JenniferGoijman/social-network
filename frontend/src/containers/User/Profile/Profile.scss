@@ -2,35 +2,18 @@
     display: flex;
     justify-content: center;
 
-    .profile-wraper {
-        display: flex;
-        align-content: center;    
-        flex-direction: column;
-        margin: 0 20px;
-    
-        .posts-wraper {
-            display: inline-grid;
-            align-items: center;
-            grid-template-columns: 30vw 30vw 30vw;
-            //margin: 0 1.5vw;
-        }
+    .posts-wraper {
+        display: grid;
+        grid-template-columns: 28vw 28vw 28vw;
+
     }
 }
 
 @media only screen and (max-width: 415px) {
     .grid-center {
-        display: flex;
-        justify-content: center;
-
-        .profile-wraper {
-            display: flex;
-            align-items: center;
-            flex-direction: column;
-
-            .posts-wraper {
-                display: flex;
-                flex-flow: wrap;
-            }
+        
+        .posts-wraper {
+            grid-template-columns: 33vw 33vw 33vw;
         }
     }
 }

@@ -1,6 +1,5 @@
 .post-profile-container {
-    display: flex;
-    margin: 3vw 3vw;
+    margin: 0;
 
     .post {
         width: 25vw;
@@ -8,7 +7,7 @@
         max-width: 600px;
         background-color: white;
         border: 1px solid rgb(200, 200, 200);
-        margin: 30px 0 10px 0;
+        margin: 20px 10px;
 
          .body {
             width: 25vw;
@@ -25,20 +24,21 @@
 
 @media only screen and (max-width: 415px) {
     .post-profile-container {        
-        // max-height: 100px;
-        margin: 0 2vw;
+        width: 33vw;
+        height: 33vw;
 
         .post {
-            width: 25vw;
-            height: 25vw;
+            width: 33vw;
+            height: 33vw;
+            margin: 0;
     
-            .body {
-                width: 25vw;
-                height: 25vw;
-    
+             .body {
+                width: 33vw;
+                height: 33vw;
+                
                 img {
-                    width: 25vw;
-                    height: 25vw;
+                    width: 33vw;
+                    height: 33vw;
                 }
             }
         }

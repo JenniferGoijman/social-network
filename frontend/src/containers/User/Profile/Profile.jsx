@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, Fragment } from 'react';
 import { connect } from 'react-redux';
 import './Profile.scss';
 import { getMyUser, getByUsername } from '../../../redux/actions/users';
@@ -16,18 +16,19 @@ const Profile = props => {
         .then(res => {
             setCurrentUser(res.data);
         });
-    }, []);
+    }, [usernameFromParams]);
 
     return (
-        <div className="grid-center">
-            <div className="profile-wraper">
-                <ProfileHeader currentUser={currentUser} usernameFromParams={usernameFromParams} />
+        <Fragment>
+            <ProfileHeader currentUser={currentUser} usernameFromParams={usernameFromParams} />
+            
+            <div className="grid-center">
                 <div className="posts-wraper">
                     {props.currentUser?.posts?.map(post => 
                         <PostProfile key={post.id} post={post} currentUser={currentUser} />)}
                 </div>
             </div>
-        </div>
+        </Fragment>
     )
 }
 
