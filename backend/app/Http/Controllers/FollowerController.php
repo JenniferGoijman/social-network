@@ -14,13 +14,6 @@ class FollowerController extends Controller
         try {
             $body = $request->all();
             $follower = Follower::create($body);
-            
-            // $userfollower = User::find($body['follower_id']);
-            // $userfollower->increment('amount_followings');
-
-            // $userfollowed = User::find($body['followed_id']);
-            // $userfollowed->increment('amount_followers');
-
             return response($follower, 201);
         } catch (\Exception $e) {
             return response([
@@ -32,16 +25,7 @@ class FollowerController extends Controller
     public function unfollow($follower_id, $followed_id)
     {
         try {
-            $follower = Follower::where('follower_id', $follower_id)->where('followed_id', $followed_id)->delete();
-            
-            // $userUnfollower = User::find($follower_id);
-            // $userUnfollower->amount_followings--;
-            // $userUnfollower->save();
-            
-            // $userUnfollowed = User::find($followed_id);
-            // $userUnfollowed->amount_followers--;
-            // $userUnfollowed->save();
-            
+            $follower = Follower::where('follower_id', $follower_id)->where('followed_id', $followed_id)->delete();            
             return response($follower, 201);
         } catch (\Exception $e) {
             return response([

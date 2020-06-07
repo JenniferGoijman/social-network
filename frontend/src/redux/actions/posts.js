@@ -1,7 +1,7 @@
 import store from '../store';
 import axios from 'axios';
 import { API_URL } from '../../api-config';
-import { UPLOAD_IMAGE, DELETE_IMAGE, GET_ALL_POSTS } from '../types'
+import { GET_ALL_POSTS } from '../types'
 
 export const uploadPostImage = async(post) => {
     try {
@@ -42,4 +42,29 @@ export const deletePost = async(post_id) => {
     } catch (error) {
         console.error(error)
     }    
+}
+export const like = async(post_id) => {
+    try {
+        const res = await axios.get(API_URL + 'posts/like/' + post_id, {
+            headers: {
+                Authorization: "Bearer " + localStorage.getItem('authToken')
+            }
+        });
+        console.log(res);
+        return getFeed();
+    } catch (error) {
+        console.error(error)
+    }    
+}
+export const unlike = async(post_id) => {
+    try {
+        await axios.get(API_URL + 'posts/unlike/' + post_id, {
+            headers: {
+                Authorization: "Bearer " + localStorage.getItem('authToken')
+            }
+        });
+        return getFeed();
+    } catch (error) {
+        console.error(error)
+    }     
 }

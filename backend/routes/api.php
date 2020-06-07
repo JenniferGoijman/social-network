@@ -25,6 +25,8 @@ Route::prefix('v1')->group( function () {
             Route::post('postImage', 'PostController@uploadPostImage');
             Route::delete('{id}', 'PostController@deletePost');
             Route::get('', 'PostController@getFeed');
+            Route::get('like/{id}', 'LikeController@like');
+            Route::get('unlike/{id}', 'LikeController@unlike');
         });
     });
     

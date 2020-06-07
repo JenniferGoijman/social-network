@@ -36,9 +36,18 @@
             }
         }
 
+        .like {
+            width: 100%;
+            text-align: left;
+            margin: 5px 0 0 26px;
+            cursor: pointer;
+            h1 {
+                margin: 0;
+            }
+        }
+
         .description {
             width: 100%;
-            margin-top: 10px;
             padding: 0 6px;
             display: flex;
         }
