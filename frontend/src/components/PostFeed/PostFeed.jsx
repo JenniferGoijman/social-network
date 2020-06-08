@@ -19,12 +19,15 @@ const PostFeed = props => {
     const [loading, setLoading] = useState(false);
     const isLiked = props.post.likes?.filter(like => like.user_id === props.myUser?.id).length > 0 ? true : false;
     
+    const toUpperCaseFilter = (d) => {
+        return d.toUpperCase();
+    };
+
     const showInsertComment = () => {
         writeComment? setWriteComment(false): setWriteComment(true);
     }
 
     const onSubmit = post_id => {
-        console.log(post_id, value);
         if (!value) {
             return;
         }
@@ -82,13 +85,13 @@ const PostFeed = props => {
                 )}                             
                 
                 <div className="date">
-                    <Moment fromNow>{props.post.created_at}</Moment>
+                    <Moment fromNow filter={toUpperCaseFilter} style={{fontSize:'x-small'}}>{props.post.created_at}</Moment>
                 </div>
                 
                 {writeComment &&
                     <div className="comment">
                         <Form.Item className="textarea">
-                            <TextArea rows={2} onChange={onChange} value={value} />
+                            <TextArea rows={2} onChange={onChange} value={value} placeholder="Agrega un comentario..." />
                         </Form.Item>
                         <Form.Item>
                             <Button htmlType="submit" loading={loading} onClick={onSubmit.bind(this, props.post.id)} type="link" style={{fontWeight:500}}>

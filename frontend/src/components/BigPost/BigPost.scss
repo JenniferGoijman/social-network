@@ -65,14 +65,29 @@
                         width: 100%;
                         text-align: left;
                         cursor: pointer;
-                        border-bottom: 1px solid rgb(200, 200, 200);
-                        border-top: 1px solid rgb(200, 200, 200);
+                        border-bottom: 1px solid rgb(220, 220, 220);
+                        border-top: 1px solid rgb(220, 220, 220);
                         
                         .like {
-                            margin: 5px 0 5px 15px;
+                            margin: 0 0 5px 15px;
                             
                             h1 {
                                 margin: 0;
+                            }
+                        }
+                    }
+
+                    .comment {
+                        width: 100%;
+                        display: flex;
+                        padding-top: 10px;
+                        
+                        .ant-row.ant-form-item.textarea {
+                            width: inherit;
+
+                            .ant-input {
+                               border:none;
+                               resize:none; 
                             }
                         }
                     }

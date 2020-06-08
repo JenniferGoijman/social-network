@@ -49,15 +49,30 @@
 
         .description {
             width: 100%;
-            padding: 0 6px;
+            padding: 0 20px;
             display: flex;
         }
 
         .date {
             width: 100%;
             margin: 0 10px;
-            padding: 0 0 10px 16px;
+            padding: 8px 0 10px 16px;
             display: flex;            
+        }
+
+        .comment {
+            width: 100%;
+            display: flex;
+            padding-left: 20px;
+
+            .ant-row.ant-form-item.textarea {
+                width: inherit;
+
+                .ant-input {
+                    border:none;
+                    resize:none; 
+                 }
+            }
         }
     }
 }

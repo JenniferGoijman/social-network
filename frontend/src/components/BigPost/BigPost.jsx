@@ -1,18 +1,43 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import Moment from 'react-moment';
 import 'moment/locale/es';
 import './BigPost.scss';
 import { IMAGES_URL } from '../../api-config';
-import { Avatar, Divider } from 'antd';
+import { Avatar, Form, Button, Input } from 'antd';
 import UsernameBold from '../Profile/UsernameBold/UsernameBold';
 import SettingsPost from '../Profile/SettingsPost/SettingsPost';
 import { HeartOutlined, HeartFilled } from '@ant-design/icons';
-import { like, unlike } from '../../redux/actions/posts';
+import { like, unlike, insertComment } from '../../redux/actions/posts';
+
+const { TextArea } = Input;
 
 const BigPost = props => {
+    const [value, setValue] = useState();
+    const [loading, setLoading] = useState(false);
     const isMe = props.myUser?.id === props.post.user.id;
     const isLiked = props.post.likes?.filter(like => like.user_id === props.myUser?.id).length > 0 ? true : false;
+    
+    const toUpperCaseFilter = (d) => {
+        return d.toUpperCase();
+    };
+
+    const onSubmit = post_id => {
+        if (!value) {
+            return;
+        }
+        setLoading(true);
+        const comment = {"post_id": post_id, "body":value}
+        insertComment(comment, props.currentUser.id);
+
+        setLoading(false);
+        setValue();
+    }
+
+    const onChange = e => {
+        setValue(e.target.value);
+        console.log(e.target.value);
+    }
 
     return (
         <div className="big-post-container">
@@ -28,30 +53,64 @@ const BigPost = props => {
                             <SettingsPost post={props.post} myUser={props.myUser} />
                         </div>}
                     </div>
+
                     <div className="comments">
                         <Avatar src={IMAGES_URL + props.post.user.pic}/>
                         <div className="userDate">
-                            <UsernameBold user={props.post.user} />
+                            <div style={{display:'flex', alignItems:'baseline'}}>
+                                <UsernameBold user={props.post.user} />
+                                <div style={{fontWeight:'400', fontSize:13}}>{props.post.description}</div>
+                            </div>  
                             <div className="datePost">
-                                <Moment fromNow style={{fontSize:'small'}}>{props.post.created_at}</Moment>
+                                <Moment fromNow style={{fontSize:'x-small'}}>{props.post.created_at}</Moment>
                             </div>  
                         </div>
                     </div>
+
+                    {props.post.comments?.map(comment => 
+                        <div className="comments">
+                            <Avatar src={IMAGES_URL + comment.user.pic}/>
+                            <div className="userDate">
+                                <div style={{display:'flex', alignItems:'baseline'}}>
+                                    <UsernameBold user={comment.user} />
+                                    <div style={{fontWeight:'400', fontSize:13}}>{comment.body}</div>
+                                </div>  
+                                <div className="datePost">
+                                    <Moment fromNow style={{fontSize:'x-small'}}>{comment.created_at}</Moment>
+                                </div>  
+                            </div>
+                        </div>
+                    )}
                 </div>
                 
-                <div className="like-container">
-                    <div className="like">
-                        <h1>
-                            { !isLiked && <HeartOutlined onClick={like.bind(this, props.post.id, props.currentUser?.id)} /> }
-                            { isLiked && <HeartFilled onClick={unlike.bind(this, props.post.id, props.currentUser?.id)} style={{color:'rgb(237, 73, 86)'}}/> }
-                        </h1>
-                        {props.post.likes.length > 0 && 
-                            <div style={{fontWeight:'500', color:'black'}}>{props.post.likes.length} Me gusta</div>}
-                        {!props.post.likes.length > 0 && 
-                            <div style={{color:'black'}}>Sé el primero en
-                                <span style={{fontWeight:'500', cursor:'pointer'}} 
-                                    onClick={like.bind(this, props.post.id, props.currentUser?.id)}> indicar que te gusta esto</span>
-                            </div>}
+                <div>
+                    <div className="like-container">
+                        <div className="like">
+                            <h1>
+                                { !isLiked && <HeartOutlined onClick={like.bind(this, props.post.id, props.currentUser?.id)} /> }
+                                { isLiked && <HeartFilled onClick={unlike.bind(this, props.post.id, props.currentUser?.id)} style={{color:'rgb(237, 73, 86)'}}/> }
+                            </h1>
+                            {props.post.likes.length > 0 && 
+                                <div style={{fontWeight:'500', color:'black'}}>{props.post.likes.length} Me gusta</div>}
+                            {!props.post.likes.length > 0 && 
+                                <div style={{color:'black'}}>Sé el primero en
+                                    <span style={{fontWeight:'500', cursor:'pointer'}} 
+                                        onClick={like.bind(this, props.post.id, props.currentUser?.id)}> indicar que te gusta esto</span>
+                                </div>}
+                            <Moment format="D MMMM YYYY" filter={toUpperCaseFilter} style={{fontSize:'x-small'}}>{props.post.created_at}</Moment>
+                        </div>
+                    </div>
+                    
+
+                    <div className="comment">
+                        <Form.Item className="textarea">
+                            <TextArea rows={1} onChange={onChange} value={value} placeholder="Agrega un comentario..." />
+                        </Form.Item>
+                        <Form.Item>
+                            <Button htmlType="submit" loading={loading} onClick={onSubmit.bind(this, props.post.id)} type="link" style={{fontWeight:500}}>
+                                Publicar
+                            </Button>
+                        </Form.Item>
                     </div>
                 </div>
             </div>
