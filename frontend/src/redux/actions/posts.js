@@ -77,3 +77,19 @@ export const unlike = async(post_id, user_id) => {
         console.error(error)
     }     
 }
+export const insertComment = async(comment, user_id) => {
+    try {
+        await axios.post(API_URL + 'posts/comment', comment, {
+            headers: {
+                Authorization: "Bearer " + localStorage.getItem('authToken')
+            }
+        });
+        if (user_id !== null) {
+            return getById(user_id);
+        } else{
+            return getFeed();
+        }
+    } catch (error) {
+        console.error(error)
+    }    
+}

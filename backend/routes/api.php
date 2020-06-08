@@ -34,8 +34,7 @@ Route::prefix('v1')->group( function () {
             Route::get('', 'PostController@getFeed');
             Route::get('like/{post_id}', 'LikeController@like');
             Route::get('unlike/{post_id}', 'LikeController@unlike');
-            Route::get('comment/{post_id}', 'CommentController@insert');
-
+            Route::post('comment', 'CommentController@insert');
         });
     });
 });

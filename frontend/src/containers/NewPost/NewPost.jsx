@@ -62,7 +62,6 @@ const NewPost = props => {
                 <div className="header">
                     <FontAwesomeIcon icon={faTimes} style={{fontSize:"x-large", cursor:"pointer"}} onClick={close}/>
                     <div className="title">Nueva publicación con foto</div>
-                    {/* <a onClick={onClick} >Publicar</a> */}
                     <Button type="link" disabled={!selectedFile} loading={loading} onClick={onClick}>Publicar</Button>
                 </div>
                 <div className="body">

@@ -75,6 +75,7 @@ const ResetPassword = props => {
                             { required: true, message: 'Ingrese su nueva contraseña', }, ]} hasFeedback >
                             <Input.Password placeholder="Nueva contraseña"/>
                         </Form.Item>}
+                        
                         <Row justify="center">
                             <Col>
                                 <Form.Item >
