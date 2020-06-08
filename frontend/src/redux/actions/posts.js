@@ -45,14 +45,14 @@ export const deletePost = async(post_id) => {
     }    
 }
 export const like = async(post_id, user_id) => {
+    console.log(post_id, user_id);
     try {
         await axios.get(API_URL + 'posts/like/' + post_id, {
             headers: {
                 Authorization: "Bearer " + localStorage.getItem('authToken')
             }
         });
-        //return user_id ? getFeed() : getById(user_id);
-        if (user_id) {
+        if (user_id !== null) {
             return getById(user_id);
         } else{
             return getFeed();
@@ -68,7 +68,7 @@ export const unlike = async(post_id, user_id) => {
                 Authorization: "Bearer " + localStorage.getItem('authToken')
             }
         });
-        if (user_id) {
+        if (user_id !== null) {
             return getById(user_id);
         } else{
             return getFeed();

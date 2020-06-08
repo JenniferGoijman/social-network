@@ -30,10 +30,12 @@ Route::prefix('v1')->group( function () {
     Route::prefix('posts')->group(function () {
         Route::middleware('auth:api')->group(function(){
             Route::post('postImage', 'PostController@uploadPostImage');
-            Route::delete('{id}', 'PostController@deletePost');
+            Route::delete('{post_id}', 'PostController@deletePost');
             Route::get('', 'PostController@getFeed');
-            Route::get('like/{id}', 'LikeController@like');
-            Route::get('unlike/{id}', 'LikeController@unlike');
+            Route::get('like/{post_id}', 'LikeController@like');
+            Route::get('unlike/{post_id}', 'LikeController@unlike');
+            Route::get('comment/{post_id}', 'CommentController@insert');
+
         });
     });
 });

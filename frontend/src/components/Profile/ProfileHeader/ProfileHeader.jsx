@@ -33,9 +33,11 @@ const ProfileHeader = props => {
                     
                     <div className="info">
                         <div className="name">
-                            <h1>{currentUser?.username}</h1>
-                            { !isMe && !isAlreadyFollowed && <Follow myUser={myUser} currentUser={currentUser} locationUser={usernameFromParams} />}
-                            { isAlreadyFollowed && <Unfollow myUser={myUser} currentUser={currentUser} locationUser={usernameFromParams} />}
+                            <div style={{marginBottom:15}}>
+                                <h1>{currentUser?.username}</h1>
+                                { !isMe && !isAlreadyFollowed && <Follow myUser={myUser} currentUser={currentUser} locationUser={usernameFromParams} />}
+                                { isAlreadyFollowed && <Unfollow myUser={myUser} currentUser={currentUser} locationUser={usernameFromParams} />}
+                            </div>
                             <div className="editSettings">
                                 { isMe && <Edit /> }
                                 { isMe && <SettingsButton />}

@@ -17,6 +17,9 @@
 
                 .modal-body {
                     min-width: 25vw;
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: space-between;
 
                     .header-container {
                         display: flex;
@@ -56,6 +59,22 @@
                         width: 100%;
                         margin-left: 10px;
                         display: flex;
+                    }
+
+                    .like-container {
+                        width: 100%;
+                        text-align: left;
+                        cursor: pointer;
+                        border-bottom: 1px solid rgb(200, 200, 200);
+                        border-top: 1px solid rgb(200, 200, 200);
+                        
+                        .like {
+                            margin: 5px 0 5px 15px;
+                            
+                            h1 {
+                                margin: 0;
+                            }
+                        }
                     }
                 }
             }

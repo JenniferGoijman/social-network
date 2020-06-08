@@ -38,7 +38,7 @@
             align-items: center;
             width: fit-content;
             height: fit-content;
-            min-width: 70vh;
+            // min-width: 70vh;
             min-height: 50vh;
 
             img {
@@ -61,8 +61,8 @@
         width: fit-content;
 
         .new-post {
-            width: fit-content;
-            max-width: 320px;
+            width: 100vw;
+            max-width: 415px;
             margin: 10px 0 0 0;
         }
     }

@@ -32,7 +32,7 @@ const BigPostMobile = props => {
                     {!props.post.likes.length > 0 && 
                         <div style={{color:'black'}}>Sé el primero en
                             <span style={{fontWeight:'500', cursor:'pointer'}} 
-                                onClick={like.bind(this, props.post.id)}> indicar que te gusta esto</span>
+                                onClick={like.bind(this, props.post.id, props.currentUser?.id)}> indicar que te gusta esto</span>
                         </div>}
                 </div>
 
