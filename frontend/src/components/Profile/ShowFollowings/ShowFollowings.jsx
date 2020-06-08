@@ -3,21 +3,27 @@ import { connect } from 'react-redux';
 import { Modal, List} from 'antd';
 import './ShowFollowings.scss';
 import { IMAGES_URL } from '../../../api-config';
-import { getById } from '../../../redux/actions/users'
+import { getById } from '../../../redux/actions/users';
+import { useHistory } from 'react-router-dom';
 
 import Follow from '../Follow/Follow';
 import Unfollow from '../Unfollow/Unfollow';
-import UsernameBold from '../UsernameBold/UsernameBold';
 
 const ShowFollowings = props => {
     const [visible, setVisible] = useState();
     const showModal = () => { setVisible(true); };
     const hideModal = () => { setVisible(false); };
+    const history = useHistory();
     const hasFollowings = props.currentUser.followings.length>0? true : false;
     
     useEffect(() => { 
         getById(props.currentUser?.id); 
     }, []);
+
+    const goToUserProfile = (user)=> {
+        history.push('/'+ user.username);
+        hideModal();
+    }
 
     return (
         <div>
@@ -34,7 +40,7 @@ const ShowFollowings = props => {
                             <div className="imgName">
                                 <img src={IMAGES_URL + followed.pic} alt="Foto de perfil" />
                                 <div className="names">
-                                    <UsernameBold user={followed} />
+                                    <div className="username" onClick={goToUserProfile.bind(this, followed)}>{followed.username}</div>
                                     <span style={{marginLeft:10}}>{followed.name}</span>
                                 </div>
                             </div>

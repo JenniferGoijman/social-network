@@ -7,8 +7,7 @@ const Follow = props => {
 
     const handleFollow = () => {
         setLoading(true);
-        const followerFollowed = {follower_id: props.myUser.id, followed_id: props.currentUser.id};
-        follow(followerFollowed)
+        follow(props.currentUser.id)
         .then(res => {
             console.log(":)");
             getByUsername(props.locationUser);

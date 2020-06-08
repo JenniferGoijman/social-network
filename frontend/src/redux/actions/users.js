@@ -110,11 +110,19 @@ export const getByUsername = async(username) => {
     })
     return res;
 }
-export const follow = async(followerFollowed) => {
-    await axios.post(API_URL + 'followers/follow', followerFollowed);
+export const follow = async(followed_id) => {
+    await axios.get(API_URL + 'followers/follow/'+ followed_id, {
+        headers: {
+            Authorization: 'Bearer ' + localStorage.getItem('authToken')
+        }
+    });
     return getMyUser();
 }
-export const unfollow = async(follower_id, followed_id) => {
-    await axios.get(API_URL + 'followers/unfollow/' + follower_id + '/'+ followed_id);
+export const unfollow = async(followed_id) => {
+    await axios.get(API_URL + 'followers/unfollow/' + followed_id, {
+        headers: {
+            Authorization: 'Bearer ' + localStorage.getItem('authToken')
+        }
+    });
     return getMyUser();
 }

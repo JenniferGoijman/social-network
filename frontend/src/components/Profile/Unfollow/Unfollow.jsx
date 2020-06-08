@@ -8,9 +8,7 @@ const Unfollow = props => {
 
     const handleUnfollow = event => {
         setLoading(true);
-        const follower_id = props.myUser.id;
-        const followed_id = props.currentUser.id;
-        unfollow(follower_id, followed_id)
+        unfollow(props.currentUser.id)
         .then(res => {
             console.log(":)");
             getByUsername(props.locationUser);

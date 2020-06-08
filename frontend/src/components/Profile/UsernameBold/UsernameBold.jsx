@@ -10,12 +10,7 @@ const UsernameBold = props => {
     }
     
     return (
-        <div 
-            className="username" 
-            onClick={goToUserProfile.bind(this, props.user)}
-        >
-            {props.user.username}
-        </div>
+        <div className="username" onClick={goToUserProfile.bind(this, props.user)}>{props.user.username}</div>
     )
 }
 

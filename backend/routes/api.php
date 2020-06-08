@@ -19,6 +19,13 @@ Route::prefix('v1')->group( function () {
             Route::put('update', 'UserController@update');
         });
     });
+    
+    Route::prefix('followers')->group(function () {
+        Route::middleware('auth:api')->group(function(){
+            Route::get('/follow/{followed_id}', 'FollowerController@follow');
+            Route::get('/unfollow/{followed_id}', 'FollowerController@unfollow');
+        });
+    });
 
     Route::prefix('posts')->group(function () {
         Route::middleware('auth:api')->group(function(){
@@ -28,11 +35,5 @@ Route::prefix('v1')->group( function () {
             Route::get('like/{id}', 'LikeController@like');
             Route::get('unlike/{id}', 'LikeController@unlike');
         });
-    });
-    
-
-    Route::prefix('followers')->group(function () {
-        Route::post('/follow', 'FollowerController@follow');
-        Route::get('/unfollow/{follower_id}/{followed_id}', 'FollowerController@unfollow');
     });
 });
