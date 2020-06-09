@@ -36,7 +36,7 @@ function App() {
           <Route path='/login' component={LoginContainer} exact />
           <Route path='/accounts/password/reset' component={ResetPassword} exact />
           <Route path='/create' component={NewPost} exact />
-          <Route path='/posts/:username' component={BigPostsMobile} exact />
+          <Route path='/posts/:username/:post_id' component={BigPostsMobile} exact />
           <Route path='/feed' component={PostsFeed} exact />
           <Route path='/search' component={SearchMobile} exact />
           <Route path='/:username' component={Profile} exact />

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import { Form, Input, Row, Col, Button, notification, Divider } from 'antd';
 import { FacebookFilled } from '@ant-design/icons';
@@ -13,14 +13,16 @@ const LoginComponent = props => {
     const [form] = Form.useForm();
     const history = useHistory();
 
-    const token = localStorage.getItem('authToken');
-    if (token) {
-        getMyUser()
-        .then(res => {
-            history.push('/'+ props.myUser.username);
-        })
-        .catch(console.error)
-    }
+    setTimeout(() => {
+        const token = localStorage.getItem('authToken');
+        if (token) {
+            getMyUser()
+            .then(res => {
+                history.push('/'+ props.myUser.username);
+            })
+            .catch(console.error)
+        }
+    }, 3000);
 
     const onFinish = values => {
         const user = values;

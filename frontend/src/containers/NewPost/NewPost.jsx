@@ -12,7 +12,6 @@ const NewPost = props => {
     const [selectedFile, setSelectedFile] = useState();
     const [preview, setPreview] = useState();
     const [comment, setComment] = useState('');
-    const [value, setValue] = useState();
     const [loading, setLoading] = useState(false);
     const history = useHistory();
     const { TextArea } = Input;
@@ -66,7 +65,7 @@ const NewPost = props => {
                 </div>
                 <div className="body">
                     {!selectedFile && <input type="file" name="image" onChange={onSelectFile}/>}            
-                    {selectedFile && <img src={preview} /> }
+                    {selectedFile && <img src={preview} alt="Vista previa de imágen" /> }
                 </div>
                 {selectedFile && 
                     <div className="comment">

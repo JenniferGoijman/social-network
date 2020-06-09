@@ -52,7 +52,7 @@ const BigPostMobile = props => {
                     <UsernameBold user={props.post.user} />
                 </div>
                 <div className="body">
-                    <img src={IMAGES_URL + props.post.image} />
+                    <img src={IMAGES_URL + props.post.image} alt="Publicación" />
                 </div>
 
                 <div className="like">

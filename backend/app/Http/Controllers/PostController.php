@@ -39,6 +39,10 @@ class PostController extends Controller
         $userIds = $user->followings()->pluck('followed_id');
         return Post::whereIn('user_id', $userIds)->with('user')->with('likes')->with('comments')->latest()->get();
     }
+    public function getById($id) 
+    {
+        return Post::Find($id)->load('user', 'likes', 'comments');
+    }
     public function deletePost($id) {          
         $post = Post::find($id);
 

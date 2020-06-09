@@ -5,7 +5,7 @@ import { useLocation, useHistory } from 'react-router-dom';
 import './Header.scss';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHome, faPaperPlane, faSearch, faPlusSquare, faHeart } from '@fortawesome/free-solid-svg-icons'
+import { faHome, faSearch, faPlusSquare, faHeart } from '@fortawesome/free-solid-svg-icons'
 import { IMAGES_URL } from '../../api-config';
 
 import Logo from '../../img/logo.png';
@@ -47,18 +47,15 @@ const Header = props => {
                 <div className="icon">
                     <FontAwesomeIcon icon={faHome} onClick={showFeed} />
                 </div>
-                {biggerThan415 && <div className="icon">
-                    <FontAwesomeIcon icon={faPaperPlane} />
-                </div>}
                 {!biggerThan415 && <div className="icon">
                     <FontAwesomeIcon icon={faSearch} onClick={search} />
                 </div>}
                 <div className="icon">
                     <FontAwesomeIcon icon={faPlusSquare} onClick={newPost}/>
                     </div>
-                <div className="icon">
+                {/* <div className="icon">
                     <FontAwesomeIcon icon={faHeart} />
-                </div>
+                </div> */}
                 <div className="icon">
                     {props.myUser && <img src={IMAGES_URL + props.myUser?.pic} alt="Foto de perfil"
                         onClick={myProfile} />}

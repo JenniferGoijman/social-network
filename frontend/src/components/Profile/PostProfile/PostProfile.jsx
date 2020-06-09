@@ -14,15 +14,16 @@ const PostProfile = props => {
     const biggerThan415 = useMediaPredicate("(min-width: 415px)");
     const history = useHistory();
 
-    const goToPostsMobile = () => {
-        history.push('/posts/'+ props.post.user.username);
+    const goToPostsMobile = post_id => {
+        history.push('/posts/'+ props.post.user.username + '/'+ post_id);
     }
 
     return (           
         <div className="post-profile-container">
             <div className="post">
                 <div className="body">
-                    <img src={IMAGES_URL + props.post.image} onClick={biggerThan415?showModal:goToPostsMobile} />
+                    <img src={IMAGES_URL + props.post.image} alt="Publicación"
+                        onClick={biggerThan415?showModal:goToPostsMobile.bind(this, props.post.id)} />
                 </div>
             </div>
             <Modal visible={visible} onOk={hideModal} onCancel={hideModal} footer={null} className="post-profile"

@@ -32,6 +32,22 @@ export const getFeed = async() => {
         console.error(error)
     }
 }
+export const getPostById = async(post_id) => {
+    try {
+        const res = await axios.get(API_URL + 'posts/post/' + post_id, {
+            headers: {
+                Authorization: "Bearer " + localStorage.getItem('authToken')
+            }
+        });
+        store.dispatch({
+            type: GET_ALL_POSTS,
+            payload: res.data
+        })
+        return res;
+    } catch (error) {
+        console.error(error)
+    }
+}
 export const deletePost = async(post_id) => {
     try {
         const res = await axios.delete(API_URL + 'posts/' + post_id, {

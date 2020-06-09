@@ -9,6 +9,7 @@ import NotFound from '../../../components/NotFound/NotFound';
 
 const Profile = props => {
     const [currentUser, setCurrentUser] = useState();
+    const [notFound, setNotFound] = useState();
     const usernameFromParams = props.match.params.username.toLowerCase();
 
     useEffect(() => {   
@@ -16,6 +17,9 @@ const Profile = props => {
         getByUsername(usernameFromParams)
         .then(res => {
             setCurrentUser(res.data);
+        })
+        .catch(res => {
+            setNotFound(true);
         });
     }, [usernameFromParams]);
 
@@ -24,7 +28,6 @@ const Profile = props => {
             {currentUser && 
             <Fragment>
                 <ProfileHeader currentUser={currentUser} usernameFromParams={usernameFromParams} />
-                
                 <div className="grid-center">
                     <div className="posts-wraper">
                         {props.currentUser?.posts?.map(post => 
@@ -33,7 +36,7 @@ const Profile = props => {
                 </div>
             </Fragment>}
 
-            {!currentUser && !props.users?.find(u => u.username===usernameFromParams) && <NotFound /> }
+            {notFound && <NotFound /> }
         </Fragment>
     )
 }

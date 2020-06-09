@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { IMAGES_URL } from '../../../api-config';
 import './Settings.scss'
 import { Form, Input, Button, notification } from 'antd';
-import { getMyUser, updateInfo } from '../../../redux/actions/users';
+import { getMyUser, getByUsername, updateInfo } from '../../../redux/actions/users';
 import ChangeablePicThroughLink from '../../../components/Profile/ChangeablePicThroughLink/ChangeablePicThroughLink';
 import { useHistory } from 'react-router-dom';
 
@@ -17,15 +17,28 @@ const Settings = props => {
         .catch(console.error)
     }, [])
 
-    const onFinish = ({myUser}) => {
+    const update = myUser => {
         updateInfo(myUser)
+            .then(res => {
+                history.push('/'+ myUser.username);
+            })
+            .catch((res) =>{
+                notification.error({message:'Ajustes', description:'Hubo un problema al tratar de guardar los cambios.'})
+                console.log(res)
+            })
+    }
+    const onFinish = ({myUser}) => {
+        getByUsername(myUser.username)
         .then(res => {
-            history.push('/'+ myUser.username);
+            if (res.data.id === props.myUser.id) {
+                update(myUser);
+            } else {
+                notification.error({message:'Ajustes', description:'El nombre de usuario ingresado ya existe.'})
+            }
         })
-        .catch((res) =>{
-            notification.error({message:'Ajustes', description:'Hubo un problema al tratar de guardar los cambios.'})
-            console.log(res)
-        })
+        .catch(res => {
+            update(myUser);
+        });
     }
     
     return (        

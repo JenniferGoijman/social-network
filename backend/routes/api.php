@@ -31,6 +31,7 @@ Route::prefix('v1')->group( function () {
         Route::middleware('auth:api')->group(function(){
             Route::post('postImage', 'PostController@uploadPostImage');
             Route::delete('{post_id}', 'PostController@deletePost');
+            Route::get('post/{post_id}', 'PostController@getById');
             Route::get('', 'PostController@getFeed');
             Route::get('like/{post_id}', 'LikeController@like');
             Route::get('unlike/{post_id}', 'LikeController@unlike');

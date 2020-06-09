@@ -33,11 +33,16 @@ const ProfileHeader = props => {
                     
                     <div className="info">
                         <div className="name">
-                            <div style={{marginBottom:15}}>
+                            {biggerThan415 && <div style={{display:'flex', alignItems:'center'}}>
                                 <h1>{currentUser?.username}</h1>
                                 { !isMe && !isAlreadyFollowed && <Follow myUser={myUser} currentUser={currentUser} locationUser={usernameFromParams} />}
                                 { isAlreadyFollowed && <Unfollow myUser={myUser} currentUser={currentUser} locationUser={usernameFromParams} />}
-                            </div>
+                            </div>}
+                            {!biggerThan415 && <div style={{marginBottom:15}}>
+                                    <h1>{currentUser?.username}</h1>
+                                    { !isMe && !isAlreadyFollowed && <Follow myUser={myUser} currentUser={currentUser} locationUser={usernameFromParams} />}
+                                    { isAlreadyFollowed && <Unfollow myUser={myUser} currentUser={currentUser} locationUser={usernameFromParams} />}
+                            </div>}
                             <div className="editSettings">
                                 { isMe && <Edit /> }
                                 { isMe && <SettingsButton />}

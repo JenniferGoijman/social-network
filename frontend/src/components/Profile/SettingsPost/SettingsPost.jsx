@@ -16,7 +16,7 @@ const SettingsPost = props => {
         deletePost(id)
         .then(res => {
             console.log(":)");
-            window.location.pathname='/'+ props.myUser.username;
+            history.push('/feed');
         })
         .catch(()=>{
             console.log(":(")
