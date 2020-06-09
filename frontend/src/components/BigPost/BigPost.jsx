@@ -46,7 +46,7 @@ const BigPost = props => {
                 <div>
                     <div className="header-container">
                         <div className="header">
-                            <Avatar src={IMAGES_URL + props.post.user.pic}/>
+                            <img src={IMAGES_URL + props.post.user.pic} alt="Foto de perfil" className="imgAvatar" />
                             <UsernameBold user={props.post.user} />
                         </div>
                         {isMe &&  <div className="icon">
@@ -55,7 +55,7 @@ const BigPost = props => {
                     </div>
 
                     <div className="comments">
-                        <Avatar src={IMAGES_URL + props.post.user.pic}/>
+                        <img src={IMAGES_URL + props.post.user.pic} alt="Foto de perfil" className="imgAvatar" />
                         <div className="userDate">
                             <div style={{display:'flex', alignItems:'baseline'}}>
                                 <UsernameBold user={props.post.user} />
@@ -69,7 +69,7 @@ const BigPost = props => {
 
                     {props.post.comments?.map(comment => 
                         <div className="comments">
-                            <Avatar src={IMAGES_URL + comment.user.pic}/>
+                            <img src={IMAGES_URL + comment.user.pic} alt="Foto de perfil" className="imgAvatar" />
                             <div className="userDate">
                                 <div style={{display:'flex', alignItems:'baseline'}}>
                                     <UsernameBold user={comment.user} />
