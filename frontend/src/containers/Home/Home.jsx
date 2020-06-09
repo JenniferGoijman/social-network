@@ -9,7 +9,7 @@ const Home = () => {
 
     return (
         <div className="home-container">
-             {biggerThan415 && <img src={Mobiles} alt="Aplicación de Instagram en móvil"/>}
+             {biggerThan415 && <img src={Mobiles} alt="Aplicación de Jennstagram en móvil"/>}
             <div className="login"><LoginComponent></LoginComponent></div>
         </div>
     )

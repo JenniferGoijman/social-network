@@ -3,7 +3,7 @@ import { Form, Input, Row, Col, Button, notification, Divider } from 'antd';
 import { FacebookFilled } from '@ant-design/icons';
 
 import './Register.scss'
-import Logo from '../../../img/logoGrande.png';
+import Logo from '../../../img/logo.png';
 import { register } from '../../../redux/actions/users'
 
 
@@ -30,7 +30,7 @@ const Register = props => {
             <div className="card-in">
                 <div className="header">
                     <div className="logo">
-                        <img src={Logo} alt="Logo Instagram"/>
+                        <img src={Logo} alt="Logo Jennstagram"/>
                     </div>
                     <h3>Regístrate para ver fotos y vídeos de tus amigos.</h3>
                     <Button type="primary" htmlType="submit" icon={<FacebookFilled />} style={{width: 270, borderRadius:4}}>

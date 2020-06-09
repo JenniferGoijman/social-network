@@ -38,7 +38,7 @@ const Header = props => {
     return (
         <header>
             <div className="logo">
-                <img src={Logo} alt="Logo Instagram" onClick={showFeed}/>
+                <img src={Logo} alt="Logo Jennstagram" onClick={showFeed}/>
             </div>
             {biggerThan415 && <div>
                <Search placeholder="Busca" style={{ width: 200 }}></Search>

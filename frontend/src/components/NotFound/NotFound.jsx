@@ -7,7 +7,7 @@ const NotFound = props => {
         <div>
             <h2>Esta página no está disponible.</h2>
             <p>Es posible que el enlace que has seguido sea incorrecto o que se haya eliminado la página. 
-                <a href={'/' + props.myUser.username}> Volver a Instagram.</a>
+                <a href={'/' + props.myUser.username}> Volver a Jennstagram.</a>
                </p>    
         </div>
     )

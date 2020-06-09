@@ -5,7 +5,7 @@ import { FacebookFilled } from '@ant-design/icons';
 import { getMyUser } from '../../redux/actions/users';
 
 import './LoginComponent.scss';
-import Logo from '../../img/logoGrande.png';
+import Logo from '../../img/logo.png';
 import { useHistory } from 'react-router-dom';
 import { login } from '../../redux/actions/users';
 
@@ -43,7 +43,7 @@ const LoginComponent = props => {
             <div className="card-in">
                 <div className="header">
                     <div className="logo">
-                        <img src={Logo} alt="Logo Instagram"/>
+                        <img src={Logo} alt="Logo Jenntagram"/>
                     </div>
                 </div>
                 <div className="form">
