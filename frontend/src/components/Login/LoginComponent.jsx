@@ -32,7 +32,6 @@ const LoginComponent = props => {
         })
         .catch((res) =>{
             notification.error({message:'Login', description:'Hubo un problema al tratar de iniciar sesión'})
-            console.log(res)
         })
     };
   

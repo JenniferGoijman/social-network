@@ -59,7 +59,6 @@ export const getAll = async() => {
     return res;
 }
 export const updateInfo = async(user) => {
-    console.log(user);
     try {
         const res = await axios.put(API_URL + 'users/update', user, {
             headers: {

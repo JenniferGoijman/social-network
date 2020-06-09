@@ -19,17 +19,15 @@ const { TextArea } = Input;
 
 const BigPostMobile = props => {
     const history = useHistory();
-    const usernameFromParams = props.match.params.username.toLowerCase();
-    const postIdFromParams = props.match.params.post_id;    
+    const usernameFromParams = props.match.params.username.toLowerCase();   
     const [currentUser, setCurrentUser] = useState();  
     const [myUser, setMyUser] = useState(props.myUser);
-    const isLiked = props.posts?.likes?.filter(like => like.user_id === myUser?.id).length > 0 ? true : false;
+    const isLiked = props.post?.likes?.filter(like => like.user_id === myUser?.id).length > 0 ? true : false;
     const [value, setValue] = useState();
     const [writeComment, setWriteComment] = useState(false);
     const [loading, setLoading] = useState(false);
     
     useEffect(() => {   
-        getPostById(postIdFromParams);
         getByUsername(usernameFromParams)
             .then(res => { 
                 setCurrentUser(res.data); 
@@ -37,7 +35,7 @@ const BigPostMobile = props => {
     }, []);
 
     const goToProfile = () => {
-        history.push('/'+ props.posts.user.username);
+        history.push('/'+ props.post.user.username);
     }
 
     const toUpperCaseFilter = (d) => {
@@ -63,7 +61,6 @@ const BigPostMobile = props => {
 
     const onChange = e => {
         setValue(e.target.value);
-        console.log(e.target.value);
     }
     
     return (
@@ -72,32 +69,32 @@ const BigPostMobile = props => {
                 <h2 style={{margin:0}}><ArrowLeftOutlined /></h2>
             </div>
             <div className="big-post-mobile-container">   
-                {props.posts && <div className="post">
+                {props.post && <div className="post">
                     <div className="header">
-                        <Avatar src={IMAGES_URL + props.posts.user.pic}/>
-                        <UsernameBold user={props.posts?.user} />
+                        <Avatar src={IMAGES_URL + props.post.user.pic}/>
+                        <UsernameBold user={props.post?.user} />
                     </div>
                     <div className="body">
-                        <img src={IMAGES_URL + props.posts.image} alt="Publicación" />
+                        <img src={IMAGES_URL + props.post.image} alt="Publicación" />
                     </div>
 
                     <div className="like">
                         <div style={{display:'flex'}}>
                             <h1>
-                                { !isLiked && <HeartOutlined onClick={like.bind(this, props.posts.id, currentUser?.id, "BigPostMobile")} /> }
-                                { isLiked && <HeartFilled onClick={unlike.bind(this, props.posts.id, currentUser?.id, "BigPostMobile")} style={{color:'rgb(237, 73, 86)'}}/> }
+                                { !isLiked && <HeartOutlined onClick={like.bind(this, props.post.id, currentUser?.id, "BigPostMobile")} /> }
+                                { isLiked && <HeartFilled onClick={unlike.bind(this, props.post.id, currentUser?.id, "BigPostMobile")} style={{color:'rgb(237, 73, 86)'}}/> }
                             </h1>
                             <h1 style={{marginLeft:10}} onClick={showInsertComment}><FontAwesomeIcon icon={faComment} /></h1>
                         </div>
-                        <ShowLikes post={props.posts} currentUser={currentUser} />
+                        <ShowLikes post={props.post} currentUser={currentUser} />
                     </div>
 
                     <div className="description">
-                        <UsernameBold user={props.posts.user} />
-                        <div>{props.posts.description}</div>                
+                        <UsernameBold user={props.post.user} />
+                        <div>{props.post.description}</div>                
                     </div>
 
-                    {props.posts.comments?.map(comment => 
+                    {props.post.comments?.map(comment => 
                             <div className="comment">
                                 <div className="userDate">
                                     <div style={{display:'flex', alignItems:'baseline'}}>
@@ -109,7 +106,7 @@ const BigPostMobile = props => {
                         )}
                     
                     <div className="date">
-                        <Moment fromNow filter={toUpperCaseFilter} style={{fontSize:'x-small'}}>{props.posts.created_at}</Moment>
+                        <Moment fromNow filter={toUpperCaseFilter} style={{fontSize:'x-small'}}>{props.post.created_at}</Moment>
                     </div>
                     
                     {writeComment &&
@@ -118,7 +115,7 @@ const BigPostMobile = props => {
                                 <TextArea rows={2} onChange={onChange} value={value} placeholder="Agrega un comentario..." />
                             </Form.Item>
                             <Form.Item>
-                                <Button htmlType="submit" loading={loading} onClick={onSubmit.bind(this, props.posts.id)} type="link" style={{fontWeight:500}}>
+                                <Button htmlType="submit" loading={loading} onClick={onSubmit.bind(this, props.post.id)} type="link" style={{fontWeight:500}}>
                                     Publicar
                                 </Button>
                             </Form.Item>
@@ -129,5 +126,5 @@ const BigPostMobile = props => {
     )
 }
 
-const mapStateToProps = ({user, post}) => ({ myUser: user.myUser, currentUser: user.currentUser, users: user.users, posts:post.posts });
+const mapStateToProps = ({user, post}) => ({ myUser: user.myUser, currentUser: user.currentUser, users: user.users, post:post.post });
 export default connect(mapStateToProps)(BigPostMobile);

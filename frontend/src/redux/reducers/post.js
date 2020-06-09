@@ -1,4 +1,4 @@
-import { GET_ALL_POSTS } from '../types'
+import { GET_ALL_POSTS, GET_ONE_POST } from '../types'
 
 const postReducer = (state = {}, action) => {
     switch (action.type) {
@@ -6,6 +6,11 @@ const postReducer = (state = {}, action) => {
             return {
                 ...state,
                 posts: action.payload
+            }
+        case GET_ONE_POST:
+            return {
+                ...state,
+                post:action.payload
             }
         default:
             return state;

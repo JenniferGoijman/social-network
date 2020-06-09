@@ -13,7 +13,6 @@ import { logout } from '../../../redux/actions/users';
 const ResetPassword = props => {
     const [form] = Form.useForm();
     const [match, setMatch] = useState();
-    console.log(props);
 
     const onFinish = values => {
         if (!match) {

@@ -2,7 +2,6 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 const NotFound = props => {
-    console.log(props)
     return (
         <div>
             <h2>Esta página no está disponible.</h2>

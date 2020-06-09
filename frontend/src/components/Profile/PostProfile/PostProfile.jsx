@@ -6,6 +6,7 @@ import { useMediaPredicate } from 'react-media-hook';
 import { useHistory } from 'react-router-dom';
 
 import BigPost from '../../BigPost/BigPost';
+import { getPostById } from '../../../redux/actions/posts';
 
 const PostProfile = props => {
     const [visible, setVisible] = useState();
@@ -15,6 +16,7 @@ const PostProfile = props => {
     const history = useHistory();
 
     const goToPostsMobile = post_id => {
+        getPostById(post_id);
         history.push('/posts/'+ props.post.user.username + '/'+ post_id);
     }
 

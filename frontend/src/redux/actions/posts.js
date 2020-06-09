@@ -1,7 +1,7 @@
 import store from '../store';
 import axios from 'axios';
 import { API_URL } from '../../api-config';
-import { GET_ALL_POSTS } from '../types'
+import { GET_ALL_POSTS, GET_ONE_POST } from '../types'
 import { getById } from './users';
 
 export const uploadPostImage = async(post) => {
@@ -40,7 +40,7 @@ export const getPostById = async(post_id) => {
             }
         });
         store.dispatch({
-            type: GET_ALL_POSTS,
+            type: GET_ONE_POST,
             payload: res.data
         })
         return res;
@@ -61,7 +61,6 @@ export const deletePost = async(post_id) => {
     }    
 }
 export const like = async(post_id, user_id, from) => {
-    console.log(post_id, user_id);
     try {
         await axios.get(API_URL + 'posts/like/' + post_id, {
             headers: {
@@ -80,7 +79,6 @@ export const like = async(post_id, user_id, from) => {
     }    
 }
 export const unlike = async(post_id, user_id, from) => {
-    console.log(post_id, user_id, from);
     try {
         await axios.get(API_URL + 'posts/unlike/' + post_id, {
             headers: {

@@ -36,7 +36,7 @@ const Profile = props => {
                 </div>
             </Fragment>}
 
-            {notFound && <NotFound /> }
+            {!currentUser && notFound && <NotFound /> }
         </Fragment>
     )
 }
