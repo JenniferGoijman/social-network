@@ -4,11 +4,13 @@ import Moment from 'react-moment';
 import 'moment/locale/es';
 import './BigPost.scss';
 import { IMAGES_URL } from '../../api-config';
-import { Avatar, Form, Button, Input } from 'antd';
-import UsernameBold from '../Profile/UsernameBold/UsernameBold';
-import SettingsPost from '../Profile/SettingsPost/SettingsPost';
+import { Form, Button, Input } from 'antd';
 import { HeartOutlined, HeartFilled } from '@ant-design/icons';
 import { like, unlike, insertComment } from '../../redux/actions/posts';
+
+import UsernameBold from '../Profile/UsernameBold/UsernameBold';
+import SettingsPost from '../Profile/SettingsPost/SettingsPost';
+import ShowLikes from '../ShowLikes/ShowLikes';
 
 const { TextArea } = Input;
 
@@ -90,13 +92,7 @@ const BigPost = props => {
                                 { !isLiked && <HeartOutlined onClick={like.bind(this, props.post.id, props.currentUser?.id)} /> }
                                 { isLiked && <HeartFilled onClick={unlike.bind(this, props.post.id, props.currentUser?.id)} style={{color:'rgb(237, 73, 86)'}}/> }
                             </h1>
-                            {props.post.likes.length > 0 && 
-                                <div style={{fontWeight:'500', color:'black'}}>{props.post.likes.length} Me gusta</div>}
-                            {!props.post.likes.length > 0 && 
-                                <div style={{color:'black'}}>Sé el primero en
-                                    <span style={{fontWeight:'500', cursor:'pointer'}} 
-                                        onClick={like.bind(this, props.post.id, props.currentUser?.id)}> indicar que te gusta esto</span>
-                                </div>}
+                            <ShowLikes post={props.post} currentUser={props.currentUser} />
                             <Moment format="D MMMM YYYY" filter={toUpperCaseFilter} style={{fontSize:'x-small'}}>{props.post.created_at}</Moment>
                         </div>
                     </div>

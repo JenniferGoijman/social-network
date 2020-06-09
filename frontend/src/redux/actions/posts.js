@@ -60,7 +60,7 @@ export const deletePost = async(post_id) => {
         console.error(error)
     }    
 }
-export const like = async(post_id, user_id) => {
+export const like = async(post_id, user_id, from) => {
     console.log(post_id, user_id);
     try {
         await axios.get(API_URL + 'posts/like/' + post_id, {
@@ -68,7 +68,9 @@ export const like = async(post_id, user_id) => {
                 Authorization: "Bearer " + localStorage.getItem('authToken')
             }
         });
-        if (user_id !== null) {
+        if (from === "BigPostMobile") {
+            return getPostById(post_id);
+        } else if (user_id !== null) {
             return getById(user_id);
         } else{
             return getFeed();
@@ -77,14 +79,17 @@ export const like = async(post_id, user_id) => {
         console.error(error)
     }    
 }
-export const unlike = async(post_id, user_id) => {
+export const unlike = async(post_id, user_id, from) => {
+    console.log(post_id, user_id, from);
     try {
         await axios.get(API_URL + 'posts/unlike/' + post_id, {
             headers: {
                 Authorization: "Bearer " + localStorage.getItem('authToken')
             }
         });
-        if (user_id !== null) {
+        if (from === "BigPostMobile") {
+            return getPostById(post_id);
+        } else if (user_id !== null) {
             return getById(user_id);
         } else{
             return getFeed();

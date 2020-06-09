@@ -11,7 +11,7 @@ import PostsFeed from './containers/PostsFeed/PostsFeed';
 import Profile from './containers/User/Profile/Profile';
 import SearchMobile from './containers/SearchMobile/SearchMobile';
 import ResetPassword from './containers/User/ResetPassword/ResetPassword';
-import BigPostsMobile from './containers/BigPostsMobile/BigPostsMobile';
+import BigPostMobile from './components/BigPostMobile/BigPostMobile';
 
 import Header from './components/Header/Header';
 
@@ -36,7 +36,7 @@ function App() {
           <Route path='/login' component={LoginContainer} exact />
           <Route path='/accounts/password/reset' component={ResetPassword} exact />
           <Route path='/create' component={NewPost} exact />
-          <Route path='/posts/:username/:post_id' component={BigPostsMobile} exact />
+          <Route path='/posts/:username/:post_id' component={BigPostMobile} exact />
           <Route path='/feed' component={PostsFeed} exact />
           <Route path='/search' component={SearchMobile} exact />
           <Route path='/:username' component={Profile} exact />

@@ -1,15 +1,16 @@
 import React, { useState } from 'react';
-import { Avatar } from 'antd';
 import { IMAGES_URL } from '../../api-config';
 import './PostFeed.scss';
 import Moment from 'react-moment';
 import 'moment/locale/es';
-import UsernameBold from '../Profile/UsernameBold/UsernameBold';
+import { Avatar, Form, Button, Input  } from 'antd';
 import { HeartOutlined, HeartFilled } from '@ant-design/icons';
-import { like, unlike, insertComment } from '../../redux/actions/posts';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faComment } from '@fortawesome/free-regular-svg-icons';
-import { Form, Button, Input  } from 'antd';
+import { like, unlike, insertComment } from '../../redux/actions/posts';
+
+import UsernameBold from '../Profile/UsernameBold/UsernameBold';
+import ShowLikes from '../ShowLikes/ShowLikes';
 
 const { TextArea } = Input;
 
@@ -63,13 +64,7 @@ const PostFeed = props => {
                         </h1>
                         <h1 style={{marginLeft:10}} onClick={showInsertComment}><FontAwesomeIcon icon={faComment} /></h1>
                     </div>
-                    {props.post.likes?.length > 0 && 
-                        <div style={{fontWeight:'500', color:'black'}}>{props.post.likes.length} Me gusta</div>}
-                    {!props.post.likes?.length > 0 && 
-                        <div style={{color:'black'}}>Sé el primero en
-                            <span style={{fontWeight:'500', cursor:'pointer'}} 
-                                onClick={like.bind(this, props.post.id, null)}> indicar que te gusta esto</span>
-                        </div>}
+                    <ShowLikes post={props.post} currentUser={null} />
                 </div>
 
                 <div className="description">

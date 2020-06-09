@@ -12,7 +12,7 @@ const PostsFeed = props => {
 
     return (
         <div className="posts-container">
-            {props.posts.length > 0 && props.posts?.map(post => 
+            {props.posts?.length > 0 && props.posts?.map(post => 
                 <PostFeed key={post.id} post={post} myUser={props.myUser} />)}
             
             {!props.posts.length > 0 && <div style={{marginTop:30}}>
