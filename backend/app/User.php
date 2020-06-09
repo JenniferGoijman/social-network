@@ -64,4 +64,8 @@ class User extends Authenticatable
     {
         return $this->hasMany('\App\Comment')->with('user');
     }
+    public function likes()
+    {
+        return $this->hasMany('\App\Like')->with('user');
+    }
 }

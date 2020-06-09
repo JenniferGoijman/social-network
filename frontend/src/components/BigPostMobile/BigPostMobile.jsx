@@ -29,11 +29,11 @@ const BigPostMobile = props => {
     const [loading, setLoading] = useState(false);
     
     useEffect(() => {   
+        getPostById(postIdFromParams);
         getByUsername(usernameFromParams)
             .then(res => { 
                 setCurrentUser(res.data); 
             });
-        getPostById(postIdFromParams)
     }, []);
 
     const goToProfile = () => {
