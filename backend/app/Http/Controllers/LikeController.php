@@ -16,6 +16,13 @@ class LikeController extends Controller
             $id = Auth::id();
             $user = User::find($id);
             $body = ['user_id' => $user->id, 'post_id' => $post_id];
+            $alreadyExists = Like::where('user_id',$user->id)->where('post_id',$post_id)->get()->count();
+            if ($alreadyExists > 0) {
+                return response("You have already liked this post");
+            } else if ($alreadyExists) {
+                $like = Like::create($body);
+                return response($like, 201);
+            }
             $like = Like::create($body);
             return response($like, 201);
         } catch (\Exception $e) {

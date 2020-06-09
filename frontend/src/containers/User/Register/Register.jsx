@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Form, Input, Row, Col, Button, notification, Divider } from 'antd';
 import { FacebookFilled } from '@ant-design/icons';
 
@@ -9,8 +9,10 @@ import { register } from '../../../redux/actions/users'
 
 const Register = props => {
     const [form] = Form.useForm();
+    const [loading, setLoading] = useState(false);
 
     const onFinish = values => {
+        setLoading(true);
         const user = values;
         register(user)
         .then(res => {
@@ -22,6 +24,7 @@ const Register = props => {
         .catch((res) =>{
             notification.error({message:'Register', description:'Hubo un problema al registrar el usuario'})
             console.log(res)
+            setLoading(false);
         })
     };
   
@@ -60,7 +63,7 @@ const Register = props => {
                         <Row justify="center">
                             <Col>
                                 <Form.Item >
-                                    <Button type="primary" htmlType="submit" style={{width: 270, borderRadius:4}}>
+                                    <Button type="primary" htmlType="submit" loading={loading} style={{width: 270, borderRadius:4}}>
                                         Registrarse
                                     </Button>
                                 </Form.Item>

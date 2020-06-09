@@ -51,8 +51,7 @@ const NewPost = props => {
     }
     
     const handleComment = e => {
-        setComment(e.target.value);
-        
+        setComment(e.target.value);  
     };
 
     return (
