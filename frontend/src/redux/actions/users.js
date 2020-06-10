@@ -36,7 +36,7 @@ export const resetPassword = async(id, password) => {
 }
 export const uploadProfileImage = async(image) => {
     try {
-        const res = await axios.post(API_URL + 'users/profileImage', image, {
+        const res = await axios.post(API_URL + 'users/pic', image, {
             headers: {
                 Authorization: "Bearer " + localStorage.getItem('authToken')
             }

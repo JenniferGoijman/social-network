@@ -12,8 +12,8 @@ const SettingsButton = () => {
     const hideModal = () => { setVisible(false); };
 
     const disconnect = () => {
-        logout();
-        history.push('/');
+        logout()
+        .then(res => history.push('/'))
         hideModal();
     }
 

@@ -12,11 +12,8 @@ const Search = props => {
     const value = undefined;
 
     const handleSearch = value => {
-        if (value) {
-            setData(props.users.filter(d => d.username.toLowerCase().includes(value.toLowerCase())));
-        } else {
-            setData([])
-        }
+        if (!value) {return setData([])}
+        setData(props.users.filter(d => d.username.toLowerCase().includes(value.toLowerCase()) || d.name.toLowerCase().includes(value.toLowerCase())));
     };
     
     const handleChange = value => {

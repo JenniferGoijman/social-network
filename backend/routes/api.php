@@ -12,7 +12,7 @@ Route::prefix('v1')->group( function () {
         
         Route::middleware('auth:api')->group(function(){
             Route::get('user','UserController@userInfo');
-            Route::post('profileImage', 'UserController@uploadProfileImage');
+            Route::post('pic', 'UserController@uploadProfileImage');
             Route::get('logout','UserController@logout');
             Route::get('id/{id}','UserController@getById');
             Route::get('username/{username}','UserController@getByUsername');
@@ -29,7 +29,7 @@ Route::prefix('v1')->group( function () {
 
     Route::prefix('posts')->group(function () {
         Route::middleware('auth:api')->group(function(){
-            Route::post('postImage', 'PostController@uploadPostImage');
+            Route::post('post', 'PostController@uploadPost');
             Route::delete('{post_id}', 'PostController@deletePost');
             Route::get('post/{post_id}', 'PostController@getById');
             Route::get('', 'PostController@getFeed');

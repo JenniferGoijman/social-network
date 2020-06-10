@@ -12,7 +12,7 @@ use Aws\S3\S3Client;
 
 class PostController extends Controller
 {
-    public function uploadPostImage(Request $request)
+    public function uploadPost(Request $request)
     {
         try {
             $request->validate(['image' => 'required|image']);

@@ -6,11 +6,11 @@ const UsernameBold = props => {
     const history = useHistory();
 
     const goToUserProfile = (user)=> {
-        history.push('/'+ user.username);
+        history.push('/'+ user?.username);
     }
     
     return (
-        <div className="username" onClick={goToUserProfile.bind(this, props.user)}>{props.user.username}</div>
+        <div className="username" onClick={goToUserProfile.bind(this, props.user)}>{props.user?.username}</div>
     )
 }
 

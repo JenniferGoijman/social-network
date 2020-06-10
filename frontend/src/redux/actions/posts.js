@@ -6,7 +6,7 @@ import { getById } from './users';
 
 export const uploadPostImage = async(post) => {
     try {
-        const res = await axios.post(API_URL + 'posts/postImage', post, {
+        const res = await axios.post(API_URL + 'posts/post', post, {
             headers: {
                 Authorization: "Bearer " + localStorage.getItem('authToken')
             }
@@ -69,11 +69,11 @@ export const like = async(post_id, user_id, from) => {
         });
         if (from === "BigPostMobile") {
             return getPostById(post_id);
-        } else if (user_id !== null) {
+        } 
+        if (user_id !== null) {
             return getById(user_id);
-        } else{
-            return getFeed();
         }
+        return getFeed();
     } catch (error) {
         console.error(error)
     }    
@@ -87,11 +87,11 @@ export const unlike = async(post_id, user_id, from) => {
         });
         if (from === "BigPostMobile") {
             return getPostById(post_id);
-        } else if (user_id !== null) {
-            return getById(user_id);
-        } else{
-            return getFeed();
         }
+        if (user_id !== null) {
+            return getById(user_id);
+        }
+        return getFeed();
     } catch (error) {
         console.error(error)
     }     
@@ -105,9 +105,8 @@ export const insertComment = async(comment, user_id) => {
         });
         if (user_id !== null) {
             return getById(user_id);
-        } else{
-            return getFeed();
         }
+        return getFeed();
     } catch (error) {
         console.error(error)
     }    
