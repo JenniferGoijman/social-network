@@ -13,9 +13,11 @@ class CommentController extends Controller
     public function insert(Request $request)
     {
         try {
-            $id = Auth::id();
-            $user = User::find($id);
-            $body = ['user_id' => $user->id, 'post_id' => $request->input('post_id'), 'body' => $request->input('body')];
+            $body = $request->validate([
+                'post_id'=>'required|number',
+                'body'=>'required|string',
+            ]);
+            $body['user_id' ] = Auth::user()->id;
             $like = Comment::create($body);
             return response($like, 201);
         } catch (\Exception $e) {

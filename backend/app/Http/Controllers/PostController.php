@@ -7,10 +7,7 @@ use App\Post;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\File; 
 use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Str;
 use Aws\S3\S3Client;
 
 class PostController extends Controller
@@ -21,9 +18,7 @@ class PostController extends Controller
             $request->validate(['image' => 'required|image']);
             $image_path = $request->image->store('images','s3');
             
-            $id = Auth::id();
-            $user = User::find($id);
-                      
+            $user = Auth::user();
             $body = ['image' => $image_path, 'description' => $request->description, 'user_id' => $user->id];
             
             $post = Post::create($body);
@@ -34,8 +29,7 @@ class PostController extends Controller
     }
     public function getFeed() 
     {
-        $id = Auth::id();
-        $user = User::find($id);
+        $user = Auth::user();
         $userIds = $user->followings()->pluck('followed_id');
         return Post::whereIn('user_id', $userIds)->with('user')->with('likes')->with('comments')->latest()->get();
     }
@@ -44,10 +38,9 @@ class PostController extends Controller
         return Post::Find($id)->load('user', 'likes', 'comments');
     }
     public function deletePost($id) {          
-        $post = Post::find($id);
+        $post = Post::Find($id);
 
         Storage::disk('s3')->delete($post->image);
-        File::delete($post->image);
         
         $post->delete();
         return response($post);

@@ -113,8 +113,7 @@ class UserController extends Controller
                 'username' => 'required|string',
                 'email' => 'required|string']);
             $body = $request->all();    
-            $id = Auth::id();
-            $user = User::find($id);
+            $user = Auth::user();
             $user->update($body);
             return response($user);
         } catch (\Exception $e) {
@@ -129,8 +128,7 @@ class UserController extends Controller
             $request->validate(['image' => 'required|image']);
             $image_path = $request->image->store('images','s3');
 
-            $id = Auth::id();
-            $user = User::find($id);
+            $user = Auth::user();
             
             $picDefault = "images/nopic.png";
             $oldPic = $user->pic;

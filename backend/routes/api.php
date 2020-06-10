@@ -7,15 +7,15 @@ Route::prefix('v1')->group( function () {
     Route::prefix('users')->group(function () {
         Route::post('register', 'UserController@register');
         Route::post('login', 'UserController@login');
-        Route::put('resetPassword/{id}', 'UserController@resetPassword');
+        Route::put('password/{id}', 'UserController@resetPassword');
         Route::get('', 'UserController@getAll');
         
         Route::middleware('auth:api')->group(function(){
             Route::get('user','UserController@userInfo');
             Route::post('profileImage', 'UserController@uploadProfileImage');
             Route::get('logout','UserController@logout');
-            Route::get('byId/{id}','UserController@getById');
-            Route::get('byUsername/{username}','UserController@getByUsername');
+            Route::get('id/{id}','UserController@getById');
+            Route::get('username/{username}','UserController@getByUsername');
             Route::put('update', 'UserController@update');
         });
     });

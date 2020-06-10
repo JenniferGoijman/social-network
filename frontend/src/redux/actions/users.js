@@ -29,7 +29,7 @@ export const logout = async() => {
 }
 export const resetPassword = async(id, password) => {
     try {
-        return axios.put(API_URL + 'users/resetPassword/' + id, password);
+        return axios.put(API_URL + 'users/password/' + id, password);
     } catch (error) {
         console.error(error)
     }
@@ -85,7 +85,7 @@ export const getMyUser = async() => {
     });
 }
 export const getById = async(id) => {
-    const res = await axios.get(API_URL + 'users/byId/' + id, {
+    const res = await axios.get(API_URL + 'users/id/' + id, {
         headers: {
             Authorization: 'Bearer ' + localStorage.getItem('authToken')
         }
@@ -97,7 +97,7 @@ export const getById = async(id) => {
     return res;
 }
 export const getByUsername = async(username) => {
-    const res = await axios.get(API_URL + 'users/byUsername/' + username, {
+    const res = await axios.get(API_URL + 'users/username/' + username, {
         headers: {
             Authorization: 'Bearer ' + localStorage.getItem('authToken')
         }
