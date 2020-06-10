@@ -33,7 +33,7 @@ const ShowFollowings = props => {
             <Modal title="Siguiendo" visible={visible} onOk={hideModal} onCancel={hideModal} footer={null} className="showFollowings">
                 <List header={null} footer={null} dataSource={[
                     props.currentUser.followings.map(followed => {
-                        const isMe = props.myUser?.id === followed.id;
+                        const itsMe = props.myUser?.id === followed.id;
                         const isAlreadyFollowed = props.myUser?.followings?.filter(f => f.id === followed.id).length>0 ? true : false;
                         return(
                         <div className="userFollowings" key={followed.id}>
@@ -44,8 +44,8 @@ const ShowFollowings = props => {
                                     <span style={{marginLeft:10}}>{followed.name}</span>
                                 </div>
                             </div>
-                            { !isMe && !isAlreadyFollowed && <Follow myUser={props.myUser} currentUser={followed} locationUser={props.locationUser}/>}
-                            { !isMe && isAlreadyFollowed && <Unfollow myUser={props.myUser} currentUser={followed} locationUser={props.locationUser}/>}
+                            { !itsMe && !isAlreadyFollowed && <Follow myUser={props.myUser} currentUser={followed} locationUser={props.locationUser}/>}
+                            { !itsMe && isAlreadyFollowed && <Unfollow myUser={props.myUser} currentUser={followed} locationUser={props.locationUser}/>}
                         </div>)
                     })
                 ]} 

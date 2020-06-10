@@ -34,22 +34,22 @@ const ShowLikes = ({post, currentUser, myUser}) => {
 
             <Modal title="Me gusta" visible={visible} onOk={hideModal} onCancel={hideModal} footer={null} className="showLikes">
                 <List header={null} footer={null} dataSource={[
-                    post.likes.map(like => {
-                        const isMe = myUser?.id === like.user.id;
-                        const isAlreadyFollowed = myUser?.followings?.filter(f => f.id === like.user.id).length>0 ? true : false;
+                    post.likes.map(l => {
+                        const itsMe = myUser?.id === l?.user_id;
+                        const isAlreadyFollowed = myUser?.followings?.filter(f => f.id === l.user.id).length>0 ? true : false;
                         return(
-                        <div className="userLike" key={like.user.id}>
+                        <div className="userLike" key={l.user.id}>
                             <div className="imgName">
-                                <img src={IMAGES_URL + like.user.pic} alt="Foto de perfil" />
+                                <img src={IMAGES_URL + l.user.pic} alt="Foto de perfil" />
                                 <div className="names">
-                                    <div className="username" onClick={goToUserProfile.bind(this, like.user)}>{like.user.username}</div>
-                                    <span style={{marginLeft:10}}>{like.user.name}</span>
+                                    <div className="username" onClick={goToUserProfile.bind(this, l.user)}>{l.user.username}</div>
+                                    <span style={{marginLeft:10}}>{l.user.name}</span>
                                 </div>
                             </div>
-                            { !isMe && !isAlreadyFollowed && 
-                                 <Follow myUser={myUser} currentUser={like.user} locationUser={""}/>}
-                            { !isMe && isAlreadyFollowed && 
-                                <Unfollow myUser={myUser} currentUser={like.user} locationUser={""}/>}
+                            { !itsMe && !isAlreadyFollowed && 
+                                 <Follow myUser={myUser} currentUser={l.user} locationUser={""}/>}
+                            { !itsMe && isAlreadyFollowed && 
+                                <Unfollow myUser={myUser} currentUser={l.user} locationUser={""}/>}
                         </div>
                         )}
                     )

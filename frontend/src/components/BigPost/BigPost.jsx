@@ -17,7 +17,7 @@ const { TextArea } = Input;
 const BigPost = props => {
     const [value, setValue] = useState();
     const [loading, setLoading] = useState(false);
-    const isMe = props.myUser?.id === props.post.user.id;
+    const itsMe = props.myUser?.id === props.post.user.id;
     const isLiked = props.post.likes?.filter(like => like.user_id === props.myUser?.id).length > 0 ? true : false;
     
     const toUpperCaseFilter = (d) => {
@@ -50,7 +50,7 @@ const BigPost = props => {
                             <img src={IMAGES_URL + props.post.user.pic} alt="Foto de perfil" className="imgAvatar" />
                             <UsernameBold user={props.post.user} />
                         </div>
-                        {isMe &&  <div className="icon">
+                        {itsMe &&  <div className="icon">
                             <SettingsPost post={props.post} myUser={props.myUser} />
                         </div>}
                     </div>

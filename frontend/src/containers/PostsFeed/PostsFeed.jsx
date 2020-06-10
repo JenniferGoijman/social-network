@@ -15,7 +15,7 @@ const PostsFeed = props => {
             {props.posts?.length > 0 && props.posts?.map(post => 
                 <PostFeed key={post.id} post={post} myUser={props.myUser} />)}
             
-            {!props.posts.length > 0 && <div style={{marginTop:30}}>
+            {!props.posts?.length > 0 && <div style={{marginTop:30}}>
                 <h1>Tu feed esta vacío!</h1>
                 <h3>Comienza a seguir a tus amigos y te aparecerán sus publicaciones.</h3>
             </div>}

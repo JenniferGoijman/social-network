@@ -18,7 +18,7 @@ const ProfileHeader = props => {
     const biggerThan415 = useMediaPredicate("(min-width: 415px)");
     const currentUser = props.currentUser;
     const myUser = props.myUser;
-    const isMe = myUser?.id === currentUser?.id;
+    const itsMe = myUser?.id === currentUser?.id;
     const isAlreadyFollowed = myUser?.followings?.filter(f => f?.id === currentUser?.id).length > 0 ? true : false;
     const usernameFromParams = props.usernameFromParams;
     
@@ -27,25 +27,25 @@ const ProfileHeader = props => {
             <Fragment>
                 <div className="profile">
                     <div className="photo">
-                        {isMe && <ChangeablePicThroughPic myUser={myUser} />}
-                        {!isMe && <img src={IMAGES_URL + currentUser?.pic} alt="Foto de perfil"/>}
+                        {itsMe && <ChangeablePicThroughPic myUser={myUser} />}
+                        {!itsMe && <img src={IMAGES_URL + currentUser?.pic} alt="Foto de perfil"/>}
                     </div>
                     
                     <div className="info">
                         <div className="name">
                             {biggerThan415 && <div style={{display:'flex', alignItems:'center'}}>
                                 <h1>{currentUser?.username}</h1>
-                                { !isMe && !isAlreadyFollowed && <Follow myUser={myUser} currentUser={currentUser} locationUser={usernameFromParams} />}
+                                { !itsMe && !isAlreadyFollowed && <Follow myUser={myUser} currentUser={currentUser} locationUser={usernameFromParams} />}
                                 { isAlreadyFollowed && <Unfollow myUser={myUser} currentUser={currentUser} locationUser={usernameFromParams} />}
                             </div>}
                             {!biggerThan415 && <div style={{marginBottom:15}}>
                                     <h1>{currentUser?.username}</h1>
-                                    { !isMe && !isAlreadyFollowed && <Follow myUser={myUser} currentUser={currentUser} locationUser={usernameFromParams} />}
+                                    { !itsMe && !isAlreadyFollowed && <Follow myUser={myUser} currentUser={currentUser} locationUser={usernameFromParams} />}
                                     { isAlreadyFollowed && <Unfollow myUser={myUser} currentUser={currentUser} locationUser={usernameFromParams} />}
                             </div>}
                             <div className="editSettings">
-                                { isMe && <Edit /> }
-                                { isMe && <SettingsButton />}
+                                { itsMe && <Edit /> }
+                                { itsMe && <SettingsButton />}
                             </div>
                         </div>
 
