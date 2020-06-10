@@ -14,7 +14,7 @@ class CommentController extends Controller
     {
         try {
             $body = $request->validate([
-                'post_id'=>'required|number',
+                'post_id'=>'required|integer',
                 'body'=>'required|string',
             ]);
             $body['user_id' ] = Auth::user()->id;
