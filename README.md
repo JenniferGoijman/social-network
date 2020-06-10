@@ -26,7 +26,7 @@ You can register here [Jennstagram](http://jennstagram.herokuapp.com/) and try i
 ![foto](frontend/src/img/readme/post-modal.png)
 
 ### Mobile first
-![foto](frontend/src/img/readme/mobile-profile.png)
+![foto](frontend/src/img/readme/mobile-profile.gif)
 
 Don't forget to register on [Jennstagram](http://jennstagram.herokuapp.com/)!
 Made by [Jennifer Goijman](https://github.com/JenniferGoijman)
