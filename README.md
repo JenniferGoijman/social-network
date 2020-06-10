@@ -6,5 +6,23 @@ It was made with React (Hooks & Redux), Ant Design, Sass, PHP (Laravel), Eloquen
 You can register here [Jennstagram](http://jennstagram.herokuapp.com/) and try it by yourself.
 
 ## Views
+
+### Home
+![foto](frontend/src/img/readme/home.png)
+
 ### Registration
 ![foto](frontend/src/img/readme/register.png)
+
+### Reset Password
+![foto](frontend/src/img/readme/reset-pass.png)
+
+### Feed
+![foto](frontend/src/img/readme/feed.gif)
+
+### Profile
+![foto](frontend/src/img/readme/profile.png)
+
+### Post
+![foto](frontend/src/img/readme/post-modal.png)
+
+
