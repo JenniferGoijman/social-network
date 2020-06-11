@@ -1,38 +1,27 @@
-import React, { useEffect, useState, Fragment } from 'react';
+import React, { useState, Fragment } from 'react';
 import { connect } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 import { IMAGES_URL } from '../../api-config';
 import './BigPostMobile.scss';
 import Moment from 'react-moment';
 import 'moment/locale/es';
 import { Form, Button, Input, Avatar  } from 'antd';
-import { HeartOutlined, HeartFilled } from '@ant-design/icons';
+import { HeartOutlined, HeartFilled, ArrowLeftOutlined } from '@ant-design/icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faComment } from '@fortawesome/free-regular-svg-icons';
 import { like, unlike, insertComment } from '../../redux/actions/posts';
-import { getByUsername } from '../../redux/actions/users';
 import UsernameBold from '../Profile/UsernameBold/UsernameBold';
 import ShowLikes from '../ShowLikes/ShowLikes';
-import { useHistory } from 'react-router-dom';
-import { ArrowLeftOutlined } from '@ant-design/icons';
 
 const { TextArea } = Input;
 
 const BigPostMobile = props => {
     const history = useHistory();
-    const usernameFromParams = props.match.params.username.toLowerCase();   
-    const [currentUser, setCurrentUser] = useState();  
     const myUser = props.myUser;
     const isLiked = props.post?.likes?.filter(postLike => postLike.user_id === myUser?.id).length > 0 ? true : false;
     const [value, setValue] = useState();
     const [writeComment, setWriteComment] = useState(false);
     const [loading, setLoading] = useState(false);
-    
-    useEffect(() => {   
-        getByUsername(usernameFromParams)
-            .then(res => { 
-                setCurrentUser(res.data); 
-            });
-    }, []);
 
     const goToProfile = () => {
         history.push('/'+ props.post.user.username);
@@ -51,8 +40,8 @@ const BigPostMobile = props => {
             return;
         }
         setLoading(true);
-        const comment = {"post_id": post_id, "body":value}
-        insertComment(comment, props.currentUser.id);
+        const comment = {"post_id": post_id, "body": value};
+        insertComment(comment, props.post.user.id);
 
         setLoading(false);
         setWriteComment(false);
@@ -69,7 +58,7 @@ const BigPostMobile = props => {
                 <h2 style={{margin:0}}><ArrowLeftOutlined /></h2>
             </div>
             <div className="big-post-mobile-container">   
-                {props.post && <div className="post">
+                {props.post.id == props.match.params.post_id && <div className="post">
                     <div className="header">
                         <Avatar src={IMAGES_URL + props.post.user.pic}/>
                         <UsernameBold user={props.post?.user} />
@@ -81,12 +70,12 @@ const BigPostMobile = props => {
                     <div className="like">
                         <div style={{display:'flex'}}>
                             <h1>
-                                { !isLiked && <HeartOutlined onClick={like.bind(this, props.post.id, currentUser?.id, "BigPostMobile")} /> }
-                                { isLiked && <HeartFilled onClick={unlike.bind(this, props.post.id, currentUser?.id, "BigPostMobile")} style={{color:'rgb(237, 73, 86)'}}/> }
+                                { !isLiked && <HeartOutlined onClick={like.bind(this, props.post.id, props.post.user?.id, "BigPostMobile")} /> }
+                                { isLiked && <HeartFilled onClick={unlike.bind(this, props.post.id, props.post.user.id, "BigPostMobile")} style={{color:'rgb(237, 73, 86)'}}/> }
                             </h1>
                             <h1 style={{marginLeft:10}} onClick={showInsertComment}><FontAwesomeIcon icon={faComment} /></h1>
                         </div>
-                        <ShowLikes post={props.post} currentUser={currentUser} />
+                        <ShowLikes post={props.post} currentUser={props.post.user} />
                     </div>
 
                     <div className="description">
@@ -126,5 +115,5 @@ const BigPostMobile = props => {
     )
 }
 
-const mapStateToProps = ({user, post}) => ({ myUser: user.myUser, currentUser: user.currentUser, users: user.users, post:post.post });
+const mapStateToProps = ({user, post}) => ({ myUser: user.myUser, post: post.post });
 export default connect(mapStateToProps)(BigPostMobile);
