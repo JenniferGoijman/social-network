@@ -28,5 +28,9 @@ You can register here [Jennstagram](http://jennstagram.herokuapp.com/) and try i
 ### Mobile first
 ![foto](frontend/src/img/readme/mobile-profile.gif)
 
+### Upload images
+![foto](frontend/src/img/readme/upload-image.gif)
+
 Don't forget to register on [Jennstagram](http://jennstagram.herokuapp.com/)!
+
 Made by [Jennifer Goijman](https://github.com/JenniferGoijman)
