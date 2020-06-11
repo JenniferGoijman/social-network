@@ -4,7 +4,7 @@ import './NewPost.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
 import { uploadPostImage } from '../../redux/actions/posts';
-import { Comment, Avatar, Form, Input, Button } from 'antd';
+import { Comment, Avatar, Form, Input, Button, Spin } from 'antd';
 import { IMAGES_URL } from '../../api-config';
 import { useHistory } from 'react-router-dom';
 
@@ -64,7 +64,9 @@ const NewPost = props => {
                 </div>
                 <div className="body">
                     {!selectedFile && <input type="file" name="image" onChange={onSelectFile}/>}            
-                    {selectedFile && <img src={preview} alt="Vista previa de imágen" /> }
+                    {selectedFile && !loading && <img src={preview} alt="Vista previa de imágen" /> }
+                    {selectedFile && loading && <Spin size="large"><img src={preview} alt="Vista previa de imágen" /></Spin>}
+                    
                 </div>
                 {selectedFile && 
                     <div className="comment">
