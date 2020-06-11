@@ -5,6 +5,7 @@ import { getMyUser, getByUsername } from '../../../redux/actions/users';
 
 import ProfileHeader from '../../../components/Profile/ProfileHeader/ProfileHeader';
 import PostProfile from '../../../components/Profile/PostProfile/PostProfile';
+import Loading from '../../../components/Loading/Loading';
 import NotFound from '../../../components/NotFound/NotFound';
 
 const Profile = props => {
@@ -25,6 +26,8 @@ const Profile = props => {
 
     return (
         <Fragment>
+            {!currentUser && !notFound && <Loading />}
+
             {currentUser && 
             <Fragment>
                 <ProfileHeader currentUser={currentUser} usernameFromParams={usernameFromParams} />
