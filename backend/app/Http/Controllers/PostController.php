@@ -31,6 +31,7 @@ class PostController extends Controller
     {
         $user = Auth::user();
         $userIds = $user->followings()->pluck('followed_id');
+        $userIds->push($user->id);
         return Post::whereIn('user_id', $userIds)->with('user', 'likes', 'comments')->latest()->get();
     }
     public function getById($id) 
