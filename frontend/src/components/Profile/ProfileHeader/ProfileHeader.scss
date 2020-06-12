@@ -17,9 +17,6 @@
             height: 150px;
             border-radius: 80px;
             border: 1px rgb(200, 200, 200) solid;
-        }
-        
-        img:hover {
             cursor: pointer;
         }
         
@@ -99,20 +96,19 @@
         .info {
             margin-left: 0;
             max-width: 60vw;
+            min-width: 0;
     
             .name {
                 display: flex;
                 flex-direction: column;
                 padding-left: 15px;
                 
-                // .editSettings {
-                //     margin-top: 15px;
-                // }
-
                 h1 {
                     margin: 0;
                     overflow: hidden;
                     text-overflow: ellipsis;
+                    max-height: 44px;
+                    max-width: 60vw;
                 }
             }
         }
