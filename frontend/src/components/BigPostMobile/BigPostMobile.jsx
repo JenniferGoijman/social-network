@@ -10,8 +10,10 @@ import { HeartOutlined, HeartFilled, ArrowLeftOutlined } from '@ant-design/icons
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faComment } from '@fortawesome/free-regular-svg-icons';
 import { like, unlike, insertComment } from '../../redux/actions/posts';
+
 import UsernameBold from '../Profile/UsernameBold/UsernameBold';
 import ShowLikes from '../ShowLikes/ShowLikes';
+import UsernameAndText from '../UsernameAndText/UsernameAndText';
 
 const { TextArea } = Input;
 
@@ -79,16 +81,14 @@ const BigPostMobile = props => {
                     </div>
 
                     <div className="description">
-                        <UsernameBold user={props.post.user} />
-                        <div>{props.post.description}</div>                
+                        <UsernameAndText username={props.post.user.username} text={props.post.description} size={14} />
                     </div>
 
                     {props.post.comments?.map(comment => 
                             <div className="comment">
                                 <div className="userDate">
                                     <div style={{display:'flex', alignItems:'baseline'}}>
-                                        <UsernameBold user={comment.user} />
-                                        <div style={{fontWeight:'400', fontSize:13}}>{comment.body}</div>
+                                        <UsernameAndText username={comment.user.username} text={comment.body} size={14} />
                                     </div>
                                 </div>
                             </div>
@@ -98,17 +98,16 @@ const BigPostMobile = props => {
                         <Moment fromNow filter={toUpperCaseFilter} style={{fontSize:'x-small'}}>{props.post.created_at}</Moment>
                     </div>
                     
-                    {writeComment &&
-                        <div className="comment">
-                            <Form.Item className="textarea">
-                                <TextArea rows={2} onChange={onChange} value={value} placeholder="Agrega un comentario..." />
-                            </Form.Item>
-                            <Form.Item>
-                                <Button htmlType="submit" loading={loading} onClick={onSubmit.bind(this, props.post.id)} type="link" style={{fontWeight:500}}>
-                                    Publicar
-                                </Button>
-                            </Form.Item>
-                        </div>}
+                    {writeComment && <div className="comment">
+                        <Form.Item className="textarea">
+                            <TextArea rows={2} onChange={onChange} value={value} placeholder="Agrega un comentario..." />
+                        </Form.Item>
+                        <Form.Item>
+                            <Button htmlType="submit" loading={loading} onClick={onSubmit.bind(this, props.post.id)} type="link" style={{fontWeight:500}}>
+                                Publicar
+                            </Button>
+                        </Form.Item>
+                    </div>}
                 </div>}
             </div>
         </Fragment>

@@ -37,9 +37,9 @@
         }
 
         .like {
-            width: 100%;
+            width: 90%;
             text-align: left;
-            margin: 5px 0 5px 35px;
+            margin: 5px 0;
             cursor: pointer;
             
             h1 {
@@ -51,6 +51,8 @@
             width: 100%;
             padding: 0 20px;
             display: flex;
+            max-width: 600px;
+            text-align: left;
         }
 
         .date {
@@ -64,6 +66,7 @@
             width: 100%;
             display: flex;
             padding-left: 20px;
+            text-align: left;
 
             .ant-row.ant-form-item.textarea {
                 width: inherit;

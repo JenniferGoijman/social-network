@@ -11,6 +11,7 @@ import { like, unlike, insertComment } from '../../redux/actions/posts';
 import UsernameBold from '../Profile/UsernameBold/UsernameBold';
 import SettingsPost from '../Profile/SettingsPost/SettingsPost';
 import ShowLikes from '../ShowLikes/ShowLikes';
+import UsernameAndText from '../UsernameAndText/UsernameAndText';
 
 const { TextArea } = Input;
 
@@ -18,7 +19,7 @@ const BigPost = props => {
     const [value, setValue] = useState();
     const [loading, setLoading] = useState(false);
     const itsMe = props.myUser?.id === props.post.user.id;
-    const isLiked = props.post.likes?.filter(like => like.user_id === props.myUser?.id).length > 0 ? true : false;
+    const isLiked = props.post.likes?.filter(postLike => postLike.user_id === props.myUser?.id).length > 0 ? true : false;
     
     const toUpperCaseFilter = (d) => {
         return d.toUpperCase();
@@ -59,8 +60,7 @@ const BigPost = props => {
                         <img src={IMAGES_URL + props.post.user.pic} alt="Foto de perfil" className="imgAvatar" />
                         <div className="userDate">
                             <div style={{display:'flex', alignItems:'baseline'}}>
-                                <UsernameBold user={props.post.user} />
-                                <div style={{fontWeight:'400', fontSize:13}}>{props.post.description}</div>
+                                <UsernameAndText username={props.post.user.username} text={props.post.description} size={15} />
                             </div>  
                             <div className="datePost">
                                 <Moment fromNow style={{fontSize:'x-small'}}>{props.post.created_at}</Moment>
@@ -72,10 +72,7 @@ const BigPost = props => {
                         <div className="comments">
                             <img src={IMAGES_URL + comment.user.pic} alt="Foto de perfil" className="imgAvatar" />
                             <div className="userDate">
-                                <div style={{display:'flex', alignItems:'baseline'}}>
-                                    <UsernameBold user={comment.user} />
-                                    <div style={{fontWeight:'400', fontSize:13}}>{comment.body}</div>
-                                </div>  
+                                <UsernameAndText username={comment.user.username} text={comment.body} size={15} />
                                 <div className="datePost">
                                     <Moment fromNow style={{fontSize:'x-small'}}>{comment.created_at}</Moment>
                                 </div>  
