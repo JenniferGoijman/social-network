@@ -30,21 +30,25 @@ class UserController extends Controller
     }
     public function login(Request $request)
     {
-        $usernameOrEmail = $request->input('usernameOrEmail');
-        $password = $request->input('password');
-        
-        if (Str::contains($usernameOrEmail, '@')) {
-            $credentials = ['email' => $usernameOrEmail, 'password' => $password];
-        } else {
-            $credentials = ['username' => $usernameOrEmail, 'password' => $password];
+        try {
+            $usernameOrEmail = $request->input('usernameOrEmail');
+            $password = $request->input('password');
+            
+            if (Str::contains($usernameOrEmail, '@')) {
+                $credentials = ['email' => $usernameOrEmail, 'password' => $password];
+            } else {
+                $credentials = ['username' => $usernameOrEmail, 'password' => $password];
+            }
+            
+            if (!Auth::attempt($credentials)) {
+                return response(['message' => 'Wrong Credentials'], 400);
+            }
+            $user = Auth::user();
+            $token = $user->createToken('authToken')->accessToken;
+            return response(['user' => $user->load('followers', 'followings', 'posts'), 'token' => $token]);
+        } catch (\Exception $e) {
+            return response(['message' => 'Hubo un problema para iniciar sesión', 'error' => $e->getMessage()], 500);
         }
-        
-        if (!Auth::attempt($credentials)) {
-            return response(['message' => 'Wrong Credentials'], 400);
-        }
-        $user = Auth::user();
-        $token = $user->createToken('authToken')->accessToken;
-        return response(['user' => $user->load('followers', 'followings', 'posts'), 'token' => $token]);
     }
     public function resetPassword(Request $request, $id) 
     {
@@ -55,9 +59,7 @@ class UserController extends Controller
             $user->update(['password' => $newPassword]);
             return response($user);
         } catch (\Exception $e) {
-            return response([
-                'error' => $e
-            ], 500);
+            return response(['error' => $e], 500);
         }
     }
     public function logout()
@@ -79,9 +81,7 @@ class UserController extends Controller
         try {
             return User::all();
         } catch (\Exception $e) {
-            return response([
-                'error' => $e
-            ], 500);
+            return response(['error' => $e], 500);
         }
     }
     public function getById($id)

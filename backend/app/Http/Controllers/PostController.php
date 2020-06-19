@@ -29,21 +29,32 @@ class PostController extends Controller
     }
     public function getFeed() 
     {
-        $user = Auth::user();
-        $userIds = $user->followings()->pluck('followed_id');
-        $userIds->push($user->id);
-        return Post::whereIn('user_id', $userIds)->with('user', 'likes', 'comments')->latest()->get();
+        try {
+            $user = Auth::user();
+            $userIds = $user->followings()->pluck('followed_id');
+            $userIds->push($user->id);
+            return Post::whereIn('user_id', $userIds)->with('user', 'likes', 'comments')->latest()->get();
+        } catch (\Exception $e) {
+            return response(['error' => $e,], 500);
+        }
+        
     }
     public function getById($id) 
     {
-        return Post::Find($id)->load('user', 'likes', 'comments');
+        try {
+            return Post::Find($id)->load('user', 'likes', 'comments');
+        } catch (\Exception $e) {
+            return response(['error' => $e,], 500);
+        }
     }
-    public function deletePost($id) {          
-        $post = Post::Find($id);
-
-        Storage::disk('s3')->delete($post->image);
-        
-        $post->delete();
-        return response($post);
+    public function deletePost($id) {       
+        try {
+            $post = Post::Find($id);
+            Storage::disk('s3')->delete($post->image);
+            $post->delete();
+            return response($post);
+        } catch (\Exception $e) {
+            return response(['error' => $e,], 500);
+        }
     }
 }
