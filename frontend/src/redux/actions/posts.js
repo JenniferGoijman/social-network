@@ -1,21 +1,9 @@
 import store from '../store';
 import axios from 'axios';
 import { API_URL } from '../../api-config';
-import { GET_ALL_POSTS, GET_ONE_POST } from '../types'
+import { GET_ALL_POSTS, GET_ONE_POST, CLEAN_UP } from '../types'
 import { getById } from './users';
 
-export const uploadPostImage = async(post) => {
-    try {
-        const res = await axios.post(API_URL + 'posts/post', post, {
-            headers: {
-                Authorization: "Bearer " + localStorage.getItem('authToken')
-            }
-        });
-        return res;
-    } catch (error) {
-        console.error(error)
-    }
-}
 export const getFeed = async() => {
     try {
         const res = await axios.get(API_URL + 'posts', {
@@ -32,6 +20,16 @@ export const getFeed = async() => {
         console.error(error)
     }
 }
+export const cleanup = async() => {
+    try {
+        store.dispatch({
+            type: CLEAN_UP,
+            payload: []
+        })
+    } catch (error) {
+        console.error(error)
+    }
+}
 export const getPostById = async(post_id) => {
     try {
         const res = await axios.get(API_URL + 'posts/post/' + post_id, {
@@ -43,6 +41,18 @@ export const getPostById = async(post_id) => {
             type: GET_ONE_POST,
             payload: res.data
         })
+        return res;
+    } catch (error) {
+        console.error(error)
+    }
+}
+export const uploadPostImage = async(post) => {
+    try {
+        const res = await axios.post(API_URL + 'posts/post', post, {
+            headers: {
+                Authorization: "Bearer " + localStorage.getItem('authToken')
+            }
+        });
         return res;
     } catch (error) {
         console.error(error)

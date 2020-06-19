@@ -60,7 +60,7 @@ const BigPostMobile = props => {
                 <h2 style={{margin:0}}><ArrowLeftOutlined /></h2>
             </div>
             <div className="big-post-mobile-container">   
-                {props.post.id == props.match.params.post_id && <div className="post">
+                {props.post?.id == props.match.params.post_id && <div className="post">
                     <div className="header">
                         <Avatar src={IMAGES_URL + props.post.user.pic}/>
                         <UsernameBold user={props.post?.user} />
