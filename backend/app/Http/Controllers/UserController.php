@@ -7,7 +7,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\File; 
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Aws\S3\S3Client;
@@ -135,7 +134,6 @@ class UserController extends Controller
             
             if ($oldPic !== $picDefault) {
                 Storage::disk('s3')->delete($oldPic);
-                File::delete($oldPic);
             }
             $user->update(['pic' => $image_path]);
             return response($user);
