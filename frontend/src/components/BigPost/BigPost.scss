@@ -11,7 +11,7 @@
                 display: flex;
             
                 img {
-                    width: 50vw;
+                    max-width: 50vw;
                     max-height: 90vh;
                 }
 
@@ -36,7 +36,6 @@
                             width: 100%;
                             padding: 6px 16px;
                             font-weight: 500;
-
                         }
 
                         .icon {

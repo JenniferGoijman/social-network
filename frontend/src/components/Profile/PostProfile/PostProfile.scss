@@ -9,16 +9,16 @@
         border: 1px solid rgb(200, 200, 200);
         margin: 20px 10px;
         overflow: hidden;
+        position: relative;        
         display: flex;
         align-items: center;
         justify-content: center;
 
         img {
-            width: fit-content;
-            max-width: 25vw;
-            height: fit-content;
-            max-height: 25vw;
             object-fit: cover;
+            width: fit-content;
+            min-width: 25vw;
+            min-height: 25vw;
         }
     }
 }
