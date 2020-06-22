@@ -4,6 +4,7 @@ import { Modal } from 'antd';
 import './PostProfile.scss';
 import { useMediaPredicate } from 'react-media-hook';
 import { useHistory } from 'react-router-dom';
+import { HeartFilled, MessageFilled } from '@ant-design/icons';
 
 import BigPost from '../../BigPost/BigPost';
 import { getPostById } from '../../../redux/actions/posts';
@@ -23,8 +24,11 @@ const PostProfile = props => {
     return (           
         <div className="post-profile-container">
             <div className="post">
-                <img src={IMAGES_URL + props.post.image} alt="Publicación"
-                    onClick={biggerThan415?showModal:goToPostsMobile.bind(this, props.post.id)} />
+                <span class="post-info" onClick={biggerThan415?showModal:goToPostsMobile.bind(this, props.post.id)}>
+                    <span><HeartFilled />{props.post.likes.length}</span>
+                    <span><MessageFilled />{props.post.comments.length}</span>
+                </span>
+                <img src={IMAGES_URL + props.post.image} alt="Publicación"/>
             </div>
             <Modal visible={visible} onOk={hideModal} onCancel={hideModal} footer={null} className="post-profile"
                 style={{ display:'inline-flex', justifyContent:'center', alignItems:'center', height:'100vh' }} centered >

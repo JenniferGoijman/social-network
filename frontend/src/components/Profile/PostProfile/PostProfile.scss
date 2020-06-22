@@ -21,6 +21,31 @@
             min-height: 25vw;
         }
     }
+
+    .post-info {
+        position: absolute;
+        visibility: hidden;
+        height: 100%;
+        width: 100%;
+    }
+
+    .post:hover {
+        .post-info {
+            visibility: visible;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: absolute;
+            background: rgba(0, 0, 0, 0.3);
+            color: white;
+            font-size: 20px;
+
+            span {
+                margin: 10px;
+            }
+        }
+    }
 }
 
 @media only screen and (max-width: 415px) {
