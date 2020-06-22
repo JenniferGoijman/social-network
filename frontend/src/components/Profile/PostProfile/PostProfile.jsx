@@ -23,10 +23,8 @@ const PostProfile = props => {
     return (           
         <div className="post-profile-container">
             <div className="post">
-                <div className="body">
-                    <img src={IMAGES_URL + props.post.image} alt="Publicación"
-                        onClick={biggerThan415?showModal:goToPostsMobile.bind(this, props.post.id)} />
-                </div>
+                <img src={IMAGES_URL + props.post.image} alt="Publicación"
+                    onClick={biggerThan415?showModal:goToPostsMobile.bind(this, props.post.id)} />
             </div>
             <Modal visible={visible} onOk={hideModal} onCancel={hideModal} footer={null} className="post-profile"
                 style={{ display:'inline-flex', justifyContent:'center', alignItems:'center', height:'100vh' }} centered >

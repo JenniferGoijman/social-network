@@ -10,7 +10,7 @@ const ChangeablePicThroughPic = props => {
         fd.append("image", event.target.files[0], event.target.files[0].name);
         uploadProfileImage(fd)
         .then((res) => { console.log(":)") })
-          .catch(() => { console.log(":(") });
+        .catch(() => { console.log(":(") });
     }
 
     return (
